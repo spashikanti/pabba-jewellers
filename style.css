@@ -51,6 +51,20 @@ body{font-family:Poppins,sans-serif;background:#0b0b0b;color:#eee;margin:0}
     width: 100%; /* Line grows from left to right on hover */
 }
 
+.logo h1 {
+    font-size: 1.4rem;
+    margin: 0;
+    color: #D4AF37;
+    letter-spacing: 2px;
+}
+
+.telugu-name {
+    display: block;
+    font-size: 0.8rem;
+    color: #888; /* Dimmer than the main title to show hierarchy */
+    margin-top: -5px;
+}
+
 .hero{height:90vh;background:url("images/hero.jpg") center/cover;display:flex;align-items:center;justify-content:center;text-align:center;margin-top:60px}
 
 .trust{display:flex;justify-content:space-around;background:#111;padding:40px 0;text-align:center}
