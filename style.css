@@ -1,11 +1,26 @@
 body{font-family:Poppins,sans-serif;background:#0b0b0b;color:#eee;margin:0}
 .gold{color:#e6c15a;text-shadow:0 0 8px rgba(230,193,90,.35)}
-.navbar{display:flex;justify-content:space-between;padding:20px;background:#000}
-.hero{height:90vh;background:url("images/hero.jpg") center/cover;display:flex;align-items:center;justify-content:center;text-align:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;padding:40px}
+.navbar{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:15px 8%;background:#000;z-index:1000}
+.nav-links a{margin:0 10px;color:#fff;text-decoration:none}
+.nav-links button{margin-left:10px}
+
+.hero{height:90vh;background:url("images/hero.jpg") center/cover;display:flex;align-items:center;justify-content:center;text-align:center;margin-top:60px}
+
+.trust{display:flex;justify-content:space-around;background:#111;padding:40px 0;text-align:center}
+.trust h3{color:#e6c15a;font-size:28px}
+
+section{padding:80px 8%}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}
 .card{background:#151515;border-radius:12px;overflow:hidden;cursor:pointer}
 .card img{width:100%;height:240px;object-fit:cover}
+.card h3{text-align:center;padding:10px}
+
+.about,.custom{text-align:center;max-width:800px;margin:auto}
+
+.testimonials{text-align:center;background:#111}
+.testimonial{display:none}
+.testimonial.active{display:block}
+
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center}
 .modal-content{background:#111;padding:20px;border-radius:12px;display:flex;gap:20px;width:80%}
-.close{position:absolute;right:20px;top:10px;cursor:pointer}
 .whatsapp-btn{background:#25D366;color:#fff;padding:10px;border:none}
