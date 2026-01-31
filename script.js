@@ -127,7 +127,7 @@ setInterval(()=>{
   testimonials[tIndex].classList.add('active');
 },4000);
 */
-
+/*
 const t=document.querySelectorAll(".testimonial");
 if(t.length){
 let ti=0;
@@ -137,6 +137,44 @@ setInterval(()=>{
   t[ti].classList.add("active");
 },3500);
 }
+*/
+
+async function loadTestimonials() {
+    const container = document.getElementById('testimonial-container');
+    try {
+        const response = await fetch('testimonials.json');
+        const data = await response.json();
+        
+        let html = '';
+        data.forEach((item, index) => {
+            html += `
+                <div class="testimonial ${index === 0 ? 'active' : ''}">
+                    <p>"${item.text}"</p>
+                    <h4>- ${item.name}</h4>
+                    <div class="stars">${item.rating}</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+        startCarousel(); // Initialize the sliding logic
+    } catch (error) {
+        console.error("Error loading testimonials:", error);
+    }
+}
+
+function startCarousel() {
+    let current = 0;
+    const items = document.querySelectorAll('.testimonial');
+    if(items.length === 0) return;
+
+    setInterval(() => {
+        items[current].classList.remove('active');
+        current = (current + 1) % items.length;
+        items[current].classList.add('active');
+    }, 4000); // Change every 4 seconds
+}
+
+loadTestimonials();
 
 /* Category filtering scroll fix */
 function filterCategory(cat){
