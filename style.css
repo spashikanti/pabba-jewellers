@@ -1,14 +1,55 @@
 body{font-family:Poppins,sans-serif;background:#0b0b0b;color:#eee;margin:0}
 .gold{color:#e6c15a;text-shadow:0 0 8px rgba(230,193,90,.35)}
 
+/*
 .navbar{display:flex;justify-content:space-between;align-items:center;padding:15px 8%;background:#000;flex-wrap:wrap}
 .nav-links{display:flex;gap:15px;flex-wrap:wrap}
 
-/*
 .navbar{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:15px 8%;background:#000;z-index:1000}
 .nav-links a{margin:0 10px;color:#fff;text-decoration:none}
-*/
 .nav-links button{margin-left:10px}
+*/
+
+/* 1. Remove default link styles */
+.nav-links {
+    list-style: none; /* Removes the bullet points */
+    display: flex;
+    gap: 30px; /* Increased gap for a more "breathable" luxury feel */
+}
+
+.nav-links a {
+    text-decoration: none; /* Removes the underline */
+    color: #e0e0e0; /* A soft off-white/silver */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 1.5px; /* Added spacing for "premium" look */
+    text-transform: uppercase;
+    transition: all 0.4s ease; /* Smooth transition for the hover effect */
+    position: relative;
+}
+
+/* 2. The Interaction: Subtle Gold Glow & Underline on Hover */
+.nav-links a:hover {
+    color: #D4AF37; /* Changes to Gold on hover */
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.4); /* Subtle gold glow */
+}
+
+/* 3. Modern Underline Effect (Animated) */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background-color: #D4AF37;
+    transition: width 0.4s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%; /* Line grows from left to right on hover */
+}
 
 .hero{height:90vh;background:url("images/hero.jpg") center/cover;display:flex;align-items:center;justify-content:center;text-align:center;margin-top:60px}
 
