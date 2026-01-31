@@ -14,6 +14,22 @@ window.addEventListener('scroll', function() {
     }
 });
 
+const menuToggle = document.getElementById('mobile-menu');
+const navLinks = document.querySelector('.nav-links');
+
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+}
+
+// Close menu when a link is clicked (important for UX)
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
+});
+
 const langBtn = document.getElementById('lang-toggle');
 let currentLang = 'en';
 
