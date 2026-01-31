@@ -168,7 +168,7 @@ async function loadTestimonials() {
         container.innerHTML = "<p>Trusted by hundreds of families in Hyderabad.</p>";
     }
 }
-
+/*
 function startCarousel() {
     let current = 0;
     
@@ -192,6 +192,35 @@ function startCarousel() {
             setTimeout(() => { items[current].style.opacity = '1'; }, 50);
         }, 500); // Half-second fade out
     }, 4000);
+}
+*/
+function startCarousel() {
+    let current = 0;
+    const items = document.querySelectorAll('.testimonial');
+    if (items.length === 0) return;
+
+    setInterval(() => {
+        // 1. Fade out current
+        items[current].style.opacity = '0';
+        
+        // Use a short delay so the fade-out starts before we switch
+        setTimeout(() => {
+            items[current].style.display = 'none';
+            items[current].classList.remove('active');
+
+            // Move to next index
+            current = (current + 1) % items.length;
+
+            // 2. Prepare next
+            items[current].style.display = 'block';
+            items[current].classList.add('active');
+            
+            // 3. Fade in next immediately
+            setTimeout(() => {
+                items[current].style.opacity = '1';
+            }, 50); 
+        }, 400); // This matches the 0.4s CSS transition
+    }, 5000); // 5 seconds per testimonial
 }
 
 // Call the function
