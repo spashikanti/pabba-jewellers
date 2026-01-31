@@ -371,3 +371,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+function animateCounters() {
+    const counters = [
+        { id: 'customerCount', target: 483, suffix: '+', decimals: 0 },
+        { id: 'ratingCount', target: 4.3, suffix: '★', decimals: 1 }
+    ];
+
+    counters.forEach(counter => {
+        const element = document.getElementById(counter.id);
+        if (!element) return;
+
+        let start = 0;
+        const duration = 2000; // 2 seconds
+        const increment = counter.target / (duration / 16); // 16ms is roughly 60fps
+
+        const updateCount = () => {
+            start += increment;
+            if (start < counter.target) {
+                element.innerText = start.toFixed(counter.decimals) + counter.suffix;
+                requestAnimationFrame(updateCount);
+            } else {
+                element.innerText = counter.target + counter.suffix;
+            }
+        };
+
+        updateCount();
+    });
+}
+
+// Trigger animation when the section is visible
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target); // Run only once
+        }
+    });
+}, { threshold: 0.5 });
+
+const trustSection = document.querySelector('.trust');
+if (trustSection) observer.observe(trustSection);
