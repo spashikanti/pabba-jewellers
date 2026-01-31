@@ -1,7 +1,13 @@
 body{font-family:Poppins,sans-serif;background:#0b0b0b;color:#eee;margin:0}
 .gold{color:#e6c15a;text-shadow:0 0 8px rgba(230,193,90,.35)}
+
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:15px 8%;background:#000;flex-wrap:wrap}
+.nav-links{display:flex;gap:15px;flex-wrap:wrap}
+
+<!--
 .navbar{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:15px 8%;background:#000;z-index:1000}
 .nav-links a{margin:0 10px;color:#fff;text-decoration:none}
+-->
 .nav-links button{margin-left:10px}
 
 .hero{height:90vh;background:url("images/hero.jpg") center/cover;display:flex;align-items:center;justify-content:center;text-align:center;margin-top:60px}
@@ -22,5 +28,14 @@ section{padding:80px 8%}
 .testimonial.active{display:block}
 
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center}
+<!--
 .modal-content{background:#111;padding:20px;border-radius:12px;display:flex;gap:20px;width:80%}
+-->
+.modal-content{background:#111;padding:20px;border-radius:12px;width:400px;position:relative;text-align:center}
+.close{position:absolute;right:10px;top:5px;cursor:pointer;color:#fff}
 .whatsapp-btn{background:#25D366;color:#fff;padding:10px;border:none}
+
+.pagination{text-align:center;margin-top:30px}
+.pagination button{margin:5px;padding:8px 12px}
+
+footer{text-align:center;padding:20px;background:#000;margin-top:40px}
