@@ -7,44 +7,73 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="navbar">
-  <h3 class="gold">Pabba Jewellers & Co.</h3>
-  <div>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <h2 class="gold">Pabba Jewellers & Co.</h2>
+  <div class="nav-links">
+    <a href="#collections">Collections</a>
+    <a href="#catalog">Catalog</a>
+    <a href="#about">About</a>
+    <a href="#contact">Visit</a>
     <button id="langToggle">తెలుగు</button>
   </div>
-</div>
+</nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <h1 class="gold" data-en="Timeless Elegance. Crafted for You." data-te="నిత్యమైన అందం. మీకోసం రూపొందించబడింది."></h1>
+    <h1 class="gold">Timeless Elegance. Crafted for You.</h1>
   </div>
 </section>
 
-<section id="collections">
-  <h2 class="gold" data-en="Signature Collections" data-te="మా ప్రత్యేక కలెక్షన్స్"></h2>
-  <div class="grid" id="productGrid"></div>
-</section>
-  
+<!-- TRUST BADGES -->
 <section class="trust">
-  <div>483+ Happy Customers</div>
-  <div>4.3★ Rated Store</div>
-  <div>Custom Designs</div>
-  <div>Trusted Experts</div>
+  <div><h3>483+</h3><p>Happy Customers</p></div>
+  <div><h3>4.3★</h3><p>Rated Store</p></div>
+  <div><h3>Custom</h3><p>Designs</p></div>
+  <div><h3>Trusted</h3><p>Experts</p></div>
 </section>
 
+<!-- COLLECTIONS -->
 <section id="collections">
   <h2 class="gold">Collections</h2>
   <div class="grid" id="collectionsGrid"></div>
 </section>
 
+<!-- CATALOG -->
 <section id="catalog">
   <h2 class="gold">Catalog</h2>
   <div class="grid" id="productGrid"></div>
 </section>
 
+<!-- ABOUT -->
+<section id="about" class="about">
+  <h2 class="gold">A Tradition of Trust & Craftsmanship</h2>
+  <p>Serving Hyderabad with personalized jewellery expertise, wide variety of designs, and custom creations that match your taste and budget. We build long-term relationships through quality and care.</p>
+</section>
+
+<!-- CUSTOM DESIGN -->
+<section class="custom">
+  <h2 class="gold">Your Design. Your Budget. Our Craft.</h2>
+  <p>Describe your dream jewellery — we craft it beautifully within your budget.</p>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <h2 class="gold">What Customers Say</h2>
+  <div class="testimonial active">“Vast variety of models and very reasonable prices.”</div>
+  <div class="testimonial">“They quickly understand our taste and show exactly what we need.”</div>
+  <div class="testimonial">“Excellent receiving and on-time delivery.”</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="gold">Visit Our Store</h2>
+  <p>Ganesh Nagar, Ramanthapur, Hyderabad</p>
+  <p>📞 +91 89785 69063</p>
+</section>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
@@ -54,7 +83,7 @@
     <div class="modal-details">
       <h3 id="modalTitle" class="gold"></h3>
       <p id="modalDesc"></p>
-      <button class="whatsapp-btn" id="waBtn">WhatsApp</button>
+      <button class="whatsapp-btn" id="waBtn">Enquire on WhatsApp</button>
     </div>
   </div>
 </div>
