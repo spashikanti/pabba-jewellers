@@ -456,6 +456,22 @@ footer {
     margin-top: 5px;
 }
 
+/* Hide Hamburger by default on Desktop */
+.menu-toggle {
+    display: none;
+}
+
+.sparkle-effect {
+    position: relative;
+    animation: goldGlow 1.5s ease-out;
+}
+
+@keyframes goldGlow {
+    0% { color: #D4AF37; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+    50% { color: #fff; text-shadow: 0 0 25px rgba(212, 175, 55, 1); transform: scale(1.1); }
+    100% { color: #D4AF37; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); transform: scale(1); }
+}
+
 /* --- MOBILE RESPONSIVE FIXES (768px and below) --- */
 @media (max-width: 768px) {
     /* 1. Reset Body Padding to match the smaller mobile header */
@@ -538,9 +554,3 @@ footer {
         font-size: 2rem;
     }
 }
-
-/* Hide Hamburger by default on Desktop */
-.menu-toggle {
-    display: none;
-}
-
