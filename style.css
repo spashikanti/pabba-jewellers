@@ -9,13 +9,47 @@ body{font-family:Poppins,sans-serif;background:#0b0b0b;color:#eee;margin:0}
 .nav-links a{margin:0 10px;color:#fff;text-decoration:none}
 .nav-links button{margin-left:10px}
 */
+/* 1. Make the Header Sticky */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Keeps Logo left and Menu right */
+    align-items: center;
+    padding: 15px 8%;
+    background: rgba(0, 0, 0, 0.9); /* Slight transparency for a modern feel */
+    backdrop-filter: blur(10px);    /* Blurs content behind for luxury glass effect */
+    
+    position: fixed;   /* Makes it sticky */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;      /* Ensures it stays above all other content */
+    box-sizing: border-box; 
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2); /* Subtle gold border line */
+}
+
+/* 2. Push the Menu to the Right */
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-left: auto; /* This ensures it stays pushed to the right side */
+}
+
+/* 3. Important: Prevent Hero content from hiding under the sticky header */
+body {
+    padding-top: 80px; /* Adjust this to match your navbar height */
+}
 
 /* 1. Remove default link styles */
+/*
 .nav-links {
     list-style: none; /* Removes the bullet points */
     display: flex;
     gap: 30px; /* Increased gap for a more "breathable" luxury feel */
 }
+*/
 
 .nav-links a {
     text-decoration: none; /* Removes the underline */
