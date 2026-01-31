@@ -1,4 +1,6 @@
+/*
 let currentLang="en";
+*/
 let products=[];
 let currentPage=1;
 const perPage=6;
@@ -10,6 +12,21 @@ window.addEventListener('scroll', function() {
     } else {
         nav.classList.remove('scrolled');
     }
+});
+
+const langBtn = document.getElementById('lang-toggle');
+let currentLang = 'en';
+
+langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'te' : 'en';
+    
+    // Update all elements that have data attributes
+    document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
+    });
+
+    // Update button text
+    langBtn.textContent = currentLang === 'en' ? 'తెలుగు' : 'English';
 });
 
 /* Load Collections */
