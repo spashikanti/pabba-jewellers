@@ -237,6 +237,7 @@ section {
 }
 */
 /* Fix the messed up WhatsApp icon and Popup */
+/*
 .modal-content {
     background: #111;
     padding: 30px;
@@ -248,7 +249,30 @@ section {
     text-align: center;
     animation: fadeIn 0.3s ease;
 }
-
+*/
+/* Modal Background */
+.modal {
+    display: none; 
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+/* Modal Box */
+.modal-content {
+    background: #151515;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    position: relative; /* Crucial for positioning the close button */
+    text-align: center;
+    border: 1px solid #D4AF37;
+}
+/*
 .close {
     position: absolute;
     right: 20px;
@@ -257,8 +281,19 @@ section {
     color: #D4AF37;
     cursor: pointer;
     line-height: 1;
+}*/
+/* Close Button - Fixed Position */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #D4AF37;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 10;
 }
-
+/*
 .whatsapp-btn {
     display: flex;
     align-items: center;
@@ -272,6 +307,23 @@ section {
     margin-top: 20px;
     font-weight: 600;
     transition: background 0.3s;
+}*/
+/* WhatsApp Icon Fix */
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #25D366;
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
 }
 
 .whatsapp-btn:hover {
