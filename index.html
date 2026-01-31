@@ -5,334 +5,163 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pabba Jewellers & Co.</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-/* ---------------- GLOBAL STYLES ---------------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:#0b0b0b;color:#eee;scroll-behavior:smooth}
+h1,h2,h3{font-family:'Playfair Display',serif}
+section{padding:80px 8%}
+.gold{background:linear-gradient(90deg,#d4af37,#fff3b0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #0c0c0c;
-  color: #f5f5f5;
-  scroll-behavior: smooth;
-}
+/* NAV */
+.navbar{position:fixed;width:100%;padding:18px 8%;display:flex;justify-content:space-between;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);z-index:1000}
+.navbar a{color:#fff;margin-left:20px;text-decoration:none}
+.navbar a:hover{color:#d4af37}
 
-h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
-}
+/* HERO */
+.hero{height:100vh;background:url('https://images.unsplash.com/photo-1611599537845-1c7aca0091c0') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
+.hero::before{content:"";position:absolute;width:100%;height:100%;background:rgba(0,0,0,.6)}
+.hero-content{position:relative}
+.btn{padding:12px 28px;border:none;background:linear-gradient(90deg,#d4af37,#b8860b);color:#000;border-radius:30px;cursor:pointer}
 
-section {
-  padding: 80px 8%;
-}
+/* TRUST */
+.trust{display:flex;justify-content:space-around;background:#111;text-align:center}
 
-.gold-text {
-  background: linear-gradient(90deg, #d4af37, #fff3b0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+/* COLLECTION */
+.collection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;margin-top:40px}
+.card{background:#151515;border-radius:12px;overflow:hidden;cursor:pointer;position:relative}
+.card img{width:100%;height:240px;object-fit:cover}
+.card:hover{box-shadow:0 0 25px rgba(212,175,55,.5);transform:translateY(-5px)}
 
-/* ---------------- NAVBAR ---------------- */
-.navbar {
-  position: fixed;
-  width: 100%;
-  padding: 18px 8%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-}
+/* SPARKLE */
+.sparkle{position:absolute;width:6px;height:6px;background:white;border-radius:50%;animation:sparkle 2s infinite}
+@keyframes sparkle{0%{opacity:0;transform:scale(0)}50%{opacity:1}100%{opacity:0;transform:scale(2)}}
 
-.navbar h2 {
-  font-size: 22px;
-  color: #d4af37;
-}
+/* MODAL */
+.modal{display:none;position:fixed;z-index:2000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.8);justify-content:center;align-items:center}
+.modal img{max-width:80%;border-radius:10px}
+.modal.active{display:flex}
 
-.navbar a {
-  color: #fff;
-  margin-left: 20px;
-  text-decoration: none;
-  font-size: 14px;
-  transition: 0.3s;
-}
+/* FORM */
+form{max-width:500px;margin:auto;display:flex;flex-direction:column;gap:15px}
+input,textarea{padding:12px;border-radius:6px;border:none}
+button{cursor:pointer}
 
-.navbar a:hover {
-  color: #d4af37;
-}
+/* CATALOG FILTER */
+.filter-btns{text-align:center;margin-bottom:20px}
+.filter-btns button{margin:5px;padding:8px 16px;background:#222;color:#fff;border:none}
+.filter-btns button:hover{background:#d4af37;color:#000}
 
-/* ---------------- HERO ---------------- */
-.hero {
-  height: 100vh;
-  background: url("https://images.unsplash.com/photo-1611599537845-1c7aca0091c0") center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-}
+/* WHATSAPP */
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;box-shadow:0 0 15px rgba(0,0,0,.4)}
 
-.hero::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-}
+.fade{opacity:0;transform:translateY(40px);transition:1s}
+.fade.show{opacity:1;transform:translateY(0)}
 
-.hero-content {
-  position: relative;
-  max-width: 800px;
-}
-
-.hero h1 {
-  font-size: 52px;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  margin-bottom: 30px;
-  font-size: 18px;
-  color: #ddd;
-}
-
-.btn {
-  padding: 12px 28px;
-  border: none;
-  background: linear-gradient(90deg, #d4af37, #b8860b);
-  color: #000;
-  font-weight: 600;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-}
-
-/* ---------------- TRUST STRIP ---------------- */
-.trust {
-  display: flex;
-  justify-content: space-around;
-  background: #111;
-  text-align: center;
-}
-
-.trust div {
-  max-width: 200px;
-}
-
-.trust h3 {
-  color: #d4af37;
-  margin-bottom: 10px;
-}
-
-/* ---------------- COLLECTION GRID ---------------- */
-.collection-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  margin-top: 40px;
-}
-
-.card {
-  background: #151515;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: 0.3s;
-  position: relative;
-}
-
-.card img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 20px rgba(212,175,55,0.4);
-}
-
-.card h3 {
-  padding: 15px;
-}
-
-/* ---------------- ABOUT ---------------- */
-.about {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: center;
-}
-
-.about img {
-  flex: 1;
-  min-width: 300px;
-  border-radius: 12px;
-}
-
-.about-text {
-  flex: 1;
-}
-
-/* ---------------- TESTIMONIALS ---------------- */
-.testimonials {
-  text-align: center;
-  background: #111;
-}
-
-.testimonial {
-  max-width: 700px;
-  margin: auto;
-  font-style: italic;
-  display: none;
-}
-
-.testimonial.active {
-  display: block;
-}
-
-/* ---------------- CONTACT ---------------- */
-.contact {
-  text-align: center;
-}
-
-.contact p {
-  margin: 10px 0;
-}
-
-/* ---------------- FOOTER ---------------- */
-footer {
-  text-align: center;
-  padding: 30px;
-  background: #000;
-  color: #888;
-}
-
-/* ---------------- ANIMATIONS ---------------- */
-.fade-in {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease;
-}
-
-.fade-in.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+footer{text-align:center;padding:30px;background:#000;color:#888}
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
-  <h2>Pabba Jewellers & Co.</h2>
+  <h3 class="gold">Pabba Jewellers & Co.</h3>
   <div>
     <a href="#collections">Collections</a>
-    <a href="#about">About</a>
-    <a href="#custom">Custom</a>
-    <a href="#contact">Visit</a>
+    <a href="#catalog">Catalog</a>
+    <a href="#booking">Booking</a>
   </div>
 </div>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <h1 class="gold-text">Timeless Elegance. Crafted for You.</h1>
-    <p>Hyderabad’s trusted destination for exquisite gold, diamond, and custom jewellery.</p>
-    <button class="btn">Explore Collection</button>
+    <h1 class="gold">Timeless Elegance. Crafted for You.</h1>
+    <p>Hyderabad’s trusted jewellery destination</p>
+    <button class="btn">Explore</button>
   </div>
 </section>
 
-<!-- TRUST -->
 <section class="trust">
-  <div><h3>483+ Happy Customers</h3></div>
-  <div><h3>4.3★ Rated Store</h3></div>
-  <div><h3>Custom Designs</h3></div>
-  <div><h3>Trusted Experts</h3></div>
+  <div>483+ Happy Customers</div>
+  <div>4.3★ Rated</div>
+  <div>Custom Designs</div>
+  <div>Trusted Experts</div>
 </section>
 
 <!-- COLLECTIONS -->
 <section id="collections">
-  <h2 class="gold-text">Our Collections</h2>
+  <h2 class="gold">Featured Collections</h2>
   <div class="collection-grid">
-    <div class="card"><img src="https://images.unsplash.com/photo-1602752250015-52934bc45613"><h3>Gold Jewellery</h3></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1588444837495-c6cfeb53b6f5"><h3>Bridal Sets</h3></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1617038260897-41a1f14a3f1c"><h3>Necklaces</h3></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"><h3>Rings</h3></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1611080626919-7cf5a9b3d6b5"><h3>Earrings</h3></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1585386959984-a4155224a1b7"><h3>Chains</h3></div>
+    <div class="card" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1602752250015-52934bc45613"></div>
+    <div class="card" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1588444837495-c6cfeb53b6f5"></div>
+    <div class="card" onclick="openModal(this)"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"></div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="about fade-in">
-  <img src="https://images.unsplash.com/photo-1589987607627-91b9f6d12391">
-  <div class="about-text">
-    <h2 class="gold-text">A Tradition of Trust & Craftsmanship</h2>
-    <p>Serving Hyderabad with personalized jewellery expertise, wide variety of designs, and custom creations that match your taste and budget. We build long-term relationships through quality and care.</p>
+<!-- ONLINE CATALOG -->
+<section id="catalog">
+  <h2 class="gold">Online Catalog</h2>
+  <div class="filter-btns">
+    <button onclick="filter('all')">All</button>
+    <button onclick="filter('ring')">Rings</button>
+    <button onclick="filter('necklace')">Necklaces</button>
+  </div>
+  <div class="collection-grid">
+    <div class="card item ring"><img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"></div>
+    <div class="card item necklace"><img src="https://images.unsplash.com/photo-1617038260897-41a1f14a3f1c"></div>
   </div>
 </section>
 
-<!-- CUSTOM -->
-<section id="custom" class="fade-in">
-  <h2 class="gold-text">Your Design. Your Budget. Our Craft.</h2>
-  <p>Describe your dream jewellery — we craft it beautifully within your budget.</p>
+<!-- BOOKING FORM -->
+<section id="booking" class="fade">
+  <h2 class="gold">Book a Visit</h2>
+  <form onsubmit="alert('Booking request sent!'); return false;">
+    <input type="text" placeholder="Your Name" required>
+    <input type="tel" placeholder="Phone Number" required>
+    <input type="date" required>
+    <textarea placeholder="What jewellery are you looking for?"></textarea>
+    <button class="btn">Submit</button>
+  </form>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <h2 class="gold-text">What Customers Say</h2>
-  <div class="testimonial active">“Vast variety of models and very reasonable prices.”</div>
-  <div class="testimonial">“They quickly understand our taste and show exactly what we need.”</div>
-  <div class="testimonial">“Excellent receiving and on-time delivery.”</div>
-</section>
+<!-- MODAL -->
+<div class="modal" id="modal" onclick="closeModal()">
+  <img id="modalImg">
+</div>
 
-<!-- CONTACT -->
-<section id="contact" class="contact fade-in">
-  <h2 class="gold-text">Visit Our Store</h2>
-  <p>Ganesh Nagar, Ramanthapur, Hyderabad</p>
-  <p>📞 +91 89785 69063</p>
-  <p>🕒 Opens 11 AM</p>
-</section>
+<!-- WHATSAPP -->
+<a href="https://wa.me/918978569063" class="whatsapp">💬</a>
 
-<footer>
-  © 2026 Pabba Jewellers & Co. | Timeless Jewellery | Trusted Craftsmanship
-</footer>
+<footer>© 2026 Pabba Jewellers & Co.</footer>
 
 <script>
-/* Fade-in on scroll */
-const faders = document.querySelectorAll('.fade-in');
+/* Fade animation */
+const faders=document.querySelectorAll('.fade');
+window.addEventListener('scroll',()=>{faders.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight*0.85){el.classList.add('show')}})})
 
-window.addEventListener('scroll', () => {
-  const triggerBottom = window.innerHeight * 0.85;
+/* Modal */
+function openModal(el){document.getElementById('modal').classList.add('active');document.getElementById('modalImg').src=el.querySelector('img').src}
+function closeModal(){document.getElementById('modal').classList.remove('active')}
 
-  faders.forEach(el => {
-    const boxTop = el.getBoundingClientRect().top;
-    if (boxTop < triggerBottom) {
-      el.classList.add('show');
-    }
-  });
-});
+/* Filter */
+function filter(cat){
+document.querySelectorAll('.item').forEach(i=>{
+i.style.display=(cat==='all'||i.classList.contains(cat))?'block':'none'
+})
+}
 
-/* Testimonial carousel */
-const testimonials = document.querySelectorAll('.testimonial');
-let index = 0;
-
-setInterval(() => {
-  testimonials[index].classList.remove('active');
-  index = (index + 1) % testimonials.length;
-  testimonials[index].classList.add('active');
-}, 4000);
+/* Sparkles */
+setInterval(()=>{
+document.querySelectorAll('.card').forEach(card=>{
+let s=document.createElement('div');
+s.className='sparkle';
+s.style.top=Math.random()*100+'%';
+s.style.left=Math.random()*100+'%';
+card.appendChild(s);
+setTimeout(()=>s.remove(),2000);
+})
+},1500);
 </script>
 
 </body>
