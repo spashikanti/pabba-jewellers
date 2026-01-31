@@ -338,5 +338,21 @@ function filterCategory(cat){
   document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
 }
 
+const backToTopBtn = document.getElementById('backToTop');
 
+window.addEventListener('scroll', () => {
+    // Show button after scrolling down 400px
+    if (window.scrollY > 400) {
+        backToTopBtn.style.display = 'block';
+    } else {
+        backToTopBtn.style.display = 'none';
+    }
+});
+
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
 
