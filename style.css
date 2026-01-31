@@ -389,3 +389,55 @@ footer {
     color: #e6c15a;
     letter-spacing: 2px;
 }
+
+/* --- MOBILE RESPONSIVE FIXES --- */
+@media (max-width: 768px) {
+    /* 1. Shrink the Header */
+    .navbar {
+        padding: 10px 5%; /* Smaller padding */
+        height: 60px; /* Force a shorter height */
+    }
+
+    /* 2. Hide links by default (Hamburger Menu prep) */
+    .nav-links {
+        position: fixed;
+        top: 60px; /* Starts right below the navbar */
+        right: -100%; /* Hidden off-screen to the right */
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.95);
+        width: 70%; /* Takes up less width */
+        height: 100vh;
+        gap: 20px;
+        padding: 40px;
+        transition: 0.3s ease-in-out;
+        backdrop-filter: blur(10px);
+        border-left: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    /* 3. Show menu when active */
+    .nav-links.active {
+        right: 0;
+    }
+
+    /* 4. Fix Logo and Body Padding */
+    .logo h1 {
+        font-size: 1.1rem; /* Smaller logo for mobile */
+    }
+    
+    body {
+        padding-top: 60px; /* Match the new mobile navbar height */
+    }
+
+    /* 5. Create the Hamburger Button Style */
+    .menu-toggle {
+        display: block !important; /* Show only on mobile */
+        cursor: pointer;
+        color: #D4AF37;
+        font-size: 1.5rem;
+    }
+}
+
+/* Hide Hamburger on Desktop */
+.menu-toggle {
+    display: none;
+}
