@@ -302,14 +302,17 @@ footer,
 .modal-content {
     background: #0d0d0d; 
     padding: 0; /* Removing padding to let the image hit the edges */
-    border-radius: 15px;
-    width: 95%; 
-    max-width: 900px; 
+    border-radius: 12px;
+    width: 90%; 
+    max-width: 1000px; 
     position: relative;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    box-shadow: 0 0 40px rgba(0, 0, 0, 1), 0 0 20px rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     overflow: hidden; /* Clips image corners to match radius */
     animation: modalFadeIn 0.4s ease-out;
+    height: auto;    
+    max-height: 90vh; /* Prevents it from going off-screen */
+    display: flex; flex-direction: column;
 }
 @keyframes modalFadeIn {
     from { opacity: 0; transform: scale(0.95); }
@@ -318,20 +321,21 @@ footer,
 .modal-body { 
     display: flex; 
     flex-direction: row; 
-    text-align: left; 
+    text-align: left;
+    height: 100%;
 }
 #modalImg { 
-    width: 55%; 
-    height: 500px; 
-    object-fit: cover; 
-    border-right: 1px solid rgba(212, 175, 55, 0.2); 
+    width: 50%; 
+    height: 600px; 
+    object-fit: cover;
 }
 .modal-details { 
-    width: 45%; 
-    padding: 40px;
+    width: 50%; 
+    padding: 60px 40px; /* More breathing room */
     display: flex; 
     flex-direction: column; 
     justify-content: center; 
+    background: #0d0d0d;
 }
 .modal-details h2 {
     font-size: 1.8rem !important;
@@ -344,20 +348,37 @@ footer,
     line-height: 1.8;
     margin-bottom: 25px;
 }
-/* Close Button Styling */
-.close-btn { 
+/* Close Button Styling - Isolated only to Modal */
+.modal .close-btn { 
     position: absolute; 
     top: 20px; 
     right: 20px; 
     font-size: 32px; 
     color: var(--primary-gold); 
     cursor: pointer; 
-    z-index: 10;
+    z-index: 2001; /* Higher than modal content */
     line-height: 1;
-    transition: 0.3s;
+    transition: var(--transition-smooth);
+    background: rgba(0,0,0,0.5); /* Adds a little circle background for visibility */
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
-.close-btn:hover {
+
+.modal .close-btn:hover {
     transform: rotate(90deg);
+    background: var(--primary-gold);
+    color: #000;
+}
+
+/* Ensure Mobile Menu X doesn't show on Desktop */
+@media (min-width: 769px) {
+    .close-menu, .nav-links .close-btn { 
+        display: none !important; 
+    }
 }
 
 /* --- TRUST & STATS --- */
@@ -506,6 +527,10 @@ footer {
 
     .modal-details h2 {
         font-size: 1.4rem !important;
+    }
+    .modal-content {
+        max-height: 95vh; /* Gives more room on mobile screens */
+        overflow-y: auto; /* Allows scrolling if the description is long */
     }
 }
 
