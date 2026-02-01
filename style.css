@@ -267,6 +267,7 @@ footer,
     color: #000; border-radius: 50%; border: none;
     display: flex; align-items: center; justify-content: center;
     z-index: 999; opacity: 0; visibility: hidden; transition: 0.3s;
+    cursor: pointer;
 }
 
 .back-to-top.show { opacity: 1; visibility: visible; }
