@@ -472,6 +472,45 @@ footer {
     100% { color: #D4AF37; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); transform: scale(1); }
 }
 
+.catalog-container {
+    padding: 120px 8% 50px;
+}
+
+#catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.product-card:hover {
+    border-color: #D4AF37;
+    transform: translateY(-5px);
+}
+
+.product-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.view-btn {
+    background: transparent;
+    border: 1px solid #D4AF37;
+    color: #D4AF37;
+    padding: 8px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+
 /* --- MOBILE RESPONSIVE FIXES (768px and below) --- */
 @media (max-width: 768px) {
     /* 1. Reset Body Padding to match the smaller mobile header */
