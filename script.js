@@ -337,39 +337,40 @@ function filterCategory(cat){
   renderProducts(filtered);
   document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
 }
-
+/*
 const backToTopBtn = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    // Show button after scrolling down 400px
-    if (window.scrollY > 400) {
-        backToTopBtn.style.display = 'block';
-    } else {
-        backToTopBtn.style.display = 'none';
-    }
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const backToTopBtn = document.getElementById('backToTop');
-
+if (backToTopBtn) {
     window.addEventListener('scroll', () => {
-        // Show button after scrolling 300px
-        if (window.pageYOffset > 300) {
-            backToTopBtn.classList.add('show');
+        // Show button after scrolling down 400px
+        if (window.scrollY > 400) {
+            backToTopBtn.style.display = 'block';
         } else {
-            backToTopBtn.classList.remove('show');
+            backToTopBtn.style.display = 'none';
         }
     });
-
-    // The Click Event
-    backToTopBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+}
+*/
+document.addEventListener('DOMContentLoaded', () => {
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            // Show button after scrolling 300px
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
         });
-    });
+    
+        // The Click Event
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 });
 
 
