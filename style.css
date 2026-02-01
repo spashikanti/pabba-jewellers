@@ -26,16 +26,14 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 8%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(0px); 
+    padding: 15px 8%;
+    background: rgba(0, 0, 0, 0.95);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
     box-sizing: border-box;
-    transition: all 0.5s ease;
 }
 
 .navbar.scrolled {
@@ -50,46 +48,40 @@ section {
 .logo {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     text-align: left;
-    flex-shrink: 0; /* Prevents logo from being squashed */
 }
 
 .logo h1 {
     font-family: 'Cinzel', serif !important;
-    font-size: 1.4rem !important;
-    text-transform: none !important; /* FORCES Camel Case regardless of page */
-    margin: 0 !important;
-    line-height: 1.2;
+    font-size: 1.3rem !important;
     color: #D4AF37;
-    letter-spacing: 1px;
+    margin: 0;
+    /* This forces BOTH pages to be ALL CAPS */
+    text-transform: uppercase !important; 
+    letter-spacing: 2px;
 }
 
 .telugu-name {
-    font-size: 0.8rem !important;
-    text-transform: none !important;
+    font-size: 0.75rem;
     color: #888;
-    margin: 0;
+    text-transform: none !important; /* Keep Telugu script normal */
+    margin-top: 2px;
 }
 
 .nav-links {
     display: flex;
-    gap: 30px;
     list-style: none;
+    gap: 25px;
+    align-items: center;
     margin: 0;
-    padding: 0;
-    margin-left: auto;
 }
 
 .nav-links a {
-    text-decoration: none !important;
-    color: #e0e0e0 !important;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
+    text-decoration: none;
+    color: #eee;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    transition: all 0.4s ease;
-    position: relative;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
 }
 
 .nav-links a:hover {
@@ -227,7 +219,11 @@ section {
 }
 /* --- HAMBURGER VISIBILITY FIX --- */
 .menu-toggle {
-    display: none; /* Hidden by default on Desktop */
+    display: none; /* Hidden on desktop */
+    font-size: 1.8rem;
+    color: #D4AF37;
+    cursor: pointer;
+    user-select: none;
 }
 /* --- RESPONSIVE MEDIA QUERIES --- */
 
@@ -247,21 +243,29 @@ section {
     }
     
     .menu-toggle {
-       display: block !important; /* Only shows on mobile */
-        order: 2; /* Keeps it to the right */
-        cursor: pointer;
-        font-size: 1.8rem;
-        color: #D4AF37;
+        display: block !important; /* Show hamburger on mobile */
     }
 
    .nav-links {
-        display: none; /* Standard mobile menu behavior */
+        position: fixed;
+        top: 70px; /* Adjust based on your header height */
+        right: -100%; /* Hide off-screen */
+        background: #111;
+        width: 250px;
+        height: 100vh;
+        flex-direction: column;
+        padding: 40px 20px;
+        transition: 0.4s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
     }
     .nav-links.active {
-        display: flex;
-        /* ... your existing drawer styles ... */
+        right: 0; /* Slide in */
     }
-
+    /* Ensure the button inside the menu doesn't look weird */
+    .nav-links li {
+        width: 100%;
+        text-align: left;
+    }
     .hero { height: 60vh; }
     .trust { flex-direction: column; gap: 40px; }
     
