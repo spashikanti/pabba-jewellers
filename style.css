@@ -1,33 +1,57 @@
-/* --- GLOBAL STYLES --- */
+/* --- GLOBAL VARIABLES: THE SINGLE SOURCE OF TRUTH --- */
+:root {
+    --primary-gold: #D4AF37;
+    --text-white: #eeeeee;
+    --text-gray: #999999;
+    --bg-black: #0b0b0b;
+    
+    /* Font Families */
+    --heading-font: 'Cinzel', serif;
+    --body-font: 'Poppins', sans-serif;
+    
+    /* Unified Spacing */
+    --letter-spacing-gold: 3px;
+    --letter-spacing-ui: 1px;
+}
+
+/* --- BASE STYLES --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
-    font-family: 'Poppins', 'Montserrat', sans-serif;
-    background: #0b0b0b;
-    color: #eee;
+    font-family: var(--body-font);
+    background: var(--bg-black);
+    color: var(--text-white);
+    line-height: 1.6;
     padding-top: 80px; 
     overflow-x: hidden;
     scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- UNIFIED HEADINGS (SITE-WIDE) --- */
+h1, h2, h3, .gold-title, .stat-box h3, .card h3 {
+    font-family: var(--heading-font) !important;
+    font-weight: 400 !important;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-gold);
+    color: var(--primary-gold);
+    text-shadow: none !important; /* Removes the "bold" glow effect */
 }
 
 section {
     padding: 60px 8%;
     text-align: center;
-    scroll-margin-top: 80px; 
-}
-
-.gold {
-    color: #e6c15a;
-    text-shadow: 0 0 8px rgba(230, 193, 90, .35);
-}
-
-/* Ensure the .gold class doesn't override the font on the home page */
-h1.gold {
-    font-family: inherit; 
+    scroll-margin-top: 80px;
+    flex: 1 0 auto; /* Pushes footer to bottom */
 }
 
 /* --- STICKY NAVBAR --- */
@@ -48,11 +72,10 @@ h1.gold {
 .navbar.scrolled {
     padding: 12px 8%;
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(230, 193, 90, 0.3);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
 }
 
-/* --- LOGO (FORCED UNIFORMITY) --- */
+/* --- LOGO LOGIC --- */
 .logo {
     display: flex;
     flex-direction: column;
@@ -61,29 +84,18 @@ h1.gold {
 }
 
 .logo h1 {
-    font-family: 'Cinzel', serif !important;
-    font-size: 1.25rem !important; /* Slightly smaller to look sharper */
-    color: #D4AF37 !important;
+    font-size: 1.25rem !important;
     margin: 0 !important;
-    text-transform: uppercase !important;
     line-height: 1.2;
-    font-weight: 400 !important; /* Forces non-bold */
-    letter-spacing: 3px !important; /* Adds elegance and space */
-    text-shadow: none !important; /* Removes the "glow" that makes it look bold */
-    display: block !important;
 }
 
 .telugu-name {
-    /*color: #888;
-    margin-top: 2px;*/
-    text-transform: none !important;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--body-font);
     font-size: 0.7rem;
-    color: #999; /* Slightly lighter gray */
-    font-weight: 300; /* Light weight */
-    letter-spacing: 1px;
-    margin-top: 4px;
-    display: block;
+    color: var(--text-gray);
+    font-weight: 300;
+    letter-spacing: var(--letter-spacing-ui);
+    text-transform: none !important;
 }
 
 /* --- NAVIGATION LINKS --- */
@@ -96,227 +108,109 @@ h1.gold {
 
 .nav-links a {
     text-decoration: none;
-    color: #eee;
+    color: var(--text-white);
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 1px;
+    letter-spacing: var(--letter-spacing-ui);
     position: relative;
     transition: 0.3s;
 }
 
-.nav-links a:hover { color: #D4AF37 !important; }
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0; height: 1px;
-    bottom: -5px; left: 0;
-    background-color: #D4AF37;
-    transition: width 0.4s ease;
-}
-
-.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--primary-gold) !important; }
 
 .lang-btn {
     background: transparent;
-    border: 1px solid #D4AF37;
-    color: #D4AF37;
+    border: 1px solid var(--primary-gold);
+    color: var(--primary-gold);
     padding: 5px 12px;
     cursor: pointer;
-    font-family: inherit;
+    font-family: var(--body-font);
+    text-transform: uppercase;
     transition: 0.3s;
 }
 
-.lang-btn:hover { background: #D4AF37; color: #000; }
+.lang-btn:hover { background: var(--primary-gold); color: #000; }
 
-/* --- MOBILE MENU TOGGLE --- */
-.menu-toggle {
-    display: none;
-    font-size: 1.8rem;
-    color: #D4AF37;
-    cursor: pointer;
-    z-index: 1002;
-}
-
-/* --- HERO & GRIDS --- */
-.hero {
-    height: 85vh;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("images/hero.jpg") center/cover no-repeat;
-    display: flex; align-items: center; justify-content: center; text-align: center;
-}
-
-.grid {
+/* --- GRID & CARD UNIFORMITY --- */
+.grid, .catalog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-.card {
-    background: #151515; border-radius: 4px; overflow: hidden;
-    cursor: pointer; border: 1px solid #222;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.card:hover { transform: translateY(-10px); border-color: #D4AF37; }
-
-.card img {
-    width: 100%; height: 280px; object-fit: cover;
-    filter: grayscale(20%); transition: 0.5s;
-}
-
-.card:hover img { filter: grayscale(0%); transform: scale(1.05); }
-
-/* --- 1. FIX BLUE LINKS IN COLLECTIONS GRID --- */
-#collectionsGrid a {
+#collectionsGrid a, #catalogGrid a {
     text-decoration: none !important;
-    color: inherit !important; /* Forces the link to use the parent's text color */
-    display: block;
+    color: inherit !important;
 }
 
-#collectionsGrid .card h3 {
-    color: #e6c15a !important; /* Ensures the gold color stays gold */
-    margin-top: 15px;
-    font-family: 'Cinzel', serif;
+.card, .product-card {
+    background: #151515;
+    border: 1px solid #222;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: 0.3s ease;
 }
 
-/* --- CATALOG & PRODUCT VIEW --- */
-.catalog-section { padding: 120px 8% 50px; min-height: 80vh; }
-.catalog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+.card:hover, .product-card:hover {
+    border-color: var(--primary-gold);
+    transform: translateY(-5px);
 }
 
-.product-card {
-    background: #151515; border: 1px solid #222;
-    border-radius: 8px; overflow: hidden; transition: 0.3s;
-    cursor: pointer; display: flex; flex-direction: column;
+.card img, .product-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
 }
-
-.product-card:hover { border-color: #D4AF37; transform: translateY(-5px); }
-.product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-.product-info { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-
-/* --- MODAL (AMAZON STYLE) --- */
-.modal {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px);
-    z-index: 2000; align-items: center; justify-content: center;
-}
-
-.modal-content {
-    background: #151515; padding: 30px; border-radius: 12px;
-    width: 90%; max-width: 800px; position: relative;
-    border: 1px solid #D4AF37;
-}
-
-.modal-body { display: flex; flex-direction: row; gap: 30px; text-align: left; }
-#modalImg { width: 50%; max-height: 450px; object-fit: cover; border-radius: 8px; }
-.modal-details { width: 50%; display: flex; flex-direction: column; justify-content: center; }
-
-.close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; color: #D4AF37; cursor: pointer; }
 
 /* --- TRUST & STATS --- */
 .trust {
-    display: flex; justify-content: space-around; padding: 60px 8%;
-    background: #111; border-top: 1px solid #222; border-bottom: 1px solid #222;
-}
-.stat-box h3 { font-size: 2.5rem; color: #D4AF37; font-family: 'Cinzel', serif; }
-
-/* --- BUTTONS --- */
-.whatsapp-btn {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    background: #25D366; color: #fff; padding: 14px; border: none;
-    border-radius: 6px; width: 100%; font-weight: 600; cursor: pointer; margin-top: 20px;
-    text-decoration: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 60px 8%;
+    background: #111;
 }
 
-.back-to-top {
-    position: fixed; bottom: 20px; right: 20px;
-    width: 40px; height: 40px; background: #D4AF37;
-    color: #000; border-radius: 50%; border: none;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 999; opacity: 0; visibility: hidden; transition: 0.3s;
+.stat-box p {
+    font-family: var(--body-font);
+    font-size: 0.85rem;
+    color: var(--text-gray);
 }
 
-.back-to-top.show { opacity: 1; visibility: visible; }
-
-/* --- CENTER FOOTER TEXT --- */
+/* --- FOOTER (STICKY & CENTERED) --- */
 footer {
+    flex-shrink: 0;
     text-align: center !important;
     padding: 40px 20px;
     background: #000;
-    color: #555;
+    color: var(--text-gray);
     width: 100%;
     font-size: 0.8rem;
+    font-family: var(--body-font);
     border-top: 1px solid #222;
 }
 
-/* --- FIX FOOTER AT BOTTOM (CATALOG PAGE) --- */
-/* This ensures that even if there are only 2 products, the footer stays at the bottom */
-html, body {
-    height: 100%;
-    margin: 0;
+/* --- MODAL STYLE --- */
+.modal-content {
+    background: #151515;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--primary-gold);
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-/* This targets the main content area to "push" the footer down */
-#collections, 
-.catalog-section {
-    flex: 1 0 auto; /* This tells the content section to take up all available space */
-}
-
-footer {
-    flex-shrink: 0; /* Prevents the footer from squishing */
-}
-
-/* --- BREADCRUMB --- */
-.breadcrumb {
-    text-align: left; margin-bottom: 25px; font-size: 0.75rem;
-    color: #666; letter-spacing: 1px;
-}
-.breadcrumb a { color: #D4AF37 !important; text-decoration: none !important; text-transform: uppercase; }
-
-/* --- RESPONSIVE MEDIA QUERIES --- */
+/* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    body { padding-top: 70px !important; }
-    .navbar { padding: 0 20px; justify-content: space-between; height: 70px; }
-    .logo h1 { font-size: 1.1rem !important; }
-    .menu-toggle { display: block !important; order: 2; }
+    .menu-toggle { display: block; font-size: 1.8rem; color: var(--primary-gold); cursor: pointer; }
+    
     .nav-links {
-        position: fixed; top: 0; right: -100%; background: #0b0b0b;
+        position: fixed; top: 0; right: -100%; background: var(--bg-black);
         width: 280px; height: 100vh; flex-direction: column;
-        justify-content: flex-start; padding-top: 100px; gap: 20px;
-        transition: 0.4s ease-in-out; z-index: 1001;
+        padding-top: 100px; transition: 0.4s; z-index: 1001;
     }
-    .nav-links.active { right: 0; display: flex; visibility: visible; opacity: 1; }
-    .nav-links a { font-size: 1.2rem; }
-    .close-menu {
-        display: block; position: absolute; top: 20px; right: 25px;
-        font-size: 2.5rem; color: #D4AF37; cursor: pointer; z-index: 2001; padding: 10px;
-    }
-    .hero { height: 60vh; }
-    .trust { flex-direction: column; gap: 40px; }
-    .modal-body { flex-direction: column; text-align: center; }
-    #modalImg { width: 100%; max-height: 300px; }
-    .modal-details { width: 100%; }
-    /* ADD THIS NEW RULE */
+    
+    .nav-links.active { right: 0; }
+    
+    /* Hide Hamburger when menu is active */
     .navbar:has(#nav-links.active) .menu-toggle {
-        opacity: 0;
-        pointer-events: none;
-        visibility: hidden;
+        opacity: 0; visibility: hidden;
     }
-}
-
-@media (max-width: 600px) {
-    .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .catalog-section { padding: 100px 3% 40px; }
-}
-
-@media (min-width: 769px) {
-    .close-menu { display: none; }
 }
