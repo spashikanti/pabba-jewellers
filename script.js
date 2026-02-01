@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --- NAVIGATION & UI --- */
+/*
 function initNavigation() {
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.querySelector('.nav-links');
@@ -40,6 +41,44 @@ function initNavigation() {
     if (closeBtn) {
         closeBtn.addEventListener('click', () => navLinks.classList.remove('active'));
     }
+}
+*/
+function initNavigation() {
+    // Select by ID for better reliability
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links'); 
+    const closeBtn = document.getElementById('close-menu');
+
+    // Helper function to close menu
+    const closeMenu = () => {
+        if (navLinks) navLinks.classList.remove('active');
+    };
+
+    // Helper function to open/toggle menu
+    const toggleMenu = () => {
+        if (navLinks) navLinks.classList.toggle('active');
+    };
+
+    // 1. Open Button (Hamburger)
+    if (menuToggle) {
+        // Use 'click' but the CSS 'cursor: pointer' ensures mobile picks it up
+        menuToggle.addEventListener('click', toggleMenu);
+    }
+
+    // 2. Close Button (The 'X')
+    if (closeBtn) {
+        // 'touchstart' makes it feel instant on mobile
+        closeBtn.addEventListener('click', closeMenu);
+        closeBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevents "ghost clicks"
+            closeMenu();
+        });
+    }
+
+    // 3. Close when any link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
 }
 
 function initScrollEffects() {
