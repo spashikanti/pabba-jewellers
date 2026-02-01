@@ -5,14 +5,11 @@ let filteredProducts = []; // Stores items currently being displayed
 
 /* --- INITIALIZATION --- */
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Navigation First
     initNavigation();
-    
-    // 2. Initialize Other UI Components
     initLanguageToggle();
     initScrollEffects();
     
-    // 3. Page Specific Loading
+    // Check which page we are on and load appropriate data
     if (document.getElementById('collectionsGrid')) {
         loadCollectionsHome();
         loadTestimonials();
@@ -22,59 +19,38 @@ document.addEventListener('DOMContentLoaded', () => {
         loadCatalogPage();
     }
 
-    // 4. Initialize Trust Counters Observer
+    // Initialize Counter Observer
     const trustSection = document.querySelector('.trust');
     if (trustSection) trustObserver.observe(trustSection);
 });
 
-/* --- NAVIGATION & UI (FIXED) --- */
+/* --- NAVIGATION & UI --- */
 function initNavigation() {
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.getElementById('nav-links');
     const closeBtn = document.getElementById('close-menu');
 
-    // Helper to close menu
-    const closeMenu = () => {
-        if (navLinks) {
-            navLinks.classList.remove('active');
-            console.log("Menu Closed");
-        }
-    };
-
-    // Open Menu
     if (menuToggle && navLinks) {
+        // Open Menu
         menuToggle.addEventListener('click', (e) => {
             e.preventDefault();
-            e.stopPropagation(); // Prevents click from bubbling
             navLinks.classList.add('active');
-            console.log("Menu Opened");
+        });
+
+        // Close Menu with X
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
         });
     } else {
-        console.error("Navigation elements (mobile-menu/nav-links) not found in HTML.");
+        console.error("Navigation IDs (mobile-menu or nav-links) not found in HTML.");
     }
-
-    // Close with X Button
-    if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeMenu();
-        });
-    }
-
-    // Close menu when clicking any link inside it
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
-
-    // Close menu when clicking outside the drawer
-    document.addEventListener('click', (e) => {
-        if (navLinks && navLinks.classList.contains('active')) {
-            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
-                closeMenu();
-            }
-        }
-    });
 }
 
 function initScrollEffects() {
@@ -136,7 +112,8 @@ function loadCollectionsHome() {
                     <h3 class="gold">${currentLang === 'en' ? c.name_en : c.name_te}</h3>
                 </a>
             `).join('');
-        });
+        })
+        .catch(err => console.error("Error loading collections:", err));
 }
 
 /* --- CATALOG PAGE: LOGIC --- */
@@ -151,7 +128,6 @@ async function loadCatalogPage() {
         if (categoryFilter) {
             const titleEl = document.getElementById('categoryTitle');
             if (titleEl) titleEl.innerText = categoryFilter.charAt(0).toUpperCase() + categoryFilter.slice(1) + " Collection";
-            
             filteredProducts = allProducts.filter(p => p.category === categoryFilter);
         } else {
             filteredProducts = allProducts;
@@ -168,14 +144,7 @@ function renderCatalog(items) {
     if (!grid) return;
 
     if (items.length === 0) {
-        grid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px;">
-                <h3 class="gold">Collection Not Found</h3>
-                <p>We couldn't find any items in this specific category.</p>
-                <br>
-                <a href="catalog.html" class="view-btn" style="text-decoration:none; display:inline-block;">View All Collections</a>
-            </div>
-        `;
+        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px;"><h3 class="gold">Collection Not Found</h3></div>`;
         return;
     }
 
@@ -200,17 +169,21 @@ function openProductModal(id) {
     if (!p) return;
 
     const modal = document.getElementById('productModal');
-    
-    document.getElementById('modalImg').src = "images/" + p.image;
-    document.getElementById('modalTitle').innerText = currentLang === 'en' ? p.title_en : p.title_te;
-    document.getElementById('modalDesc').innerText = currentLang === 'en' ? p.desc_en : p.desc_te;
-
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
     const waBtn = document.getElementById('waBtn');
-    const message = encodeURIComponent(`Hi! I'm interested in: *${p.title_en}*\nCategory: ${p.category}\nCould you provide more details?`);
-    
-    waBtn.onclick = () => {
-        window.open(`https://wa.me/918978569063?text=${message}`, '_blank');
-    };
+
+    if (modalImg) modalImg.src = "images/" + p.image;
+    if (modalTitle) modalTitle.innerText = currentLang === 'en' ? p.title_en : p.title_te;
+    if (modalDesc) modalDesc.innerText = currentLang === 'en' ? p.desc_en : p.desc_te;
+
+    const message = encodeURIComponent(`Hi! I'm interested in: *${p.title_en}*\nCategory: ${p.category}`);
+    if (waBtn) {
+        waBtn.onclick = () => {
+            window.open(`https://wa.me/918978569063?text=${message}`, '_blank');
+        };
+    }
 
     modal.style.display = 'flex';
 }
@@ -220,6 +193,7 @@ function closeModal() {
     if (modal) modal.style.display = 'none';
 }
 
+// Close modal when clicking outside content
 window.onclick = function(event) {
     const modal = document.getElementById('productModal');
     if (event.target == modal) closeModal();
@@ -277,7 +251,8 @@ function animateCounters() {
 
         let start = 0;
         const duration = 2000;
-        const increment = counter.target / (duration / 16);
+        const totalSteps = duration / 16;
+        const increment = counter.target / totalSteps;
 
         const updateCount = () => {
             start += increment;
@@ -286,7 +261,6 @@ function animateCounters() {
                 requestAnimationFrame(updateCount);
             } else {
                 element.innerText = counter.target + counter.suffix;
-                element.classList.add('sparkle-effect');
             }
         };
         updateCount();
