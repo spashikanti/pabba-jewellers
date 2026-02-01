@@ -20,6 +20,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// This will run as soon as the page is ready
+(function() {
+    console.log("Navigation Script Initialized");
+
+    function setupMenu() {
+        const menuBtn = document.getElementById('mobile-menu');
+        const navContainer = document.getElementById('nav-links');
+        const closeBtn = document.getElementById('close-menu');
+
+        if (menuBtn && navContainer) {
+            console.log("Menu elements found. Attaching events...");
+
+            menuBtn.onclick = function(e) {
+                e.preventDefault();
+                console.log("Hamburger clicked!");
+                navContainer.classList.add('active');
+            };
+
+            if (closeBtn) {
+                closeBtn.onclick = function(e) {
+                    e.preventDefault();
+                    console.log("X clicked!");
+                    navContainer.classList.remove('active');
+                };
+            }
+
+            // Close when clicking links
+            const links = navContainer.getElementsByTagName('a');
+            for (let link of links) {
+                link.onclick = function() {
+                    navContainer.classList.remove('active');
+                };
+            }
+        } else {
+            console.error("Could not find mobile-menu or nav-links IDs");
+        }
+    }
+
+    // Run now, and also run when the window finishes loading just in case
+    setupMenu();
+    window.onload = setupMenu;
+})();
+
 /* --- NAVIGATION & UI --- */
 function initNavigation() {
     document.addEventListener('DOMContentLoaded', function() {
