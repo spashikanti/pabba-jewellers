@@ -1,379 +1,222 @@
-/*
-let currentLang="en";
-*/
-let products=[];
-let currentPage=1;
-const perPage=6;
+/* --- GLOBAL STATE --- */
+let currentLang = 'en';
+let allProducts = []; // Stores the full JSON list
+let filteredProducts = []; // Stores items currently being displayed
 
-window.addEventListener('scroll', function() {
-    const nav = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
+/* --- INITIALIZATION --- */
+document.addEventListener('DOMContentLoaded', () => {
+    initNavigation();
+    initLanguageToggle();
+    initScrollEffects();
+    
+    // Check which page we are on and load appropriate data
+    if (document.getElementById('collectionsGrid')) {
+        loadCollectionsHome();
+        loadTestimonials();
+    }
+    
+    if (document.getElementById('catalogGrid')) {
+        loadCatalogPage();
     }
 });
 
-const menuToggle = document.getElementById('mobile-menu');
-const navLinks = document.querySelector('.nav-links');
+/* --- NAVIGATION & UI --- */
+function initNavigation() {
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
 
-if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+    }
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('active'));
     });
 }
 
-// Close menu when a link is clicked (important for UX)
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
+function initScrollEffects() {
+    const nav = document.querySelector('.navbar');
+    const backToTopBtn = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+        // Sticky Navbar Effect
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+
+        // Back to Top Visibility
+        if (backToTopBtn) {
+            if (window.pageYOffset > 400) backToTopBtn.classList.add('show');
+            else backToTopBtn.classList.remove('show');
+        }
     });
-});
 
-const langBtn = document.getElementById('lang-toggle');
-let currentLang = 'en';
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+}
 
-langBtn.addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'te' : 'en';
+/* --- LANGUAGE TOGGLE --- */
+function initLanguageToggle() {
+    const langBtn = document.getElementById('lang-toggle');
+    if (!langBtn) return;
+
+    langBtn.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'te' : 'en';
+        
+        // Update Static Text
+        document.querySelectorAll('[data-en]').forEach(el => {
+            el.textContent = el.getAttribute(`data-${currentLang}`);
+        });
+
+        // Update Button Text
+        langBtn.textContent = currentLang === 'en' ? 'తెలుగు' : 'English';
+
+        // Re-render dynamic content if on the page
+        if (document.getElementById('catalogGrid')) renderCatalog(filteredProducts);
+        if (document.getElementById('collectionsGrid')) loadCollectionsHome();
+    });
+}
+
+/* --- HOME PAGE: COLLECTIONS --- */
+function loadCollectionsHome() {
+    fetch("collections.json")
+        .then(r => r.json())
+        .then(cols => {
+            const grid = document.getElementById("collectionsGrid");
+            if (!grid) return;
+            grid.innerHTML = cols.map(c => `
+                <a href="catalog.html?category=${c.id}" class="card">
+                    <img src="images/${c.image}" alt="${c.name_en}">
+                    <h3 class="gold">${currentLang === 'en' ? c.name_en : c.name_te}</h3>
+                </a>
+            `).join('');
+        });
+}
+
+/* --- CATALOG PAGE: LOGIC --- */
+async function loadCatalogPage() {
+    try {
+        const response = await fetch('products.json');
+        allProducts = await response.json();
+        
+        const params = new URLSearchParams(window.location.search);
+        const categoryFilter = params.get('category');
+        
+        // Update Title and Breadcrumb based on category
+        if (categoryFilter) {
+            const titleEl = document.getElementById('categoryTitle');
+            if (titleEl) titleEl.innerText = categoryFilter.charAt(0).toUpperCase() + categoryFilter.slice(1) + " Collection";
+            
+            filteredProducts = allProducts.filter(p => p.category === categoryFilter);
+        } else {
+            filteredProducts = allProducts;
+        }
+
+        renderCatalog(filteredProducts);
+    } catch (err) {
+        console.error("Catalog Loading Error:", err);
+    }
+}
+
+function renderCatalog(items) {
+    const grid = document.getElementById('catalogGrid');
+    if (!grid) return;
+
+    if (items.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1;">No items found in this category.</p>`;
+        return;
+    }
+
+    grid.innerHTML = items.map(item => `
+        <div class="product-card" onclick="openProductModal(${item.id})">
+            <img src="images/${item.image}" alt="${item.title_en}" loading="lazy">
+            <div class="product-info">
+                <h4>${currentLang === 'en' ? item.title_en : item.title_te}</h4>
+                <p class="price-tag">${item.price || 'Price on Request'}</p>
+                <button class="view-btn">View Details</button>
+            </div>
+        </div>
+    `).join('');
+
+    const countEl = document.getElementById('itemCount');
+    if (countEl) countEl.innerText = `${items.length} Items Found`;
+}
+
+/* --- MODAL LOGIC --- */
+function openProductModal(id) {
+    const p = allProducts.find(item => item.id === id);
+    if (!p) return;
+
+    const modal = document.getElementById('productModal');
     
-    // Update all elements that have data attributes
-    document.querySelectorAll('[data-en]').forEach(el => {
-        el.textContent = el.getAttribute(`data-${currentLang}`);
-    });
+    document.getElementById('modalImg').src = "images/" + p.image;
+    document.getElementById('modalTitle').innerText = currentLang === 'en' ? p.title_en : p.title_te;
+    document.getElementById('modalDesc').innerText = currentLang === 'en' ? p.desc_en : p.desc_te;
 
-    // Update button text
-    langBtn.textContent = currentLang === 'en' ? 'తెలుగు' : 'English';
-});
-
-/* Load Collections */
-/*
-fetch("collections.json")
-.then(res=>res.json())
-.then(cols=>{
-  const grid=document.getElementById("collectionsGrid");
-  cols.forEach(c=>{
-    grid.innerHTML+=`
-      <div class="card" onclick="filterCategory('${c.id}')">
-        <img src="images/${c.image}">
-        <h3 class="gold">${c["name_"+currentLang]}</h3>
-      </div>`;
-  });
-});
-*/
-
-if(document.getElementById("collectionsGrid")){
-fetch("collections.json").then(r=>r.json()).then(cols=>{
-  const grid=document.getElementById("collectionsGrid");
-  cols.forEach(c=>{
-    grid.innerHTML+=`
-      <a href="catalog.html?category=${c.id}" class="card">
-        <img src="images/${c.image}">
-        <h3 class="gold">${c.name_en}</h3>
-      </a>`;
-  });
-});
-}
-
-/* Load Products */
-/*
-fetch("products.json")
-.then(res=>res.json())
-.then(data=>{
-  window.products=data;
-  renderProducts(data);
-});
-*/
-
-/* LOAD PRODUCTS (CATALOG PAGE) */
-if(document.getElementById("productGrid")){
-fetch("products.json").then(r=>r.json()).then(data=>{
-  products=data;
-  const params=new URLSearchParams(window.location.search);
-  const cat=params.get("cat");
-  if(cat) products=products.filter(p=>p.category===cat);
-  renderProducts();
-  setupPagination();
-});
-}
-
-/*
-function renderProducts(list){
-  const grid=document.getElementById("productGrid");
-  grid.innerHTML="";
-  list.forEach((p,i)=>{
-    grid.innerHTML+=`
-      <div class="card" onclick="openModal(${i})">
-        <img src="images/${p.image}">
-        <h3 class="gold">${p["title_"+currentLang]}</h3>
-      </div>`;
-  });
-}
-*/
-function renderProducts(){
-  const start=(currentPage-1)*perPage;
-  const list=products.slice(start,start+perPage);
-  productGrid.innerHTML="";
-  list.forEach((p,i)=>{
-    productGrid.innerHTML+=`
-      <div class="card" onclick="openModal(${start+i})">
-        <img src="images/${p.image}">
-        <h3 class="gold">${p.title_en}</h3>
-      </div>`;
-  });
-}
-
-function setupPagination(){
-  const pages=Math.ceil(products.length/perPage);
-  pagination.innerHTML="";
-  for(let i=1;i<=pages;i++){
-    pagination.innerHTML+=`<button onclick="goPage(${i})">${i}</button>`;
-  }
-}
-
-function goPage(p){currentPage=p;renderProducts()}
-
-function filterCategory(cat){
-  const filtered=products.filter(p=>p.category===cat);
-  renderProducts(filtered);
-}
-
-/* Modal */
-/*
-function openModal(i){
-  const p=products[i];
-  modal.style.display="flex";
-  modalImg.src="images/"+p.image;
-  modalTitle.innerText=p["title_"+currentLang];
-  modalDesc.innerText=p["desc_"+currentLang];
-  const msg=`Hi, I'm interested in the ${p.title_en}`;
-  waBtn.onclick=()=>window.open(`https://wa.me/918978569063?text=${encodeURIComponent(msg)}`);
-}
-function closeModal(){modal.style.display="none"}
-*/
-
-// Function to open the modal with dynamic data
-function openModal(imageSrc, title, price) {
-    const modal = document.querySelector('.modal');
-    const modalContent = document.querySelector('.modal-content');
-
-    // Injecting dynamic data into the modal
-    modalContent.innerHTML = `
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img src="${imageSrc}" alt="${title}" style="width:100%; border-radius:8px; margin-bottom:15px;">
-        <h2 class="gold">${title}</h2>
-        <p>Custom designs available in 22k Gold</p>
-        <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I am interested in the ${title}" 
-           class="whatsapp-btn" target="_blank">
-           <i class="fab fa-whatsapp"></i> Inquire on WhatsApp
-        </a>
-    `;
+    const waBtn = document.getElementById('waBtn');
+    const message = encodeURIComponent(`Hi! I'm interested in: *${p.title_en}*\nCategory: ${p.category}\nCould you provide more details?`);
     
+    waBtn.onclick = () => {
+        window.open(`https://wa.me/918978569063?text=${message}`, '_blank');
+    };
+
     modal.style.display = 'flex';
 }
 
 function closeModal() {
-    document.querySelector('.modal').style.display = 'none';
+    const modal = document.getElementById('productModal');
+    if (modal) modal.style.display = 'none';
 }
 
-// Close modal when clicking outside the box
 window.onclick = function(event) {
-    const modal = document.querySelector('.modal');
-    if (event.target == modal) {
-        closeModal();
-    }
-}
+    const modal = document.getElementById('productModal');
+    if (event.target == modal) closeModal();
+};
 
-/* Testimonials rotation */
-/*
-const testimonials=document.querySelectorAll('.testimonial');
-let tIndex=0;
-setInterval(()=>{
-  testimonials[tIndex].classList.remove('active');
-  tIndex=(tIndex+1)%testimonials.length;
-  testimonials[tIndex].classList.add('active');
-},4000);
-*/
-/*
-const t=document.querySelectorAll(".testimonial");
-if(t.length){
-let ti=0;
-setInterval(()=>{
-  t[ti].classList.remove("active");
-  ti=(ti+1)%t.length;
-  t[ti].classList.add("active");
-},3500);
-}
-*/
-
+/* --- TESTIMONIALS --- */
 async function loadTestimonials() {
     const container = document.getElementById('testimonial-container');
     if (!container) return;
 
     try {
-        // Use a relative path for GitHub Pages
-        const response = await fetch('./testimonials.json'); 
-        if (!response.ok) throw new Error("Could not load JSON");
-        
+        const response = await fetch('./testimonials.json');
         const data = await response.json();
         
-        // 1. Inject the HTML
         container.innerHTML = data.map((item, index) => `
-            <div class="testimonial ${index === 0 ? 'active' : ''}" style="display: ${index === 0 ? 'block' : 'none'}">
+            <div class="testimonial" style="display: ${index === 0 ? 'block' : 'none'}; opacity: ${index === 0 ? '1' : '0'}">
                 <p class="testimonial-text">"${item.text}"</p>
                 <h4 class="testimonial-author">- ${item.name}</h4>
                 <div class="stars">${item.rating}</div>
             </div>
         `).join('');
 
-        // 2. Start the animation ONLY after elements exist
-        if (data.length > 1) {
-            startCarousel();
-        }
+        if (data.length > 1) startCarousel();
     } catch (error) {
-        console.error("Testimonial Error:", error);
-        container.innerHTML = "<p>Trusted by hundreds of families in Hyderabad.</p>";
+        container.innerHTML = "<p>Trusted by families since 2026.</p>";
     }
 }
-/*
-function startCarousel() {
-    let current = 0;
-    
-    setInterval(() => {
-        const items = document.querySelectorAll('.testimonial');
-        if (items.length === 0) return;
 
-        // Hide current
-        items[current].style.opacity = '0';
-        setTimeout(() => {
-            items[current].style.display = 'none';
-            items[current].classList.remove('active');
-
-            // Move to next
-            current = (current + 1) % items.length;
-
-            // Show next
-            items[current].style.display = 'block';
-            items[current].classList.add('active');
-            // Small delay to trigger fade-in
-            setTimeout(() => { items[current].style.opacity = '1'; }, 50);
-        }, 500); // Half-second fade out
-    }, 4000);
-}
-*/
 function startCarousel() {
     let current = 0;
     const items = document.querySelectorAll('.testimonial');
     if (items.length === 0) return;
 
     setInterval(() => {
-        // 1. Fade out current
         items[current].style.opacity = '0';
-        
-        // Use a short delay so the fade-out starts before we switch
         setTimeout(() => {
             items[current].style.display = 'none';
-            items[current].classList.remove('active');
-
-            // Move to next index
             current = (current + 1) % items.length;
-
-            // 2. Prepare next
             items[current].style.display = 'block';
-            items[current].classList.add('active');
-            
-            // 3. Fade in next immediately
-            setTimeout(() => {
-                items[current].style.opacity = '1';
-            }, 50); 
-        }, 400); // This matches the 0.4s CSS transition
-    }, 5000); // 5 seconds per testimonial
+            setTimeout(() => { items[current].style.opacity = '1'; }, 50);
+        }, 500);
+    }, 5000);
 }
 
-// Call the function
-loadTestimonials();
-
-/*
-async function loadTestimonials() {
-    const container = document.getElementById('testimonial-container');
-    try {
-        const response = await fetch('testimonials.json');
-        const data = await response.json();
-        
-        let html = '';
-        data.forEach((item, index) => {
-            html += `
-                <div class="testimonial ${index === 0 ? 'active' : ''}">
-                    <p>"${item.text}"</p>
-                    <h4>- ${item.name}</h4>
-                    <div class="stars">${item.rating}</div>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
-        startCarousel(); // Initialize the sliding logic
-    } catch (error) {
-        console.error("Error loading testimonials:", error);
-    }
-}
-
-function startCarousel() {
-    let current = 0;
-    const items = document.querySelectorAll('.testimonial');
-    if(items.length === 0) return;
-
-    setInterval(() => {
-        items[current].classList.remove('active');
-        current = (current + 1) % items.length;
-        items[current].classList.add('active');
-    }, 4000); // Change every 4 seconds
-}
-
-loadTestimonials();
-*/
-
-/* Category filtering scroll fix */
-function filterCategory(cat){
-  const filtered=products.filter(p=>p.category===cat);
-  renderProducts(filtered);
-  document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
-}
-/*
-const backToTopBtn = document.getElementById('backToTop');
-if (backToTopBtn) {
-    window.addEventListener('scroll', () => {
-        // Show button after scrolling down 400px
-        if (window.scrollY > 400) {
-            backToTopBtn.style.display = 'block';
-        } else {
-            backToTopBtn.style.display = 'none';
-        }
-    });
-}
-*/
-document.addEventListener('DOMContentLoaded', () => {
-    const backToTopBtn = document.getElementById('backToTop');
-    if (backToTopBtn) {
-        window.addEventListener('scroll', () => {
-            // Show button after scrolling 300px
-            if (window.pageYOffset > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        });
-    
-        // The Click Event
-        backToTopBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-});
-
-
+/* --- COUNTER ANIMATION --- */
 function animateCounters() {
     const counters = [
         { id: 'customerCount', target: 483, suffix: '+', decimals: 0 },
@@ -385,8 +228,8 @@ function animateCounters() {
         if (!element) return;
 
         let start = 0;
-        const duration = 2000; // 2 seconds
-        const increment = counter.target / (duration / 16); // 16ms is roughly 60fps
+        const duration = 2000;
+        const increment = counter.target / (duration / 16);
 
         const updateCount = () => {
             start += increment;
@@ -395,81 +238,21 @@ function animateCounters() {
                 requestAnimationFrame(updateCount);
             } else {
                 element.innerText = counter.target + counter.suffix;
-                element.classList.add('sparkle-effect'); // Trigger the shimmer
+                element.classList.add('sparkle-effect');
             }
         };
-
         updateCount();
     });
 }
 
-// Trigger animation when the section is visible
-const observer = new IntersectionObserver((entries) => {
+const trustObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             animateCounters();
-            observer.unobserve(entry.target); // Run only once
+            trustObserver.unobserve(entry.target);
         }
     });
 }, { threshold: 0.5 });
 
 const trustSection = document.querySelector('.trust');
-if (trustSection) observer.observe(trustSection);
-
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const categoryFilter = params.get('category'); // e.g., 'bridal'
-    
-    fetch('products.json')
-        .then(res => res.json())
-        .then(data => {
-            const filtered = categoryFilter 
-                ? data.filter(p => p.category === categoryFilter)
-                : data;
-            renderCatalog(filtered);
-        });
-});
-
-function renderCatalog(items) {
-    const grid = document.getElementById('catalog-grid');
-    // GUARD CLAUSE: If this element doesn't exist on this page, stop here!
-    if (!grid) return;
-    grid.innerHTML = items.map(item => `
-        <div class="product-card" onclick="openProductModal(${item.id})">
-            <img src="images/${item.image}" alt="${item.title_en}">
-            <div class="product-info">
-                <h4>${currentLang === 'en' ? item.title_en : item.title_te}</h4>
-                <p class="price">${item.price}</p>
-                <button class="view-btn">View Details</button>
-            </div>
-        </div>
-    `).join('');
-
-    // Update the item count if that element exists
-    const countEl = document.getElementById('itemCount');
-    if (countEl) countEl.innerText = `${items.length} Items Found`;
-}
-
-function openProductModal(id) {
-    // Find product from your 'products' array
-    const p = products.find(item => item.id === id);
-    if(!p) return;
-
-    const modal = document.getElementById('productModal');
-    
-    // Set content
-    document.getElementById('modalImg').src = "images/" + p.image;
-    document.getElementById('modalTitle').innerText = currentLang === 'en' ? p.title_en : p.title_te;
-    document.getElementById('modalDesc').innerText = currentLang === 'en' ? p.desc_en : p.desc_te;
-
-    // Create WhatsApp Link
-    const waBtn = document.getElementById('waBtn');
-    const message = `Hi! I'm interested in this piece from your catalog:%0A%0A*${p.title_en}*%0A(Category: ${p.category})%0A%0ACan you share the price?`;
-    
-    // Open WhatsApp on click
-    waBtn.onclick = () => {
-        window.open(`https://wa.me/918978569063?text=${message}`, '_blank');
-    };
-
-    modal.style.display = 'flex';
-}
+if (trustSection) trustObserver.observe(trustSection);
