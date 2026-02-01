@@ -432,6 +432,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderCatalog(items) {
     const grid = document.getElementById('catalog-grid');
+    // GUARD CLAUSE: If this element doesn't exist on this page, stop here!
+    if (!grid) return;
     grid.innerHTML = items.map(item => `
         <div class="product-card" onclick="openProductModal(${item.id})">
             <img src="images/${item.image}" alt="${item.title_en}">
