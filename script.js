@@ -38,9 +38,7 @@ function initNavigation() {
 
     // Close Menu with X
     if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-        });
+        closeBtn.addEventListener('click', () => navLinks.classList.remove('active'));
     }
 }
 
