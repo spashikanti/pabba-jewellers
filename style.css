@@ -265,9 +265,23 @@ section {
         z-index: 2000;
     }
 
-    .nav-links.active { right: 0; }
+    /* Ensure the nav container is visible when active */
+    .nav-links.active {
+        right: 0 !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
 
     .nav-links a { font-size: 1.2rem; }
+
+    /* Ensure the browser treats these as clickable buttons */
+    #mobile-menu, 
+    #close-menu {
+        cursor: pointer;
+        display: block;
+        -webkit-tap-highlight-color: transparent; /* Removes the grey box on tap */
+    }
 
     /* THE 'X' BUTTON STYLING */
     .close-menu {
@@ -278,6 +292,8 @@ section {
         font-size: 2.5rem;
         color: #D4AF37;
         cursor: pointer;
+        z-index: 2001 !important; 
+        padding: 10px; /* Bigger hit area for thumbs */
     }
 
     .hero { height: 60vh; }
