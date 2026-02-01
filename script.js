@@ -442,3 +442,27 @@ function renderCatalog(items) {
         </div>
     `).join('');
 }
+
+function openProductModal(id) {
+    // Find product from your 'products' array
+    const p = products.find(item => item.id === id);
+    if(!p) return;
+
+    const modal = document.getElementById('productModal');
+    
+    // Set content
+    document.getElementById('modalImg').src = "images/" + p.image;
+    document.getElementById('modalTitle').innerText = currentLang === 'en' ? p.title_en : p.title_te;
+    document.getElementById('modalDesc').innerText = currentLang === 'en' ? p.desc_en : p.desc_te;
+
+    // Create WhatsApp Link
+    const waBtn = document.getElementById('waBtn');
+    const message = `Hi! I'm interested in this piece from your catalog:%0A%0A*${p.title_en}*%0A(Category: ${p.category})%0A%0ACan you share the price?`;
+    
+    // Open WhatsApp on click
+    waBtn.onclick = () => {
+        window.open(`https://wa.me/918978569063?text=${message}`, '_blank');
+    };
+
+    modal.style.display = 'flex';
+}
