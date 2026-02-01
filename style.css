@@ -50,25 +50,26 @@ section {
 .logo {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    flex: 1; /* Allows the logo to take up available space */
-    min-width: 0; /* Prevents flex items from overflowing */
+    justify-content: center;
+    text-align: left;
+    flex-shrink: 0; /* Prevents logo from being squashed */
 }
 
 .logo h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem; /* Reduced slightly for mobile safety */
-    white-space: nowrap; /* Keeps name on one line */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Adds ... if name is somehow way too long */
+    font-family: 'Cinzel', serif !important;
+    font-size: 1.4rem !important;
+    text-transform: none !important; /* FORCES Camel Case regardless of page */
+    margin: 0 !important;
+    line-height: 1.2;
+    color: #D4AF37;
+    letter-spacing: 1px;
 }
 
 .telugu-name {
-    display: block;
-    font-size: 0.8rem;
-    color: #888;
-    margin-top: -2px;
+    font-size: 0.8rem !important;
     text-transform: none !important;
+    color: #888;
+    margin: 0;
 }
 
 .nav-links {
@@ -207,11 +208,13 @@ section {
     letter-spacing: 1px;
 }
 
+/* This prevents the catalog breadcrumb from looking like a default blue link */
 .breadcrumb a {
-    color: #D4AF37 !important; /* Force Gold color */
-    text-decoration: none !important; /* Remove underline */
+    color: #D4AF37 !important;
+    text-decoration: none !important;
     text-transform: uppercase;
-    transition: 0.3s;
+    font-size: 0.75rem;
+    font-weight: 500;
 }
 
 .breadcrumb a:hover {
@@ -219,10 +222,13 @@ section {
 }
 
 .breadcrumb span {
-    margin: 0 8px;
-    color: #444;
+    color: #555;
+    margin: 0 5px;
 }
-
+/* --- HAMBURGER VISIBILITY FIX --- */
+.menu-toggle {
+    display: none; /* Hidden by default on Desktop */
+}
 /* --- RESPONSIVE MEDIA QUERIES --- */
 
 /* Mobile Phones (up to 768px) */
@@ -233,23 +239,28 @@ section {
         justify-content: flex-start; /* Align items to the left */
         gap: 10px;    
     }
+    .logo {
+        order: 1;
+    }
     .logo h1 {
         font-size: 1.05rem; /* Precise size to prevent overlap */
     }
     
     .menu-toggle {
-        margin-left: auto; /* Pushes hamburger to the far right */
-        padding: 10px;
-        z-index: 1001;
+       display: block !important; /* Only shows on mobile */
+        order: 2; /* Keeps it to the right */
+        cursor: pointer;
+        font-size: 1.8rem;
+        color: #D4AF37;
     }
 
-    .nav-links {
-        position: fixed; top: 65px; right: -100%;
-        width: 250px; height: calc(100vh - 65px);
-        background: #000; flex-direction: column;
-        padding: 40px; gap: 20px; transition: 0.4s;
+   .nav-links {
+        display: none; /* Standard mobile menu behavior */
     }
-    .nav-links.active { right: 0; }
+    .nav-links.active {
+        display: flex;
+        /* ... your existing drawer styles ... */
+    }
 
     .hero { height: 60vh; }
     .trust { flex-direction: column; gap: 40px; }
