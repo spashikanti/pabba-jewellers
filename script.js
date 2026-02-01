@@ -29,7 +29,10 @@ function initNavigation() {
 
     // Open Menu
     if (menuToggle) {
-        menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+        menuToggle.addEventListener('click', () => {
+            alert('hi');
+            navLinks.classList.toggle('active')
+        });
     }
 
     // Close mobile menu on link click
