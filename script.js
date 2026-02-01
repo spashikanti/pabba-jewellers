@@ -66,7 +66,7 @@ fetch("collections.json").then(r=>r.json()).then(cols=>{
   const grid=document.getElementById("collectionsGrid");
   cols.forEach(c=>{
     grid.innerHTML+=`
-      <a href="catalog.html?cat=${c.id}" class="card">
+      <a href="catalog.html?category=${c.id}" class="card">
         <img src="images/${c.image}">
         <h3 class="gold">${c.name_en}</h3>
       </a>`;
