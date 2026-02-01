@@ -1,21 +1,56 @@
 [
   {
+    "id": 1,
+    "title_en": "Kundan Bridal Set",
+    "title_te": "కుందన్ వధువు సెట్",
+    "image": "Classic Gold Ring.jpg",
+    "category": "bridal",
+    "price": "Contact for Price",
+    "desc_en": "Premium Kundan work with semi-precious stones.",
+    "desc_te": "విలువైన రాళ్లతో చేసిన ప్రీమియం కుందన్ పని."
+  },  
+  {
+    "id": 2,
     "title_en": "Bridal Gold Necklace Set",
     "title_te": "వధువు బంగారు హారం సెట్",
     "image": "Bridal Gold Necklace Set.jpg",
     "category": "bridal",
+    "price": "Contact for Price",
     "desc_en": "Traditional bridal necklace set with intricate detailing.",
     "desc_te": "వివాహ వేడుకల కోసం ప్రత్యేకంగా రూపొందించిన సంప్రదాయ హారం."
   },
   {
+    "id": 3,
+    "title_en": "Solitaire Diamond Ring",
+    "title_te": "సాలిటైర్ డైమండ్ రింగ్",
+    "image": "Classic Gold Ring.jpg",
+    "category": "diamond",
+    "price": "Contact for Price",
+    "desc_en": "GIA certified diamond set in 18k white gold.",
+    "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో సెట్ చేయబడిన డైమండ్."
+  },
+  {
+    "id": 4,
     "title_en": "Diamond Statement Necklace",
     "title_te": "డైమండ్ స్టేట్‌మెంట్ నెక్లెస్",
     "image": "Diamond Statement Necklace.jpg",
     "category": "diamond",
+    "price": "Contact for Price",
     "desc_en": "Luxury diamond necklace for premium occasions.",
     "desc_te": "ప్రత్యేక వేడుకల కోసం విలాసవంతమైన డైమండ్ హారం."
   },
   {
+    "id": 5,
+    "title_en": "Gold Temple Bangle",
+    "title_te": "గోల్డ్ టెంపుల్ గాజులు",
+    "image": "Diamond Statement Necklace.jpg",
+    "category": "daily",
+    "price": "Contact for Price",
+    "desc_en": "Traditional temple design for daily elegance.",
+    "desc_te": "రోజువారీ ఉపయోగం కోసం సంప్రదాయ టెంపుల్ డిజైన్."
+  },
+  {
+    "id": 6,
     "title_en": "Classic Gold Ring",
     "title_te": "క్లాసిక్ గోల్డ్ రింగ్",
     "image": "Classic Gold Ring.jpg",
