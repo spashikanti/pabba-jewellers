@@ -5,11 +5,14 @@ let filteredProducts = []; // Stores items currently being displayed
 
 /* --- INITIALIZATION --- */
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize Navigation First
     initNavigation();
+    
+    // 2. Initialize Other UI Components
     initLanguageToggle();
     initScrollEffects();
     
-    // Check which page we are on and load appropriate data
+    // 3. Page Specific Loading
     if (document.getElementById('collectionsGrid')) {
         loadCollectionsHome();
         loadTestimonials();
@@ -18,84 +21,60 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('catalogGrid')) {
         loadCatalogPage();
     }
+
+    // 4. Initialize Trust Counters Observer
+    const trustSection = document.querySelector('.trust');
+    if (trustSection) trustObserver.observe(trustSection);
 });
 
-// This will run as soon as the page is ready
-(function() {
-    console.log("Navigation Script Initialized");
-
-    function setupMenu() {
-        const menuBtn = document.getElementById('mobile-menu');
-        const navContainer = document.getElementById('nav-links');
-        const closeBtn = document.getElementById('close-menu');
-
-        if (menuBtn && navContainer) {
-            console.log("Menu elements found. Attaching events...");
-
-            menuBtn.onclick = function(e) {
-                e.preventDefault();
-                console.log("Hamburger clicked!");
-                navContainer.classList.add('active');
-            };
-
-            if (closeBtn) {
-                closeBtn.onclick = function(e) {
-                    e.preventDefault();
-                    console.log("X clicked!");
-                    navContainer.classList.remove('active');
-                };
-            }
-
-            // Close when clicking links
-            const links = navContainer.getElementsByTagName('a');
-            for (let link of links) {
-                link.onclick = function() {
-                    navContainer.classList.remove('active');
-                };
-            }
-        } else {
-            console.error("Could not find mobile-menu or nav-links IDs");
-        }
-    }
-
-    // Run now, and also run when the window finishes loading just in case
-    setupMenu();
-    window.onload = setupMenu;
-})();
-
-/* --- NAVIGATION & UI --- */
+/* --- NAVIGATION & UI (FIXED) --- */
 function initNavigation() {
-    document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.getElementById('nav-links');
     const closeBtn = document.getElementById('close-menu');
 
-    // Function to Open Menu
-    if (menuToggle) {
-        menuToggle.onclick = function() {
-            console.log("Hamburger clicked");
+    // Helper to close menu
+    const closeMenu = () => {
+        if (navLinks) {
+            navLinks.classList.remove('active');
+            console.log("Menu Closed");
+        }
+    };
+
+    // Open Menu
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Prevents click from bubbling
             navLinks.classList.add('active');
-        };
+            console.log("Menu Opened");
+        });
     } else {
-        console.error("ID 'mobile-menu' not found in HTML");
+        console.error("Navigation elements (mobile-menu/nav-links) not found in HTML.");
     }
 
-    // Function to Close Menu (X button)
+    // Close with X Button
     if (closeBtn) {
-        closeBtn.onclick = function() {
-            console.log("Close button clicked");
-            navLinks.classList.remove('active');
-        };
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeMenu();
+        });
     }
 
     // Close menu when clicking any link inside it
     const links = document.querySelectorAll('.nav-links a');
     links.forEach(link => {
-        link.onclick = function() {
-            navLinks.classList.remove('active');
-        };
+        link.addEventListener('click', closeMenu);
     });
-});
+
+    // Close menu when clicking outside the drawer
+    document.addEventListener('click', (e) => {
+        if (navLinks && navLinks.classList.contains('active')) {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                closeMenu();
+            }
+        }
+    });
 }
 
 function initScrollEffects() {
@@ -169,7 +148,6 @@ async function loadCatalogPage() {
         const params = new URLSearchParams(window.location.search);
         const categoryFilter = params.get('category');
         
-        // Update Title and Breadcrumb based on category
         if (categoryFilter) {
             const titleEl = document.getElementById('categoryTitle');
             if (titleEl) titleEl.innerText = categoryFilter.charAt(0).toUpperCase() + categoryFilter.slice(1) + " Collection";
@@ -198,8 +176,6 @@ function renderCatalog(items) {
                 <a href="catalog.html" class="view-btn" style="text-decoration:none; display:inline-block;">View All Collections</a>
             </div>
         `;
-        const countEl = document.getElementById('itemCount');
-        if (countEl) countEl.innerText = "0 Items Found";
         return;
     }
 
@@ -325,6 +301,3 @@ const trustObserver = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.5 });
-
-const trustSection = document.querySelector('.trust');
-if (trustSection) trustObserver.observe(trustSection);
