@@ -371,64 +371,79 @@ footer {
         visibility: hidden;
     }
     .catalog-section {
-        padding: 20px 5% !important; /* Reduces top and bottom empty space */
+        padding: 0px 5% 20px !important; /* Dropped top padding to 0 because body padding handles it */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the title/items but keeps breadcrumb left if handled */
     }
     /* 2. Fix Breadcrumb and Title spacing */
     .breadcrumb {
-        margin-top: 0 !important;
-        margin-bottom: 10px !important;
-        font-size: 0.7rem !important;
+        width: 100%;
+        text-align: left;
+        margin-top: 10px !important; /* Small gap from navbar */
+        margin-bottom: 5px !important;
+        font-size: 0.65rem !important;
+        opacity: 0.7;
     }
     .catalog-section h2 {
-        font-size: 1.5rem !important; /* Scale down title for better fit */
-        margin-bottom: 5px !important;
+        font-size: 1.4rem !important;
+        margin-bottom: 2px !important;
+        letter-spacing: 1px !important;
     }
     #itemCount {
-        margin-bottom: 20px !important;
-        font-size: 0.75rem !important;
+        margin-bottom: 15px !important;
+        font-size: 0.7rem !important;
+        color: var(--text-gray);
     }
     /* 3. FORCE 1 ITEM PER ROW (Fixes the "Skinny/Long" look) */
     .catalog-grid {
         grid-template-columns: 1fr !important; /* Absolute force to 1 column */
-        gap: 30px !important; /* Breathable space between cards */
-        padding: 0 5% !important;
+        display: flex !important; /* Flex is safer for forcing single columns on iOS */
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 25px !important;
+        padding: 0 !important;
     }
 
     /* 4. Make the Card "Cozier" */
     .product-card {
-        max-width: 360px; /* Prevents the card from stretching too wide */
         margin: 0 auto; /* Centers the card on the screen */
-        border: 1px solid #222;
-        background: #0f0f0f;
+        width: 100% !important;
+        max-width: 320px !important; /* Limits width to keep it "cute" and square-ish */
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+        background: #0d0d0d !important;
+        border-radius: 8px !important;
+        overflow: hidden;
     }
 
     .product-card img {
-        height: 320px !important; /* Fixed height for better proportions */
         width: 100% !important;
-        object-fit: cover;
+        height: 280px !important; /* Shorter height to prevent the "long" look */
+        object-fit: cover !important;
     }
 
     /* 5. Typography on the Card */
     .product-info {
-        padding: 20px !important;
+        padding: 15px !important;
     }
 
     .product-info h4 {
-        font-size: 1rem !important;
         letter-spacing: 2px !important;
-        margin-bottom: 10px !important;
+        font-size: 0.9rem !important;
+        margin-bottom: 5px !important;
     }
 
     .product-info p {
-        font-size: 0.85rem !important;
-        margin-bottom: 15px !important;
+        font-size: 0.8rem !important;
+        margin-bottom: 12px !important;
     }
 
     .product-card button {
         width: 100% !important;
-        padding: 12px 0 !important;
-        font-size: 0.8rem !important;
         border: 1px solid var(--primary-gold) !important;
+        padding: 10px !important;
+        font-size: 0.75rem !important;
+        border-radius: 4px !important;
     }
 }
 
