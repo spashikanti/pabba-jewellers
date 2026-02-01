@@ -166,6 +166,19 @@ h1.gold {
 
 .card:hover img { filter: grayscale(0%); transform: scale(1.05); }
 
+/* --- 1. FIX BLUE LINKS IN COLLECTIONS GRID --- */
+#collectionsGrid a {
+    text-decoration: none !important;
+    color: inherit !important; /* Forces the link to use the parent's text color */
+    display: block;
+}
+
+#collectionsGrid .card h3 {
+    color: #e6c15a !important; /* Ensures the gold color stays gold */
+    margin-top: 15px;
+    font-family: 'Cinzel', serif;
+}
+
 /* --- CATALOG & PRODUCT VIEW --- */
 .catalog-section { padding: 120px 8% 50px; min-height: 80vh; }
 .catalog-grid {
@@ -210,7 +223,7 @@ h1.gold {
 }
 .stat-box h3 { font-size: 2.5rem; color: #D4AF37; font-family: 'Cinzel', serif; }
 
-/* --- BUTTONS & FOOTER --- */
+/* --- BUTTONS --- */
 .whatsapp-btn {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     background: #25D366; color: #fff; padding: 14px; border: none;
@@ -227,6 +240,39 @@ h1.gold {
 }
 
 .back-to-top.show { opacity: 1; visibility: visible; }
+
+/* --- CENTER FOOTER TEXT --- */
+footer {
+    text-align: center !important;
+    padding: 40px 20px;
+    background: #000;
+    color: #555;
+    width: 100%;
+    font-size: 0.8rem;
+    border-top: 1px solid #222;
+}
+
+/* --- FIX FOOTER AT BOTTOM (CATALOG PAGE) --- */
+/* This ensures that even if there are only 2 products, the footer stays at the bottom */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* This targets the main content area to "push" the footer down */
+#collections, 
+.catalog-section {
+    flex: 1 0 auto; /* This tells the content section to take up all available space */
+}
+
+footer {
+    flex-shrink: 0; /* Prevents the footer from squishing */
+}
 
 /* --- BREADCRUMB --- */
 .breadcrumb {
