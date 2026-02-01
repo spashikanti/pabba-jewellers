@@ -21,67 +21,38 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --- NAVIGATION & UI --- */
-/*
 function initNavigation() {
+    document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
+    const navLinks = document.getElementById('nav-links');
     const closeBtn = document.getElementById('close-menu');
 
-    // Open Menu
+    // Function to Open Menu
     if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            alert('hi');
-            navLinks.classList.toggle('active')
-        });
+        menuToggle.onclick = function() {
+            console.log("Hamburger clicked");
+            navLinks.classList.add('active');
+        };
+    } else {
+        console.error("ID 'mobile-menu' not found in HTML");
     }
 
-    // Close mobile menu on link click
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => navLinks.classList.remove('active'));
-    });
-
-    // Close Menu with X
+    // Function to Close Menu (X button)
     if (closeBtn) {
-        closeBtn.addEventListener('click', () => navLinks.classList.remove('active'));
-    }
-}
-*/
-function initNavigation() {
-    // Select by ID for better reliability
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links'); 
-    const closeBtn = document.getElementById('close-menu');
-
-    // Helper function to close menu
-    const closeMenu = () => {
-        if (navLinks) navLinks.classList.remove('active');
-    };
-
-    // Helper function to open/toggle menu
-    const toggleMenu = () => {
-        if (navLinks) navLinks.classList.toggle('active');
-    };
-
-    // 1. Open Button (Hamburger)
-    if (menuToggle) {
-        // Use 'click' but the CSS 'cursor: pointer' ensures mobile picks it up
-        menuToggle.addEventListener('click', toggleMenu);
+        closeBtn.onclick = function() {
+            console.log("Close button clicked");
+            navLinks.classList.remove('active');
+        };
     }
 
-    // 2. Close Button (The 'X')
-    if (closeBtn) {
-        // 'touchstart' makes it feel instant on mobile
-        closeBtn.addEventListener('click', closeMenu);
-        closeBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Prevents "ghost clicks"
-            closeMenu();
-        });
-    }
-
-    // 3. Close when any link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', closeMenu);
+    // Close menu when clicking any link inside it
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+        link.onclick = function() {
+            navLinks.classList.remove('active');
+        };
     });
+});
 }
 
 function initScrollEffects() {
