@@ -127,7 +127,16 @@ function renderCatalog(items) {
     if (!grid) return;
 
     if (items.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1;">No items found in this category.</p>`;
+        grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px;">
+                <h3 class="gold">Collection Not Found</h3>
+                <p>We couldn't find any items in this specific category.</p>
+                <br>
+                <a href="catalog.html" class="view-btn" style="text-decoration:none; display:inline-block;">View All Collections</a>
+            </div>
+        `;
+        const countEl = document.getElementById('itemCount');
+        if (countEl) countEl.innerText = "0 Items Found";
         return;
     }
 
