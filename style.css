@@ -303,6 +303,7 @@ footer,
     padding: 20px;
     background: rgba(0, 0, 0, 0.85); /* Dark overlay to make the glass pop */
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Added for iPhone Safari support */
 }
 .modal-content {
     background: rgba(15, 15, 15, 0.8); /* Slightly darker for better text contrast */
@@ -360,15 +361,15 @@ footer,
 /* Close Button Styling - Isolated only to Modal */
 .modal .close-btn { 
     position: absolute; 
-    top: 20px; 
-    right: 20px; 
+    top: 15px; /* Slightly lower for better thumb reach */
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7); /* Darker for better contrast against jewelry */
     font-size: 32px; 
     color: var(--primary-gold); 
     cursor: pointer; 
     z-index: 2001; /* Higher than modal content */
     line-height: 1;
     transition: var(--transition-smooth);
-    background: rgba(0,0,0,0.5); /* Adds a little circle background for visibility */
     width: 45px;
     height: 45px;
     display: flex;
@@ -403,6 +404,10 @@ footer,
     background: var(--primary-gold);
     color: #000;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+.whatsapp-btn:active {
+    transform: scale(0.96); /* Button physically "presses" in when tapped */
+    background: rgba(212, 175, 55, 0.2);
 }
 /* Ensure Mobile Menu X doesn't show on Desktop */
 @media (min-width: 769px) {
