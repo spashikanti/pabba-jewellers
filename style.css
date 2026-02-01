@@ -60,7 +60,7 @@ section {
     font-size: 1.3rem !important;
     color: #D4AF37 !important;
     margin: 0 !important;
-    text-transform: uppercase !important; /* Forces All-Caps on index & catalog */
+    text-transform: uppercase !important;
     letter-spacing: 2px;
     line-height: 1.2;
 }
@@ -72,7 +72,7 @@ section {
     margin-top: 2px;
 }
 
-/* --- NAVIGATION LINKS --- */
+/* --- NAVIGATION LINKS (DESKTOP) --- */
 .nav-links {
     display: flex;
     list-style: none;
@@ -121,6 +121,7 @@ section {
     font-size: 1.8rem;
     color: #D4AF37;
     cursor: pointer;
+    z-index: 1001; /* Higher than navbar but accessible */
 }
 
 /* --- HERO & GRIDS --- */
@@ -210,7 +211,7 @@ section {
     width: 40px; height: 40px; background: #D4AF37;
     color: #000; border-radius: 50%; border: none;
     display: flex; align-items: center; justify-content: center;
-    z-index: 9999; opacity: 0; visibility: hidden; transition: 0.3s;
+    z-index: 999; opacity: 0; visibility: hidden; transition: 0.3s;
 }
 
 .back-to-top.show { opacity: 1; visibility: visible; }
@@ -231,22 +232,21 @@ section {
     font-weight: 500;
 }
 
-.breadcrumb a:hover { color: #fff !important; }
-
-/* --- RESPONSIVE MEDIA QUERIES --- */
+/* --- MOBILE RESPONSIVE MEDIA QUERIES --- */
 @media (max-width: 768px) {
     body { padding-top: 70px !important; }
     
     .navbar {
         padding: 0 20px;
-        justify-content: space-between; /* Force Logo and Hamburger to opposite ends */
+        justify-content: space-between;
     }
 
     .logo h1 { font-size: 1.1rem !important; }
 
     .menu-toggle {
         display: block !important;
-        order: 2; /* Ensures it stays on the right */
+        position: relative;
+        z-index: 1002; /* Higher than drawer to ensure clickability */
     }
 
     .nav-links {
@@ -254,51 +254,38 @@ section {
         top: 0;
         right: -100%; 
         background: #0b0b0b;
-        width: 280px;
+        width: 300px;
         height: 100vh;
         flex-direction: column;
-        justify-content: flex-start; /* Align items to top of drawer */
-        padding-top: 80px;         
-        gap: 20px;
-        transition: 0.4s ease-in-out;
-        /* box-shadow: -10px 0 30px rgba(0,0,0,0.8); */
-        z-index: 2000;
+        justify-content: flex-start;
+        padding-top: 100px;         
+        gap: 30px;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1001; /* Drawer is below toggle but above content */
+        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
     }
 
-    /* Ensure the nav container is visible when active */
     .nav-links.active {
         right: 0 !important;
         display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
     }
 
-    .nav-links a { font-size: 1.2rem; }
+    .nav-links a { font-size: 1.3rem; font-weight: 500; }
 
-    /* Ensure the browser treats these as clickable buttons */
-    #mobile-menu, 
-    #close-menu {
-        cursor: pointer;
-        display: block;
-        -webkit-tap-highlight-color: transparent; /* Removes the grey box on tap */
-    }
-
-    /* THE 'X' BUTTON STYLING */
     .close-menu {
-        display: block;
+        display: block !important;
         position: absolute;
         top: 20px;
         right: 25px;
-        font-size: 2.5rem;
+        font-size: 2.8rem;
         color: #D4AF37;
         cursor: pointer;
-        z-index: 2001 !important; 
-        padding: 10px; /* Bigger hit area for thumbs */
+        z-index: 1003;
+        padding: 10px;
     }
 
     .hero { height: 60vh; }
     .trust { flex-direction: column; gap: 40px; }
-
     .modal-body { flex-direction: column; text-align: center; }
     #modalImg { width: 100%; max-height: 300px; }
     .modal-details { width: 100%; }
@@ -306,10 +293,9 @@ section {
 
 @media (max-width: 600px) {
     .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .catalog-section { padding: 100px 3% 40px; }
 }
 
 /* Hide close button on desktop */
 @media (min-width: 769px) {
-    .close-menu { display: none; }
+    .close-menu { display: none !important; }
 }
