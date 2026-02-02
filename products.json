@@ -57,5 +57,40 @@
     "category": "daily",
     "desc_en": "Minimal elegant gold ring for daily wear.",
     "desc_te": "ప్రతిరోజు ధరించడానికి సరైన అందమైన గోల్డ్ రింగ్."
+  },
+  {
+    "id": 7,
+    "title_en": "Kundan Bridal Set",
+    "title_te": "కుందన్ వధువు సెట్",
+    "category": "bridal",
+    "images": [
+      "images/bridal-1.jpg",
+      "images/bridal-1-side.jpg",
+      "images/bridal-1-zoom.jpg"
+    ],
+    "specs": {
+      "purity": "22K Gold (BIS Hallmarked)",
+      "weight": "65.40 Grams",
+      "stones": "Premium Kundan & Emeralds"
+    },
+    "desc_en": "Premium Kundan work with semi-precious stones. Intricately handcrafted for the modern bride.",
+    "desc_te": "విలువైన రాళ్లతో చేసిన ప్రీమియం కుందన్ పని. వధువుల కోసం ప్రత్యేకంగా రూపొందించబడింది."
+  },
+  {
+    "id": 8,
+    "title_en": "Solitaire Diamond Ring",
+    "title_te": "సాలిటైర్ డైమండ్ రింగ్",
+    "category": "diamond",
+    "images": [
+      "images/ring-1.jpg",
+      "images/ring-1-box.jpg"
+    ],
+    "specs": {
+      "purity": "18K White Gold",
+      "stones": "1.5ct GIA Certified Diamond",
+      "cut": "Excellent / Hearts & Arrows"
+    },
+    "desc_en": "A timeless GIA certified diamond set in 18k white gold. A symbol of eternal love.",
+    "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో సెట్ చేయబడిన అత్యుత్తమ డైమండ్ రింగ్."
   }
 ]
