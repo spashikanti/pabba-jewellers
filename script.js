@@ -200,7 +200,13 @@ function openProductModal(id) {
     imageList.forEach((imgName, index) => {
         // Inject Images (Adding the images/ folder path here)
         const img = document.createElement('img');
-        img.src = `images/${imgName}`; 
+        // This logic prevents the "images/images/" bug
+        if (imgName.startsWith('images/')) {
+            img.src = imgName; // Use as is
+        } else {
+            img.src = `images/${imgName}`; // Add prefix
+        }
+        img.alt = product.title_en;
         track.appendChild(img);
 
         // Inject Dots
