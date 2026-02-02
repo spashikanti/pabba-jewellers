@@ -52,9 +52,11 @@ function initNavigation() {
 
         // Close mobile menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => navLinks.classList.remove('active'));
-            menuToggle.style.opacity = '1';
-            menuToggle.style.pointerEvents = 'auto';
+            link.addEventListener('click', () => { 
+                navLinks.classList.remove('active');
+                menuToggle.style.opacity = '1';
+                menuToggle.style.pointerEvents = 'auto';
+            });
         });
         
     } else {
@@ -177,6 +179,7 @@ let currentSlideIndex = 0;
 let totalSlides = 0;
 
 function openProductModal(id) {
+    document.body.classList.add('modal-open'); // CSS handles the rest
     document.getElementById('backToTop').style.display = 'none';
     const product = allProducts.find(p => p.id === id);
     if (!product) {
@@ -198,11 +201,18 @@ function openProductModal(id) {
     const imageList = product.images || [];
     totalSlides = imageList.length;
 
+    // Improved Image Injection
+    if (imageList.length === 0 && product.image) {
+        // Fallback to the main thumbnail if no images array exists
+        imageList.push(product.image);
+    }
+
     imageList.forEach((imgName, index) => {
         // Inject Images (Adding the images/ folder path here)
         const img = document.createElement('img');
-        // This logic prevents the "images/images/" Path Fix
-        img.src = imgName.startsWith('images/') ? imgName : `images/${imgName}`;
+        // Ensure we don't double-prefix if the JSON already has 'images/'
+        const cleanPath = imgName.startsWith('images/') ? imgName : `images/${imgName}`;
+        img.src = cleanPath;
         img.alt = product.title_en;
         // --- ZOOM LOGIC ---
         img.onclick = (e) => {
@@ -220,12 +230,12 @@ function openProductModal(id) {
 
     // --- THE VISIBILITY FIX ---
     // Ensure the track width is set correctly based on number of images
-    track.style.width = `${totalSlides * 100}%`;
+    //track.style.width = `${totalSlides * 100}%`;
     // Ensure individual images are sized correctly
-    const imgs = track.querySelectorAll('img');
-    imgs.forEach(img => {
-        img.style.width = `${100 / totalSlides}%`;
-    });
+    //const imgs = track.querySelectorAll('img');
+    //imgs.forEach(img => {
+    //    img.style.width = `${100 / totalSlides}%`;
+    //});
     
     // Force reset to first slide position
     track.style.transform = `translateX(0%)`;
@@ -262,7 +272,7 @@ function openProductModal(id) {
 
     // 3. WhatsApp link
     const msg = `Enquiry for ${product.title_en} (ID: ${product.id})`;
-    document.getElementById('whatsappBtn').href = `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(msg)}`;
+    document.getElementById('whatsappBtn').href = `https://wa.me/918978569063?text=${encodeURIComponent(msg)}`;
 
     goToSlide(0); // Reset to first slide
     document.getElementById('productModal').style.display = 'flex';
@@ -271,10 +281,7 @@ function openProductModal(id) {
     document.body.style.overflow = 'hidden';
     // to handle the "Back" button
     window.history.pushState({ modalOpen: true }, "");
-    // Add this listener at the bottom of your file
-    window.addEventListener('popstate', () => {
-        closeModal();
-    });
+    
 }
 // Carousel Navigation Functions
 function moveSlide(step) {
@@ -303,13 +310,26 @@ function updateCarousel() {
 }
 
 function closeModal() {
-    document.getElementById('backToTop').style.display = 'flex';
     const modal = document.getElementById('productModal');
-    if (modal) {
-        modal.style.display = 'none';
-        /* --- ADD THIS LINE TO RESTORE SCROLLING --- */
-        document.body.style.overflow = 'auto'; 
+    if (!modal || modal.style.display === 'none') return;
+
+    // Fix: Redefine track or use querySelector
+    const track = document.getElementById('carouselTrack');
+    if (track) {
+        track.querySelectorAll('.zoomed').forEach(el => el.classList.remove('zoomed'));
     }
+
+    document.body.classList.remove('modal-open');    
+    document.getElementById('backToTop').style.display = 'flex';
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; 
+
+    // If the modal was closed via "X" or Overlay, remove the history entry
+    if (window.history.state && window.history.state.modalOpen) {
+        window.history.back();
+    }
+
+    track.querySelectorAll('.zoomed').forEach(el => el.classList.remove('zoomed'));
 }
 
 // Safety check: Only add listener if the button exists (Catalog Page)
@@ -402,3 +422,17 @@ const trustObserver = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.5 });
+
+/* --- GLOBAL INITIALIZATION (Bottom of file) --- */
+// Update your popstate to be more specific
+window.addEventListener('popstate', (event) => {
+    // Only close if the state is NOT modalOpen (meaning we went back)
+    if (!event.state || !event.state.modalOpen) {
+        const modal = document.getElementById('productModal');
+        if (modal) {
+            document.body.classList.remove('modal-open');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+});
