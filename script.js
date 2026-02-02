@@ -173,61 +173,75 @@ function renderCatalog(items) {
 }
 
 /* --- MODAL LOGIC --- */
+let currentSlideIndex = 0;
+let totalSlides = 0;
+
 function openProductModal(id) {
-    const product = allProducts.find(p => p.id === id);
+    const product = allProducts.find(p => p.id === productId);
     if (!product) return;
 
-    const modalImg = document.getElementById('modalImg');
-    const thumbContainer = document.getElementById('thumbContainer');
-    const modalSpecs = document.getElementById('modalSpecs');
+    // Reset Carousel State
+    currentSlideIndex = 0;
+    const track = document.getElementById('carouselTrack');
+    const dotsContainer = document.getElementById('dotsContainer');
+    const prevBtn = document.querySelector('.nav-arrow.prev');
+    const nextBtn = document.querySelector('.nav-arrow.next');
 
-    // 1. Basic Info
+    // 1. Setup Images & Dots
+    track.innerHTML = "";
+    dotsContainer.innerHTML = "";
+    
+    const imageList = product.images || [];
+    totalSlides = imageList.length;
+
+    imageList.forEach((imgName, index) => {
+        // Inject Images (Adding the images/ folder path here)
+        const img = document.createElement('img');
+        img.src = `images/${imgName}`; 
+        track.appendChild(img);
+
+        // Inject Dots
+        const dot = document.createElement('div');
+        dot.className = `dot ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(index);
+        dotsContainer.appendChild(dot);
+    });
+
+    // Hide arrows if only 1 image
+    if (totalSlides <= 1) {
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+        dotsContainer.classList.add('hidden');
+    } else {
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+        dotsContainer.classList.remove('hidden');
+    }
+
+    // 2. Setup Details & Specs
     document.getElementById('modalTitle').innerText = currentLang === 'en' ? product.title_en : product.title_te;
     document.getElementById('modalDesc').innerText = currentLang === 'en' ? product.desc_en : product.desc_te;
 
-    // 2. Handle Images (Hybrid Logic)
-    // If 'images' array exists, use it; otherwise, wrap 'image' string in an array
-    const imageList = product.images ? product.images : [product.image];
-    modalImg.src = imageList[0];
-
-    // Build thumbnails only if there's more than one image
-    thumbContainer.innerHTML = ""; 
-    if (imageList.length > 1) {
-        imageList.forEach((imgSrc, index) => {
-            const thumb = document.createElement('img');
-            thumb.src = imgSrc;
-            thumb.className = 'thumb-img' + (index === 0 ? ' active-thumb' : '');
-            thumb.onclick = () => {
-                modalImg.src = imgSrc;
-                document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active-thumb'));
-                thumb.classList.add('active-thumb');
-            };
-            thumbContainer.appendChild(thumb);
-        });
-        thumbContainer.style.display = 'flex';
-    } else {
-        thumbContainer.style.display = 'none';
-    }
-
-    // 3. Handle Specs (Check if exists)
-    modalSpecs.innerHTML = "";
+    const specsGrid = document.getElementById('modalSpecs');
+    specsGrid.innerHTML = "";
     if (product.specs) {
         for (const [key, value] of Object.entries(product.specs)) {
-            modalSpecs.innerHTML += `
+            specsGrid.innerHTML += `
                 <div class="spec-item">
-                    <span class="spec-label">${key}:</span>
+                    <span class="spec-label">${key}</span>
                     <span class="spec-value">${value}</span>
                 </div>`;
         }
-        modalSpecs.style.display = 'grid';
+        specsGrid.style.display = 'grid';
     } else {
-        modalSpecs.style.display = 'none';
+        specsGrid.style.display = 'none';
     }
 
-    // 4. WhatsApp Link
-    const msg = `Interested in ${product.title_en} (ID: ${product.id})`;
+    // 3. WhatsApp link
+    const msg = `Enquiry for ${product.title_en} (ID: ${product.id})`;
     document.getElementById('whatsappBtn').href = `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(msg)}`;
 
+    goToSlide(0); // Reset to first slide
     document.getElementById('productModal').style.display = 'flex';
     
     /* --- ADD THIS LINE FOR IPHONE SCROLL FIX --- */
@@ -237,6 +251,31 @@ function openProductModal(id) {
     // Add this listener at the bottom of your file
     window.addEventListener('popstate', () => {
         closeModal();
+    });
+}
+// Carousel Navigation Functions
+function moveSlide(step) {
+    currentSlideIndex += step;
+    if (currentSlideIndex >= totalSlides) currentSlideIndex = 0;
+    if (currentSlideIndex < 0) currentSlideIndex = totalSlides - 1;
+    updateCarousel();
+}
+
+function goToSlide(index) {
+    currentSlideIndex = index;
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const track = document.getElementById('carouselTrack');
+    const dots = document.querySelectorAll('.dot');
+    
+    // Slide the track: 0%, -100%, -200%, etc.
+    track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+    
+    // Update dots
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlideIndex);
     });
 }
 
