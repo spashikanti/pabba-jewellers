@@ -777,6 +777,7 @@ footer {
     margin: 0 auto 20px;
     overflow: hidden; /* Clips the images outside the view */
     border-radius: 12px;
+    touch-action: pan-y; /* Allows scrolling page but prevents shaking */
 }
 
 .carousel-track {
@@ -787,9 +788,18 @@ footer {
 
 .carousel-track img {
     width: 100%;
-    flex-shrink: 0; /* Prevents images from squeezing */
+    flex-shrink: 0;
     aspect-ratio: 1/1;
     object-fit: cover;
+    transition: transform 0.5s ease; /* Smooth zoom */
+    cursor: zoom-in;
+}
+
+/* The Zoom Class */
+.carousel-track img.zoomed {
+    transform: scale(1.5); /* 50% zoom */
+    cursor: zoom-out;
+    z-index: 10;
 }
 
 /* Navigation Arrows */
