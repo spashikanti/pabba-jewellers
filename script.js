@@ -174,34 +174,66 @@ function renderCatalog(items) {
 
 /* --- MODAL LOGIC --- */
 function openProductModal(id) {
-    const p = allProducts.find(item => item.id === id);
-    if (!p) return;
+    const product = allProducts.find(p => p.id === productId);
+    if (!product) return;
 
-    const modal = document.getElementById('productModal');
     const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const waBtn = document.getElementById('waBtn');
+    const thumbContainer = document.getElementById('thumbContainer');
+    const modalSpecs = document.getElementById('modalSpecs');
 
-    if (modalImg) modalImg.src = "images/" + p.image;
-    if (modalTitle) modalTitle.innerText = currentLang === 'en' ? p.title_en : p.title_te;
-    if (modalDesc) modalDesc.innerText = currentLang === 'en' ? p.desc_en : p.desc_te;
+    // 1. Basic Info
+    document.getElementById('modalTitle').innerText = currentLang === 'en' ? product.title_en : product.title_te;
+    document.getElementById('modalDesc').innerText = currentLang === 'en' ? product.desc_en : product.desc_te;
 
-    const message = encodeURIComponent(`Hi! I'm interested in: *${p.title_en}*\nCategory: ${p.category}`);
-    if (waBtn) {
-        waBtn.onclick = () => {
-            window.open(`https://wa.me/918978569063?text=${message}`, '_blank');
-        };
+    // 2. Handle Images (Hybrid Logic)
+    // If 'images' array exists, use it; otherwise, wrap 'image' string in an array
+    const imageList = product.images ? product.images : [product.image];
+    modalImg.src = imageList[0];
+
+    // Build thumbnails only if there's more than one image
+    thumbContainer.innerHTML = ""; 
+    if (imageList.length > 1) {
+        imageList.forEach((imgSrc, index) => {
+            const thumb = document.createElement('img');
+            thumb.src = imgSrc;
+            thumb.className = 'thumb-img' + (index === 0 ? ' active-thumb' : '');
+            thumb.onclick = () => {
+                modalImg.src = imgSrc;
+                document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active-thumb'));
+                thumb.classList.add('active-thumb');
+            };
+            thumbContainer.appendChild(thumb);
+        });
+        thumbContainer.style.display = 'flex';
+    } else {
+        thumbContainer.style.display = 'none';
     }
 
-    modal.style.display = 'flex';
+    // 3. Handle Specs (Check if exists)
+    modalSpecs.innerHTML = "";
+    if (product.specs) {
+        for (const [key, value] of Object.entries(product.specs)) {
+            modalSpecs.innerHTML += `
+                <div class="spec-item">
+                    <span class="spec-label">${key}:</span>
+                    <span class="spec-value">${value}</span>
+                </div>`;
+        }
+        modalSpecs.style.display = 'grid';
+    } else {
+        modalSpecs.style.display = 'none';
+    }
+
+    // 4. WhatsApp Link
+    const msg = `Interested in ${product.title_en} (ID: ${product.id})`;
+    document.getElementById('whatsappBtn').href = `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(msg)}`;
+
+    document.getElementById('productModal').style.display = 'flex';
     
     /* --- ADD THIS LINE FOR IPHONE SCROLL FIX --- */
     document.body.style.overflow = 'hidden';
-
     // to handle the "Back" button
     window.history.pushState({ modalOpen: true }, "");
-    
     // Add this listener at the bottom of your file
     window.addEventListener('popstate', () => {
         closeModal();
