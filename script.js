@@ -177,8 +177,11 @@ let currentSlideIndex = 0;
 let totalSlides = 0;
 
 function openProductModal(id) {
-    const product = allProducts.find(p => p.id === productId);
-    if (!product) return;
+    const product = allProducts.find(p => p.id === id);
+    if (!product) {
+        console.error("Product not found for ID:", id);
+        return;
+    }
 
     // Reset Carousel State
     currentSlideIndex = 0;
