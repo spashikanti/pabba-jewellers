@@ -861,3 +861,15 @@ footer {
     margin-bottom: 20px;
     border: 1px solid rgba(212, 175, 55, 0.1);
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#productModal::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#productModal {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow-y: auto; /* Keeps the ability to scroll without the bar */
+}
