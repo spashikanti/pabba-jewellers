@@ -440,27 +440,41 @@ footer,
 
 /* --- BUTTONS --- */
 .back-to-top {
-    position: fixed !important; /* Forces it to stay relative to the screen */
-    bottom: 30px !important;    /* Distance from bottom */
-    right: 20px !important;     /* Distance from right */
-    width: 45px; 
-    height: 45px; 
-    background: var(--primary-gold);
-    color: #000; 
-    border-radius: 50%; 
+    /* 1. Breaking the Flex-Link */
+    position: fixed !important;
+    
+    /* 2. Precision Placement with Safe Area Support */
+    bottom: calc(30px + env(safe-area-inset-bottom)) !important; 
+    right: 20px !important;
+    
+    /* 3. Sizing & Style */
+    width: 48px !important; /* Slightly larger for easier thumb-tap on iPhone */
+    height: 48px !important;
+    background: var(--primary-gold) !important;
+    color: #000 !important;
+    border-radius: 50%;
     border: none;
-    display: flex !important;   /* Keeps the arrow centered inside the circle */
-    align-items: center; 
+    
+    /* 4. Alignment */
+    display: flex !important;
+    align-items: center;
     justify-content: center;
-    z-index: 9999 !important;   /* Ensures it stays above everything */    
-    cursor: pointer;
-    /* Animation states */
+    
+    /* 5. Depth & Visibility */
+    z-index: 99999 !important; /* Extra high for mobile */
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* 6. Crucial for iOS Safari */
+    -webkit-transform: translateZ(0); /* Forces GPU rendering */
+    transform: translateZ(0);
 }
 
-.back-to-top.show { opacity: 1; visibility: visible; }
+.back-to-top.show { 
+    opacity: 1 !important;
+    visibility: visible !important; 
+}
 .back-to-top:hover {
     transform: translateY(-5px); /* Nice little gold-standard lift effect */
 }
