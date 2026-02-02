@@ -57,10 +57,12 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <div class="modal-body">
-                <div class="modal-image-container">
-                    <img id="modalImg" src="" alt="Product Image">
-                    <div id="thumbContainer" class="thumb-gallery"></div>
-                </div>
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack"></div>                
+                    <button class="nav-arrow prev" onclick="moveSlide(-1)">&#10094;</button>
+                    <button class="nav-arrow next" onclick="moveSlide(1)">&#10095;</button>                
+                    <div class="dots-container" id="dotsContainer"></div>
+                </div>    
                 <div class="modal-details">
                     <h2 id="modalTitle"></h2>
                     <div id="modalSpecs" class="specs-grid"></div>
