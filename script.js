@@ -31,36 +31,17 @@ function initNavigation() {
     const closeBtn = document.getElementById('close-menu');
 
     if (menuToggle && navLinks) {
-        // Open Menu
         menuToggle.addEventListener('click', (e) => {
-            e.preventDefault();
             navLinks.classList.add('active');
-            // FIX: Hide hamburger so it doesn't clash with the close 'X'
-            menuToggle.style.opacity = '0';
-            menuToggle.style.pointerEvents = 'none';
+            menuToggle.style.visibility = 'hidden'; // Better than opacity 0 for accessibility
         });
 
-        // Inside initNavigation function
         if (closeBtn) {
             closeBtn.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                // FIX: Bring hamburger back
-                menuToggle.style.opacity = '1';
-                menuToggle.style.pointerEvents = 'auto';
+                menuToggle.style.visibility = 'visible';
             });
         }
-
-        // Close mobile menu on link click
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => { 
-                navLinks.classList.remove('active');
-                menuToggle.style.opacity = '1';
-                menuToggle.style.pointerEvents = 'auto';
-            });
-        });
-        
-    } else {
-        console.error("Navigation IDs (mobile-menu or nav-links) not found in HTML.");
     }
 }
 
@@ -179,79 +160,59 @@ let currentSlideIndex = 0;
 let totalSlides = 0;
 
 function openProductModal(id) {
-    document.body.classList.add('modal-open'); // CSS handles the rest
-    document.getElementById('backToTop').style.display = 'none';
+    // 1. Setup UI Elements & Data
     const product = allProducts.find(p => p.id === id);
     if (!product) {
         console.error("Product not found for ID:", id);
         return;
     }
 
-    // Reset Carousel State
-    currentSlideIndex = 0;
     const track = document.getElementById('carouselTrack');
     const dotsContainer = document.getElementById('dotsContainer');
     const prevBtn = document.querySelector('.nav-arrow.prev');
     const nextBtn = document.querySelector('.nav-arrow.next');
 
-    // 1. Setup Images & Dots
+    // 2. Initial Reset
+    currentSlideIndex = 0;
+    track.style.transition = 'none'; 
+    track.style.transform = `translateX(0%)`;
     track.innerHTML = "";
     dotsContainer.innerHTML = "";
-    
-    const imageList = product.images || [];
+
+    // 3. Image & Dot Injection
+    const imageList = (product.images && product.images.length > 0) ? [...product.images] : [product.image];
     totalSlides = imageList.length;
 
-    // Improved Image Injection
-    if (imageList.length === 0 && product.image) {
-        // Fallback to the main thumbnail if no images array exists
-        imageList.push(product.image);
-    }
-
     imageList.forEach((imgName, index) => {
-        // Inject Images (Adding the images/ folder path here)
         const img = document.createElement('img');
-        // Ensure we don't double-prefix if the JSON already has 'images/'
         const cleanPath = imgName.startsWith('images/') ? imgName : `images/${imgName}`;
         img.src = cleanPath;
         img.alt = product.title_en;
-        // --- ZOOM LOGIC ---
-        img.onclick = (e) => {
-            // Only toggle zoom if there's no sliding happening
-            e.currentTarget.classList.toggle('zoomed');
-        };
+        img.onclick = (e) => e.currentTarget.classList.toggle('zoomed');
         track.appendChild(img);
 
-        // Inject Dots
         const dot = document.createElement('div');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
         dot.onclick = () => goToSlide(index);
         dotsContainer.appendChild(dot);
     });
 
-    // --- THE VISIBILITY FIX ---
-    // Ensure the track width is set correctly based on number of images
-    //track.style.width = `${totalSlides * 100}%`;
-    // Ensure individual images are sized correctly
-    //const imgs = track.querySelectorAll('img');
-    //imgs.forEach(img => {
-    //    img.style.width = `${100 / totalSlides}%`;
-    //});
-    
-    // Force reset to first slide position
-    track.style.transform = `translateX(0%)`;
-
-    // Hide arrows if only 1 image
-    if (totalSlides <= 1) {
-        prevBtn.classList.add('hidden');
-        nextBtn.classList.add('hidden');
-        dotsContainer.classList.add('hidden');
-    } else {
-        prevBtn.classList.remove('hidden');
-        nextBtn.classList.remove('hidden');
-        dotsContainer.classList.remove('hidden');
+    // 4. Navigation Controls Logic
+    if (prevBtn && nextBtn) {
+        if (totalSlides <= 1) {
+            prevBtn.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+            dotsContainer.classList.add('hidden');
+        } else {
+            prevBtn.classList.remove('hidden');
+            nextBtn.classList.remove('hidden');
+            dotsContainer.classList.remove('hidden');
+            prevBtn.onclick = (e) => { e.stopPropagation(); moveSlide(-1); };
+            nextBtn.onclick = (e) => { e.stopPropagation(); moveSlide(1); };
+        }
     }
 
-    // 2. Setup Details & Specs
+    // 5. Details & Specs
     document.getElementById('modalTitle').innerText = currentLang === 'en' ? product.title_en : product.title_te;
     document.getElementById('modalDesc').innerText = currentLang === 'en' ? product.desc_en : product.desc_te;
 
@@ -270,21 +231,28 @@ function openProductModal(id) {
         specsGrid.style.display = 'none';
     }
 
-    // 3. WhatsApp link
+    // 6. WhatsApp Link
     const msg = `Enquiry for ${product.title_en} (ID: ${product.id})`;
     document.getElementById('whatsappBtn').href = `https://wa.me/918978569063?text=${encodeURIComponent(msg)}`;
 
-    goToSlide(0); // Reset to first slide
+    // 7. Show Modal & Browser History Management (DO ONCE)
     document.getElementById('productModal').style.display = 'flex';
-    
-    /* --- ADD THIS LINE FOR IPHONE SCROLL FIX --- */
-    document.body.style.overflow = 'hidden';
-    // to handle the "Back" button
+    document.body.classList.add('modal-open');
+    document.body.style.overflow = 'hidden'; // iPhone scroll fix
+    document.getElementById('backToTop').style.display = 'none';
     window.history.pushState({ modalOpen: true }, "");
-    
+
+    // 8. Re-enable transitions for user sliding
+    setTimeout(() => {
+        track.style.transition = 'transform 0.4s ease-out';
+    }, 50);
 }
 // Carousel Navigation Functions
 function moveSlide(step) {
+    // IMPORTANT: Remove zoom before sliding so the image doesn't look cut off
+    const zoomedImg = document.querySelector('.carousel-track img.zoomed');
+    if (zoomedImg) zoomedImg.classList.remove('zoomed');
+
     currentSlideIndex += step;
     if (currentSlideIndex >= totalSlides) currentSlideIndex = 0;
     if (currentSlideIndex < 0) currentSlideIndex = totalSlides - 1;
@@ -313,18 +281,24 @@ function closeModal() {
     const modal = document.getElementById('productModal');
     if (!modal || modal.style.display === 'none') return;
 
-    // Fix: Redefine track or use querySelector
+    // Clean up zoom
     const track = document.getElementById('carouselTrack');
     if (track) {
         track.querySelectorAll('.zoomed').forEach(el => el.classList.remove('zoomed'));
     }
 
-    document.body.classList.remove('modal-open');    
+    // Reset UI state
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = 'auto'; // Re-enable scroll
     document.getElementById('backToTop').style.display = 'flex';
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; 
 
-    // If the modal was closed via "X" or Overlay, remove the history entry
+    // Remove Arrow Listeners to prevent "ghost" clicks
+    const prevBtn = document.querySelector('.nav-arrow.prev');
+    const nextBtn = document.querySelector('.nav-arrow.next');
+    if (prevBtn) prevBtn.onclick = null;
+    if (nextBtn) nextBtn.onclick = null;
+
     if (window.history.state && window.history.state.modalOpen) {
         window.history.back();
     }
