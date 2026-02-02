@@ -452,16 +452,18 @@ footer,
     display: flex !important;   /* Keeps the arrow centered inside the circle */
     align-items: center; 
     justify-content: center;
-    z-index: 9999 !important;   /* Ensures it stays above everything */
-    opacity: 0; 
-    visibility: hidden; 
-    transition: 0.3s;
+    z-index: 9999 !important;   /* Ensures it stays above everything */    
     cursor: pointer;
-    /* Prevent iPhone from treating this as a flex item */
-    margin: 0 !important;
+    /* Animation states */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
 }
 
 .back-to-top.show { opacity: 1; visibility: visible; }
+.back-to-top:hover {
+    transform: translateY(-5px); /* Nice little gold-standard lift effect */
+}
 
 /* --- FOOTER (FIXED ALIGNMENT) --- */
 footer {
