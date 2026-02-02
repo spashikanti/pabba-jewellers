@@ -341,6 +341,7 @@ footer,
     border: 1px solid rgba(212, 175, 55, 0.25); /* Thinner, softer border */
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
     padding-right: 15px;
+    scrollbar-width: thin; /* Optional: makes it very small if it must appear */
 }
 @keyframes modalSlideUp {
     from { opacity: 0; transform: translateY(30px) scale(0.95); }
@@ -872,4 +873,7 @@ footer {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     overflow-y: auto; /* Keeps the ability to scroll without the bar */
+    align-items: center; /* Vertical center */
+    justify-content: center; /* Horizontal center */
+    padding: 20px;
 }
