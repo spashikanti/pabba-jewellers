@@ -174,7 +174,7 @@ function renderCatalog(items) {
 
 /* --- MODAL LOGIC --- */
 function openProductModal(id) {
-    const product = allProducts.find(p => p.id === productId);
+    const product = allProducts.find(p => p.id === id);
     if (!product) return;
 
     const modalImg = document.getElementById('modalImg');
