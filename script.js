@@ -35,18 +35,26 @@ function initNavigation() {
         menuToggle.addEventListener('click', (e) => {
             e.preventDefault();
             navLinks.classList.add('active');
+            // FIX: Hide hamburger so it doesn't clash with the close 'X'
+            menuToggle.style.opacity = '0';
+            menuToggle.style.pointerEvents = 'none';
         });
 
         // Inside initNavigation function
         if (closeBtn) {
             closeBtn.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                // FIX: Bring hamburger back
+                menuToggle.style.opacity = '1';
+                menuToggle.style.pointerEvents = 'auto';
             });
         }
 
         // Close mobile menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => navLinks.classList.remove('active'));
+            menuToggle.style.opacity = '1';
+            menuToggle.style.pointerEvents = 'auto';
         });
         
     } else {
