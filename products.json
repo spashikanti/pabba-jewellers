@@ -112,7 +112,8 @@
     },
     "images": [
       "Diamond Statement Necklace.jpg",
-      "Classic Gold Ring.jpg"
+      "Classic Gold Ring.jpg",
+      "Bridal Gold Necklace Set.jpg"
     ],
     "id": 8,
     "category": "diamond",
@@ -122,5 +123,65 @@
     "desc_en": "GIA certified diamond set in 18k white gold.",
     "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో సెట్ చేయబడిన అత్యుత్తమ డైమండ్ రింగ్.",
     "image": "Diamond Statement Necklace.jpg"
+  },
+  {
+    "specs": {
+      "purity": "22K",
+      "weight": "45g",
+      "stones_en": "Rubies & Pearls",
+      "stones_te": "కెంపులు మరియు ముత్యాలు"
+    },
+    "images": [
+      "temple_necklace.jpg",
+      "Classic Gold Ring.jpg"
+    ],
+    "id": 9,
+    "category": "bridal",
+    "title_en": "Antique Gold Necklace",
+    "title_te": "పురాతన బంగారు హారం",
+    "price": "Contact for Price",
+    "desc_en": "Traditional temple work with ruby embellishments.",
+    "desc_te": "రూబీ రాళ్లతో చేసిన సంప్రదాయ టెంపుల్ పనితనం.",
+    "image": "temple_necklace.jpg"
+  },
+  {
+    "specs": {
+      "purity": "18K",
+      "weight": "4.2g",
+      "stones_en": "VVS Diamonds",
+      "stones_te": "VVS డైమండ్స్"
+    },
+    "images": [
+      "diamond_studs.jpg",
+      "Bridal Gold Necklace Set.jpg",
+      "Diamond Statement Necklace.jpg"
+    ],
+    "id": 10,
+    "category": "diamond",
+    "title_en": "Diamond Studs",
+    "title_te": "డైమండ్ చెవి రింగులు",
+    "price": "Contact for Price",
+    "desc_en": "GIA certified solitaire studs in 18k white gold.",
+    "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో డైమండ్ స్టడ్స్.",
+    "image": "diamond_studs.jpg"
+  },
+  {
+    "specs": {
+      "purity": "22K",
+      "weight": "12g",
+      "stones_en": "None",
+      "stones_te": "ఏమీ లేవు"
+    },
+    "images": [
+      "gold_bangle.jpg"
+    ],
+    "id": 11,
+    "category": "daily",
+    "title_en": "Minimalist Bangle",
+    "title_te": "మినిమలిస్ట్ బంగారు గాజు",
+    "price": "Contact for Price",
+    "desc_en": "Sleek 22k gold bangle for daily elegance.",
+    "desc_te": "రోజువారీ ధరించడానికి అనువైన బంగారు గాజు.",
+    "image": "gold_bangle.jpg"
   }
 ]
