@@ -660,8 +660,10 @@ footer {
         gap: 30px;
     }
     .carousel-container {
-        flex: 1; /* Image takes half space */
-        margin-bottom: 0;
+        display: flex;
+        align-items: center; /* Vertically centers image to eliminate bottom gap */
+        height: 100%;
+        max-width: 550px; /* Slightly wider for luxury feel */
     }
     .modal-details {
         flex: 1; /* Text takes half space */
@@ -670,6 +672,10 @@ footer {
     .carousel-track img {
         max-height: 60vh !important;
         object-fit: contain !important;
+    }
+    /* Ensure the modal content doesn't have extra padding at the bottom */
+    .modal-content {
+        align-items: stretch;
     }
 }
 
@@ -922,4 +928,25 @@ body.modal-open #backToTop,
 .nav-links.active ~ #backToTop {
     visibility: hidden !important;
     opacity: 0 !important;
+}
+
+/* 2. Dedicate a full row to Stones and clean up the grid */
+.spec-item.full-row {
+    grid-column: span 2; /* Spans across both columns */
+    border-right: none !important; /* Removes the middle divider */
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    background: rgba(212, 175, 55, 0.05); /* Subtle highlight for the stones row */
+}
+
+/* Ensure the label in the full row looks premium */
+.spec-item.full-row .spec-label {
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.spec-item.full-row .spec-value {
+    display: block;
+    text-align: center;
+    font-style: italic;
+    color: var(--primary-gold);
 }
