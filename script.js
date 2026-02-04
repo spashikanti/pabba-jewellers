@@ -1,5 +1,6 @@
+
 /* --- GLOBAL STATE --- */
-let currentLang = 'en';
+let currentLang = localStorage.getItem('preferredLang') || 'en';
 let allProducts = []; // Stores the full JSON list
 let filteredProducts = []; // Stores items currently being displayed
 
@@ -8,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initLanguageToggle();
     initScrollEffects();
+
+    // Apply the saved language immediately on load
+    applyLanguage();
     
     // Check which page we are on and load appropriate data
     if (document.getElementById('collectionsGrid')) {
@@ -76,19 +80,27 @@ function initLanguageToggle() {
 
     langBtn.addEventListener('click', () => {
         currentLang = currentLang === 'en' ? 'te' : 'en';
-        
-        // Update Static Text
-        document.querySelectorAll('[data-en]').forEach(el => {
-            el.textContent = el.getAttribute(`data-${currentLang}`);
-        });
-
-        // Update Button Text
-        langBtn.textContent = currentLang === 'en' ? 'తెలుగు' : 'English';
-
-        // Re-render dynamic content if on the page
-        if (document.getElementById('catalogGrid')) renderCatalog(filteredProducts);
-        if (document.getElementById('collectionsGrid')) loadCollectionsHome();
+        // SAVE to browser memory
+        localStorage.setItem('preferredLang', currentLang);
+        applyLanguage();
     });
+}
+function applyLanguage() {
+    const langBtn = document.getElementById('lang-toggle');
+    
+    // 1. Update Static Text (data-en / data-te)
+    document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
+    });
+
+    // 2. Update Toggle Button Label
+    if (langBtn) {
+        langBtn.textContent = currentLang === 'en' ? 'తెలుగు' : 'English';
+    }
+
+    // 3. Update dynamic grids if they exist
+    if (document.getElementById('catalogGrid')) renderCatalog(filteredProducts);
+    if (document.getElementById('collectionsGrid')) loadCollectionsHome();
 }
 
 /* --- HOME PAGE: COLLECTIONS --- */
@@ -184,18 +196,32 @@ function openProductModal(id) {
     totalSlides = imageList.length;
 
     imageList.forEach((imgName, index) => {
+        const container = document.createElement('div');
+        container.className = 'slide-container'; // Ensures relative positioning for loader
+        container.innerHTML = '<div class="loader"></div>';
+        
         const img = document.createElement('img');
         const cleanPath = imgName.startsWith('images/') ? imgName : `images/${imgName}`;
         img.src = cleanPath;
         img.alt = product.title_en;
+        
+        // Hide loader once image is ready
+        img.onload = () => {
+            const loader = container.querySelector('.loader');
+            if (loader) loader.remove();
+        };
+        
         img.onclick = (e) => e.currentTarget.classList.toggle('zoomed');
         track.appendChild(img);
+        track.appendChild(container);
 
         const dot = document.createElement('div');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
         dot.onclick = () => goToSlide(index);
         dotsContainer.appendChild(dot);
     });
+
+    initSwipe();
 
     // 4. Navigation Controls Logic
     if (prevBtn && nextBtn) {
@@ -215,7 +241,7 @@ function openProductModal(id) {
     // 5. Details & Specs (Language Aware)
     const isTelugu = (currentLang === 'te');
     document.getElementById('modalTitle').innerText = isTelugu ? product.title_te : product.title_en;
-    document.getElementById('modalDesc').innerText = isTelugu ? product.desc_en : product.desc_te;
+    document.getElementById('modalDesc').innerText = isTelugu ? product.desc_te : product.desc_en;
 
     const specsGrid = document.getElementById('modalSpecs');
     specsGrid.innerHTML = "";
@@ -302,18 +328,18 @@ function closeModal() {
     const modal = document.getElementById('productModal');
     if (!modal || modal.style.display === 'none') return;
 
+    // Reset UI state
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = 'auto'; // Re-enable scroll
+    const btt = document.getElementById('backToTop');
+    if (btt) btt.style.display = 'flex';
+    
     // Clean up zoom
     const track = document.getElementById('carouselTrack');
     if (track) {
         track.querySelectorAll('.zoomed').forEach(el => el.classList.remove('zoomed'));
     }
-
-    // Reset UI state
-    document.getElementById('backToTop').style.display = 'flex';
-    
-    modal.style.display = 'none';
-    document.body.classList.remove('modal-open');
-    document.body.style.overflow = 'auto'; // Re-enable scroll
 
     // Remove Arrow Listeners to prevent "ghost" clicks
     const prevBtn = document.querySelector('.nav-arrow.prev');
@@ -401,7 +427,9 @@ function animateCounters() {
                 element.innerText = start.toFixed(counter.decimals) + counter.suffix;
                 requestAnimationFrame(updateCount);
             } else {
-                element.innerText = counter.target + counter.suffix;
+                // Final catch to ensure exact number
+                element.innerText = counter.target.toFixed(counter.decimals) + counter.suffix;
+                //element.innerText = counter.target + counter.suffix;
             }
         };
         updateCount();
@@ -435,14 +463,16 @@ const track = document.querySelector('.carousel-track');
 let touchStartX = 0;
 let touchEndX = 0;
 
-track.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
+function initSwipe() {
+    track.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
 
-track.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-}, { passive: true });
+    track.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+}
 
 function handleSwipe() {
     const swipeThreshold = 50; 
