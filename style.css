@@ -768,7 +768,7 @@ footer {
 }
 /* Remove bottom border on the last two items */
 .spec-item:nth-last-child(-n+2) {
-    border-bottom: none;
+    /* border-bottom: none; */
 }
 
 .spec-label {
