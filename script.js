@@ -564,5 +564,23 @@ function initCollectionSlider() {
     updateSlider(); // Initial call
 }
 
-// Call this after your data has loaded into the collectionsGrid
-// document.addEventListener('DOMContentLoaded', initCollectionSlider);
+if (document.getElementById('fullCollectionsGrid')) {
+    loadFullCollections();
+}
+
+function loadFullCollections() {
+    fetch("collections.json")
+        .then(r => r.json())
+        .then(cols => {
+            const grid = document.getElementById("fullCollectionsGrid");
+            grid.innerHTML = cols.map(c => `
+                <div class="collection-card">
+                    <img src="images/${c.image}" alt="${c.name_en}">
+                    <div class="card-overlay">
+                        <h3>${currentLang === 'en' ? c.name_en : c.name_te}</h3>
+                        <a href="catalog.html?category=${c.id}" class="view-all-btn">View Collection</a>
+                    </div>
+                </div>
+            `).join('');
+        });
+}
