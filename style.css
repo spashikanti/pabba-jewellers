@@ -1035,13 +1035,24 @@ body.modal-open #backToTop,
 /* 1. Mobile (Portrait) - Up to 480px */
 /* Most phones vertically fall here */
 @media screen and (max-width: 480px) {
-  body { background-color: lightblue; }
+  /* body { background-color: lightblue; } */
 }
 
 /* 2. Mobile (Landscape) - 481px to 767px */
 /* Phones held horizontally and very small tablets */
 @media screen and (min-width: 481px) and (max-width: 767px) {
   body { background-color: lightgreen; }
+    /* 1. The Outer Container */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        /* max-width: 450px; */ /* Slightly larger for premium feel */
+        margin: 0; /* auto 20px; */
+        overflow: hidden; /* This is the "window" the user looks through */
+        border-radius: 12px;
+        background: #000; /* Backdrop for the images */
+        touch-action: pan-y;
+    }
 }
 
 /* 3. Tablets (Portrait) - 768px to 1024px */
