@@ -1011,69 +1011,60 @@ body.modal-open #backToTop,
     }
 }
 
-/* --- DESKTOP PREMIUM MODAL FIX (1101px+) --- */
+/* --- DESKTOP MODAL REFINEMENT (1101px+) --- */
 @media (min-width: 1101px) {
-    /* 1. Force the Modal Content to a fixed height for consistency */
+    /* Set a consistent size for the popup box */
     .modal-content {
-        height: 85vh; /* Uniform height for all popups */
+        height: 80vh; 
+        max-height: 700px; /* Prevents it from getting too tall on giant monitors */
         display: flex;
-        flex-direction: row;
-        align-items: stretch; /* Makes both columns equal height */
+        flex-direction: column;
     }
 
-    /* 2. Fix the Modal Body Grid */
+    /* Force the body to fill the content height */
     .modal-body {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Exact 50/50 Split */
-        width: 100%;
-        height: 100%;
-        gap: 0;
+        grid-template-columns: 1fr 1fr; /* Exact 50/50 split */
+        flex: 1; 
+        overflow: hidden; /* Keeps everything contained */
         align-items: stretch;
     }
 
-    /* 3. The Image Column - Vertical & Horizontal Center */
+    /* Image Column: Perfect Centering */
     .carousel-container {
-        max-width: 100% !important;
         height: 100% !important;
+        max-width: 100% !important;
         margin: 0 !important;
-        border-radius: 11px 0 0 11px;
+        background: #050505; /* Contrast backdrop */
         display: flex;
-        align-items: center; /* Vertical Center */
-        justify-content: center; /* Horizontal Center */
-        background: #050505; /* Deep black backdrop */
-        position: relative;
+        align-items: center;
+        justify-content: center;
+        border-radius: 11px 0 0 11px;
     }
 
-    /* 4. The Track & Image Logic */
     .carousel-track {
         height: 100%;
-        display: flex;
         align-items: center;
     }
 
     .carousel-track img {
-        max-height: 80% !important; /* Prevents image from touching modal edges */
-        width: auto !important; /* Maintain aspect ratio */
-        max-width: 90% !important;
-        object-fit: contain !important; /* Shows the full 800x800 image */
-        margin: 0 auto;
+        /* This is the secret sauce for your 800x800 images */
+        max-height: 90%; 
+        max-width: 90%;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
     }
 
-    /* 5. The Details Column */
+    /* Text Column: Balanced Padding */
     .modal-details {
-        padding: 60px 40px !important;
         height: 100%;
-        overflow-y: auto; /* Allows text to scroll if it's too long */
-        border-left: 1px solid rgba(212, 175, 55, 0.2);
+        padding: 50px !important;
+        overflow-y: auto; /* Scrollable text if it exceeds 80vh */
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Centers text vertically against the image */
-    }
-    
-    /* Ensure the Close Button stays on top of the image if needed */
-    #modalCloseBtn {
-        top: 20px !important;
-        right: 20px !important;
+        justify-content: center; /* Keeps text vertically centered against the image */
+        border-left: 1px solid rgba(212, 175, 55, 0.2);
     }
 }
 
