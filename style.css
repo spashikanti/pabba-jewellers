@@ -1298,3 +1298,55 @@ body.modal-open #backToTop,
     font-style: italic;
     font-size: 1.1rem;
 }
+
+/* ============================================================
+   RESPONSIVE BREADCRUMB STYLING
+   ============================================================ */
+.breadcrumb-nav {
+    padding: 20px 0;
+    text-align: left;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    margin-bottom: 30px;
+}
+
+#breadcrumb-trail {
+    display: flex;
+    flex-wrap: wrap; /* Wraps items on tiny screens */
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#breadcrumb-trail a {
+    color: var(--text-gray);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#breadcrumb-trail a:hover {
+    color: var(--primary-gold);
+}
+
+#breadcrumb-trail span.separator {
+    color: #444;
+    font-size: 0.7rem;
+}
+
+#breadcrumb-trail span.current-page {
+    color: var(--primary-gold);
+    font-weight: 600;
+}
+
+/* Tablet & Mobile Adjustments */
+@media (max-width: 768px) {
+    .breadcrumb-nav {
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+    #breadcrumb-trail {
+        font-size: 0.7rem; /* Smaller text for mobile */
+        gap: 5px;
+    }
+}
