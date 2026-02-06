@@ -569,18 +569,21 @@ if (document.getElementById('fullCollectionsGrid')) {
 }
 
 function loadFullCollections() {
+    const grid = document.getElementById("fullCollectionsGrid");
+    if (!grid) return;
+
     fetch("collections.json")
         .then(r => r.json())
         .then(cols => {
-            const grid = document.getElementById("fullCollectionsGrid");
             grid.innerHTML = cols.map(c => `
-                <div class="collection-card">
+                <div class="collection-card" onclick="window.location.href='catalog.html?category=${c.id}'">
                     <img src="images/${c.image}" alt="${c.name_en}">
                     <div class="card-overlay">
                         <h3>${currentLang === 'en' ? c.name_en : c.name_te}</h3>
-                        <a href="catalog.html?category=${c.id}" class="view-all-btn">View Collection</a>
+                        <span class="view-all-btn">Explore Collection</span>
                     </div>
                 </div>
             `).join('');
-        });
+        })
+        .catch(err => console.error("Error loading full collections:", err));
 }
