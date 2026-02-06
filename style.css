@@ -1251,3 +1251,50 @@ body.modal-open #backToTop,
     box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); /* Subtle gold glow */
     transform: translateY(-3px); /* Lifts the button slightly on hover */
 }
+
+.luxury-padding {
+    padding: 60px 20px;
+}
+
+.dark-bg {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.trust-item h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.trust-item p[data-te] {
+    font-size: 0.9rem;
+    color: #bfa360; /* Muted gold for Telugu sub-text */
+    margin-top: 5px;
+}
+
+.gold-icon {
+    font-size: 2rem;
+    color: #d4af37;
+    margin-bottom: 15px;
+}
+
+.testimonial-card {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    border-left: 3px solid #d4af37;
+    background: #fdfdfd;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.quote {
+    font-style: italic;
+    font-size: 1.1rem;
+}
