@@ -129,6 +129,9 @@ async function loadCatalogPage() {
         
         const params = new URLSearchParams(window.location.search);
         const categoryFilter = params.get('category');
+
+        // BUILD THE BREADCRUMB
+        updateBreadcrumbs(categoryFilter);
         
         if (categoryFilter) {
             const titleEl = document.getElementById('categoryTitle');
@@ -587,3 +590,28 @@ function loadFullCollections() {
         })
         .catch(err => console.error("Error loading full collections:", err));
 }
+
+function updateBreadcrumbs(categoryID) {
+    const trail = document.getElementById('breadcrumb-trail');
+    if (!trail) return;
+
+    const isTelugu = (currentLang === 'te');
+    
+    // 1. Start with Home
+    let html = `<a href="index.html">${isTelugu ? 'హోమ్' : 'Home'}</a>`;
+    html += `<span class="separator">/</span>`;
+    
+    // 2. Add "All Collections" Link
+    html += `<a href="collections.html">${isTelugu ? 'అన్ని సేకరణలు' : 'All Collections'}</a>`;
+    
+    // 3. If a specific category is selected, add it as the final "Current" item
+    if (categoryID) {
+        html += `<span class="separator">/</span>`;
+        // Capitalize category ID for display
+        const displayID = categoryID.charAt(0).toUpperCase() + categoryID.slice(1);
+        html += `<span class="current-page">${displayID}</span>`;
+    }
+
+    trail.innerHTML = html;
+}
+
