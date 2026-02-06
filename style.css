@@ -1086,6 +1086,10 @@ body.modal-open #backToTop,
 .carousel-viewport {
     overflow: hidden;
     width: 100%;
+    /* ADD THIS: Creates space for the top and bottom borders to show */
+    padding-top: 5px; 
+    padding-bottom: 5px;
+    /* Optional: If the sides are also clipped, add padding-left/right too */
 }
 
 #collectionsGrid {
