@@ -19,8 +19,62 @@
   },
   {
     "id": 4,
-    "name_en": "Diamond Jewellery 1",
-    "name_te": "డైమండ్ నగలు 1",
-    "image": "Diamond Statement Necklace.jpg"
+    "name_en": "Temple Jewellery",
+    "name_te": "ఆలయ నగలు",
+    "image": "Collections_Images/4.image_name1.032615.jpg"
+  },
+  {
+    "id": 5,
+    "name_en": "Antique Collection",
+    "name_te": "ప్రాచీన నగల కలెక్షన్",
+    "image": "Antique Gold Necklace.jpg"
+  },
+  {
+    "id": 6,
+    "name_en": "Platinum Jewellery",
+    "name_te": "ప్లాటినం నగలు",
+    "image": "Platinum Necklace Set.jpg"
+  },
+  {
+    "id": 7,
+    "name_en": "Kids Jewellery",
+    "name_te": "పిల్లల నగలు",
+    "image": "Kids Gold Bracelet.jpg"
+  },
+  {
+    "id": 8,
+    "name_en": "Men’s Jewellery",
+    "name_te": "పురుషుల నగలు",
+    "image": "Mens Gold Chain.jpg"
+  },
+  {
+    "id": 9,
+    "name_en": "Pearl Jewellery",
+    "name_te": "ముత్యాల నగలు",
+    "image": "Pearl Necklace Set.jpg"
+  },
+  {
+    "id": 10,
+    "name_en": "Kundan Jewellery",
+    "name_te": "కుందన్ నగలు",
+    "image": "Kundan Bridal Necklace.jpg"
+  },
+  {
+    "id": 11,
+    "name_en": "Ruby & Emerald",
+    "name_te": "రూబీ మరియు పచ్చ రత్నాలు",
+    "image": "Ruby Emerald Necklace.jpg"
+  },
+  {
+    "id": 12,
+    "name_en": "Lightweight Jewellery",
+    "name_te": "తేలికపాటి నగలు",
+    "image": "Lightweight Gold Necklace.jpg"
+  },
+  {
+    "id": 13,
+    "name_en": "Traditional South Indian",
+    "name_te": "దక్షిణ భారత సంప్రదాయ నగలు",
+    "image": "South Indian Haram.jpg"
   }
 ]
