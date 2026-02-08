@@ -3,24 +3,32 @@
     "id": "bridal",
     "name_en": "Bridal Collection",
     "name_te": "వధువు కలెక్షన్",
-    "image": "Bridal Gold Necklace Set.jpg"
+    "image_id1": "1kofcI9LlZvj2Mg0tDONoB9_bfw-9PYk3",
+    "image": "Bridal Gold Necklace Set.jpg",
+    "status": "Synced"
   },
   {
     "id": "diamond",
     "name_en": "Diamond Jewellery",
     "name_te": "డైమండ్ నగలు",
-    "image": "Diamond Statement Necklace.jpg"
+    "image_id1": "1NkrTOdYEMp694SACM-9wO3uzYdNE_DT4",
+    "image": "Diamond Statement Necklace.jpg",
+    "status": "Synced"
   },
   {
     "id": "daily",
     "name_en": "Daily Wear",
     "name_te": "ప్రతిరోజు ధరించే నగలు",
-    "image": "Daily Wear Necklace.jpg"
+    "image_id1": "1L1hK7wras8stP4qP0LIr_kzDPn0uW2bu",
+    "image": "Daily Wear Necklace.jpg",
+    "status": "Synced"
   },
   {
     "id": "diamond1",
     "name_en": "Diamond Jewellery",
     "name_te": "డైమండ్ నగలు",
-    "image": "Diamond Statement Necklace.jpg"
+    "image_id1": "1NkrTOdYEMp694SACM-9wO3uzYdNE_DT4",
+    "image": "Diamond Statement Necklace.jpg",
+    "status": "Synced"
   }
 ]
