@@ -455,10 +455,13 @@ footer {
 
 /* --- BREADCRUMB --- */
 .breadcrumb {
-    text-align: left; margin-bottom: 25px; font-size: 0.75rem;
-    color: #666; letter-spacing: 1px;
+    text-align: left; 
+    margin-bottom: 20px; 
+    font-size: 0.9rem;
+    color: #888;
+    padding: 20px 0;
 }
-.breadcrumb a { color: var(--primary-gold) !important; text-decoration: none !important; text-transform: uppercase; }
+.breadcrumb a { color: var(--primary-gold) !important; text-decoration: none !important; text-transform: uppercase; transition: 0.3s;}
 
 /* Unified Styling for Close Buttons (Menu & Modal) */
 .close-menu, .close-btn {
@@ -528,10 +531,10 @@ footer {
         width: 100%;
         text-align: left;
         margin-bottom: 10px !important;
-        font-size: 0.7rem !important;
+        font-size: 0.9rem !important;
         display: block !important; /* Force visibility */
         padding-left: 5px;
-        margin-top: 25px !important;
+        margin-top: 20px !important;
     }
 
     /* FORCE 1 ITEM PER ROW - No more skinny cards */
