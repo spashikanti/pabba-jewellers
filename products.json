@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "specs": {},
+    "images": [
+      "Bridal Gold Necklace Set.jpg"
+    ],
+    "id": 1,
+    "name_en": "Bridal Collection",
+    "name_te": "వధువు కలెక్షన్",
+    "image": "Bridal Gold Necklace Set.jpg"
+  },
+  {
+    "specs": {},
+    "images": [
+      "Diamond Statement Necklace.jpg"
+    ],
+    "id": 2,
+    "name_en": "Diamond Jewellery",
+    "name_te": "డైమండ్ నగలు",
+    "image": "Diamond Statement Necklace.jpg"
+  },
+  {
+    "specs": {},
+    "images": [
+      "Daily Wear Necklace.jpg"
+    ],
+    "id": 3,
+    "name_en": "Daily Wear",
+    "name_te": "ప్రతిరోజు ధరించే నగలు",
+    "image": "Daily Wear Necklace.jpg"
+  },
+  {
+    "specs": {},
+    "images": [
+      "Collections_Images/4.image_name1.040751.jpg"
+    ],
+    "id": 4,
+    "name_en": "Temple Jewellery",
+    "name_te": "ఆలయ నగలు",
+    "image": "Collections_Images/4.image_name1.040751.jpg"
+  },
+  {
+    "specs": {},
+    "images": [
+      "Collections_Images/5.image_name1.044650.jpg"
+    ],
+    "id": 5,
+    "name_en": "Antique Collection",
+    "name_te": "ప్రాచీన నగల కలెక్షన్",
+    "image": "Collections_Images/5.image_name1.044650.jpg"
+  },
+  {
+    "specs": {},
+    "images": [
+      "Collections_Images/6.image_name1.045515.jpg"
+    ],
+    "id": 6,
+    "name_en": "Platinum Jewellery 1",
+    "name_te": "ప్లాటినం నగలు",
+    "image": "Collections_Images/6.image_name1.045515.jpg"
+  }
+]
