@@ -133,7 +133,7 @@ async function loadCatalogPage() {
         
         const response = await fetch('products.json');
         allProducts = await response.json();
-        let filteredProducts = allProducts;
+        filteredProducts = allProducts;
 
         if (categoryID) {
             // 1. Get the correct title from Collections
@@ -182,10 +182,38 @@ function renderCatalog(items) {
     if (!grid) return;
 
     if (items.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px;"><h3 class="gold">Collection Not Found</h3></div>`;
+        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px;"><h3 class="gold">No Items Found in this Collection</h3></div>`;
         return;
     }
 
+    grid.innerHTML = items.map(item => {
+        // IT Standard: Ensure we handle the folder path correctly
+        // If image_name1 is "Products_Images/xyz.jpg", the URL becomes images/Products_Images/xyz.jpg
+        const fullImagePath = `images/${item.image_name1}`;
+        const displayName = currentLang === 'en' ? item.name_en : item.name_te;
+
+        return `
+            <div class="product-card" onclick="openProductModal('${item.id}')">
+                <img src="${fullImagePath}" alt="${displayName}" loading="lazy">
+                <div class="product-info">
+                    <h4 data-en="${item.name_en}" data-te="${item.name_te}">${displayName}</h4>
+                    <p class="price-tag">${item.price || 'Price on Request'}</p>
+                    <button class="view-btn" data-en="View Details" data-te="వివరాలు చూడండి">
+                        ${currentLang === 'en' ? 'View Details' : 'వివరాలు చూడండి'}
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    const countEl = document.getElementById('itemCount');
+    if (countEl) {
+        const countTextEn = `${items.length} Items Found`;
+        const countTextTe = `${items.length} వస్తువులు కనుగొనబడ్డాయి`;
+        countEl.innerText = currentLang === 'en' ? countTextEn : countTextTe;
+    }
+    
+    /*
     grid.innerHTML = items.map(item => `
         <div class="product-card" onclick="openProductModal(${item.id})">
             <img src="images/${item.image}" alt="${item.title_en}" loading="lazy">
@@ -199,6 +227,7 @@ function renderCatalog(items) {
 
     const countEl = document.getElementById('itemCount');
     if (countEl) countEl.innerText = `${items.length} Items Found`;
+    */
 }
 
 /* --- MODAL LOGIC --- */
