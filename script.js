@@ -130,26 +130,39 @@ async function loadCatalogPage() {
         // 1. Fetch ONLY the small Collections file first (Fast!)
         const collRes = await fetch('collections.json');
         const allCollections = await collRes.json();
-
-        // 2. Find the names for the breadcrumb immediately
-        const currentCollection = allCollections.find(c => c.id === categoryID);
-
-        if(currentCollection) {
-            updateBreadcrumbs(currentCollection.name_en, currentCollection.name_te);
-            // Update the Page Title H1 as well
-            document.getElementById('categoryTitle').textContent = 
-                currentLang === 'te' ? currentCollection.name_te : currentCollection.name_en;
-        }
         
         const response = await fetch('products.json');
         allProducts = await response.json();
+        let filteredProducts = allProducts;
+
+        if (categoryID) {
+            // 1. Get the correct title from Collections
+            const currentCollection = allCollections.find(c => c.id === categoryID);
+            const titleEl = document.getElementById('categoryTitle');
+
+            // 2. Find the names for the breadcrumb immediately
+            if(titleEl && currentCollection) {
+                updateBreadcrumbs(currentCollection.name_en, currentCollection.name_te);
+                // Update the Page Title H1 as well
+                titleEl.textContent = currentLang === 'te' ? currentCollection.name_te : currentCollection.name_en;
+            }
+
+            // 2. Filter products (Ensure the column name matches your JSON, e.g., 'category_id')
+            filteredProducts = allProducts.filter(p => p.category_id === categoryID);
+        }
+        else {
+            updateBreadcrumbs(); // Reset to default
+        }
+        
+        renderCatalog(filteredProducts);
         
         //const params = new URLSearchParams(window.location.search);
         //const categoryFilter = params.get('category');
 
         // BUILD THE BREADCRUMB
         //updateBreadcrumbs(categoryFilter);
-        
+
+        /*
         if (categoryFilter) {
             const titleEl = document.getElementById('categoryTitle');
             if (titleEl) titleEl.innerText = categoryFilter.charAt(0).toUpperCase() + categoryFilter.slice(1) + " Collection";
@@ -157,8 +170,8 @@ async function loadCatalogPage() {
         } else {
             filteredProducts = allProducts;
         }
+        */
 
-        renderCatalog(filteredProducts);
     } catch (err) {
         console.error("Catalog Loading Error:", err);
     }
