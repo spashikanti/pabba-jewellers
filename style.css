@@ -1441,3 +1441,14 @@ body.modal-open #backToTop,
     margin: 0 10px;
     color: #555;
 }
+
+.breadcrumb-nav span {
+    margin: 0 8px;
+    color: #ccc; /* Subtle color for the slash / */
+}
+
+.breadcrumb-nav .current {
+    color: #555; /* Darker color for the page the user is currently on */
+    font-weight: bold;
+}
+
