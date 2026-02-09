@@ -158,3 +158,30 @@ function animateCounters() {
         updateCount();
     });
 }
+
+function startCarousel() {
+    let current = 0;
+    const items = document.querySelectorAll('.testimonial');
+    if (items.length === 0) return;
+
+    setInterval(() => {
+        items[current].style.opacity = '0';
+        setTimeout(() => {
+            items[current].style.display = 'none';
+            current = (current + 1) % items.length;
+            items[current].style.display = 'block';
+            setTimeout(() => { items[current].style.opacity = '1'; }, 50);
+        }, 500);
+    }, 5000);
+}
+
+// The "Observer" starts the animation only when the user scrolls to that section
+const trustObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            trustObserver.unobserve(entry.target); // Run only once
+        }
+    });
+}, { threshold: 0.5 });
+
