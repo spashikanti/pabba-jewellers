@@ -3,15 +3,14 @@ let currentLang = localStorage.getItem('preferredLang') || 'en';
 let allProducts = []; 
 let filteredProducts = []; 
 
-/* --- SHARED INITIALIZATION --- */
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initLanguageToggle();
     initScrollEffects();
     applyLanguage();
     
-    // Logo Navigation Fix: Ensure logo always points to Home
-    const logo = document.querySelector('.logo h1');
+    // LOGO FIX: Navigate to home on click
+    const logo = document.querySelector('.logo');
     if (logo) {
         logo.style.cursor = 'pointer';
         logo.onclick = () => window.location.href = 'index.html';
@@ -22,7 +21,6 @@ function initNavigation() {
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.getElementById('nav-links');
     const closeBtn = document.getElementById('close-menu');
-
     if (menuToggle && navLinks) {
         menuToggle.onclick = () => {
             navLinks.classList.add('active');
@@ -52,12 +50,15 @@ function initScrollEffects() {
 
 function initLanguageToggle() {
     const langBtn = document.getElementById('lang-toggle');
-    if (!langBtn) return;
-    langBtn.onclick = () => {
-        currentLang = currentLang === 'en' ? 'te' : 'en';
-        localStorage.setItem('preferredLang', currentLang);
-        applyLanguage();
-    };
+    if (langBtn) {
+        langBtn.onclick = () => {
+            currentLang = currentLang === 'en' ? 'te' : 'en';
+            localStorage.setItem('preferredLang', currentLang);
+            applyLanguage();
+            // Trigger refresh on dynamic parts if they exist
+            if (typeof renderCatalog === 'function') renderCatalog(filteredProducts);
+        };
+    }
 }
 
 function applyLanguage() {
