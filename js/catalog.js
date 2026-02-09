@@ -1,3 +1,7 @@
+/* --- GLOBAL STATE --- */
+let currentLang = localStorage.getItem('preferredLang') || 'en';
+let allProducts = []; // Stores the full JSON list
+let filteredProducts = []; // Stores items currently being displayed
 // Global Modal State
 let currentSlideIndex = 0;
 let totalSlides = 0;
@@ -22,18 +26,18 @@ async function loadCatalogPage() {
         allProducts = await prodRes.json();
 
         if (categoryID) {
-            const currentCollection = allCollections.find(c => c.id === categoryID);
+            const currentCollection = allCollections.find(c => String(c.id) === String(categoryID));
             if (currentCollection) {
                 updateBreadcrumbs(currentCollection.name_en, currentCollection.name_te);
                 document.getElementById('categoryTitle').textContent = currentLang === 'te' ? currentCollection.name_te : currentCollection.name_en;
             }
-            filteredProducts = allProducts.filter(p => p.category_id === categoryID);
+            filteredProducts = allProducts.filter(p => String(p.category_id) === String(categoryID));
         } else {
             updateBreadcrumbs();
             filteredProducts = allProducts;
         }
         renderCatalog(filteredProducts);
-    } catch (err) { console.error("Catalog Error:", err); }
+    } catch (err) { console.error("Catalog Loading Error:", err); }
 }
 
 function renderCatalog(items) {
