@@ -3,7 +3,9 @@ let currentSlideIndex = 0;
 let totalSlides = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
+    alert('DOMContentLoaded');
     if (document.getElementById('catalogGrid')) {
+        alert('catalogGrid loaded');
         loadCatalogPage();
     }
     
@@ -16,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadCatalogPage() {
     const params = new URLSearchParams(window.location.search);
     const categoryID = params.get('category');
+    alert(categoryID);
     try {
         const [collRes, prodRes] = await Promise.all([fetch('collections.json'), fetch('products.json')]);
         const allCollections = await collRes.json();
@@ -37,6 +40,7 @@ async function loadCatalogPage() {
 }
 
 function renderCatalog(items) {
+    alert('renderCatalog :' + items);
     const grid = document.getElementById('catalogGrid');
     if (!grid) return;
 
