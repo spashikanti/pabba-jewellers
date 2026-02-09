@@ -1,6 +1,3 @@
-/* --- GLOBAL STATE --- */
-let allProducts = []; // Stores the full JSON list
-let filteredProducts = []; // Stores items currently being displayed
 // Global Modal State
 let currentSlideIndex = 0;
 let totalSlides = 0;
