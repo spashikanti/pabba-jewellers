@@ -1452,3 +1452,43 @@ body.modal-open #backToTop,
     font-weight: bold;
 }
 
+/* --- LUXURIOUS BREADCRUMB SYSTEM --- */
+.breadcrumb-container {
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3); /* The thin yellow/gold line */
+}
+
+#breadcrumb-trail {
+    font-family: 'Playfair Display', serif; /* Or your preferred elegant font */
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#breadcrumb-trail a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    opacity: 0.7;
+}
+
+#breadcrumb-trail a:hover {
+    color: #D4AF37; /* Gold on hover */
+    opacity: 1;
+}
+
+#breadcrumb-trail .separator {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Highlight the last item in Gold */
+#breadcrumb-trail .current-page, 
+#breadcrumb-trail span:last-child {
+    color: #D4AF37;
+    font-weight: 600;
+    opacity: 1;
+}
