@@ -22,7 +22,8 @@ async function loadCatalogPage() {
     try {
         const [collRes, prodRes] = await Promise.all([fetch('collections.json'), fetch('products.json')]);
         const allCollections = await collRes.json();
-        allProducts = await prodRes.json();
+        const allProductsData = await prodRes.json();
+        allProducts = allProductsData;
 
         if (categoryID) {
             const currentCollection = allCollections.find(c => String(c.id) === String(categoryID));
@@ -30,7 +31,7 @@ async function loadCatalogPage() {
                 updateBreadcrumbs(currentCollection.name_en, currentCollection.name_te);
                 document.getElementById('categoryTitle').textContent = currentLang === 'te' ? currentCollection.name_te : currentCollection.name_en;
             }
-            filteredProducts = allProducts.filter(p => String(p.category_id) === String(categoryID));
+            filteredProducts = allProducts.filter(p => String(p.id) === String(categoryID));
         } else {
             updateBreadcrumbs();
             filteredProducts = allProducts;
