@@ -36,16 +36,34 @@ function initNavigation() {
 }
 
 function initScrollEffects() {
-    const nav = document.querySelector('.navbar');
     const backToTopBtn = document.getElementById('backToTop');
+    const nav = document.querySelector('.navbar');
+
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
-        if (backToTopBtn) {
-            if (window.pageYOffset > 400) backToTopBtn.classList.add('show');
-            else backToTopBtn.classList.remove('show');
+        // 1. Handle Navbar Background
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+
+        // 2. Handle Back to Top Visibility
+        if (window.pageYOffset > 400) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
         }
     });
+
+    // 3. Smooth Scroll Execution
+    if (backToTopBtn) {
+        backToTopBtn.onclick = () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
+    }
 }
 
 function initLanguageToggle() {
