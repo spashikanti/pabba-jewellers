@@ -49,8 +49,6 @@ function renderCatalog(items) {
     grid.innerHTML = items.map(item => {
         // IT Standard: Ensure we handle the folder path correctly
         // If image_name1 is "Products_Images/xyz.jpg", the URL becomes images/Products_Images/xyz.jpg
-        debugger;
-        console.log(item);
 
         if (item.image) {        
             const fullImagePath = `images/${item.image}`;
@@ -302,3 +300,28 @@ window.addEventListener('click', (event) => {
         closeModal();
     }
 });
+
+const track = document.querySelector('.carousel-track');
+let touchStartX = 0;
+let touchEndX = 0;
+
+function initSwipe() {
+    track.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50; 
+    if (touchStartX - touchEndX > swipeThreshold) {
+        moveSlide(1); // Changed from moveNext()
+    } else if (touchEndX - touchStartX > swipeThreshold) {
+        moveSlide(-1); // Changed from movePrev()
+    }
+}
+
