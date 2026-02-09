@@ -51,21 +51,24 @@ function renderCatalog(items) {
         // If image_name1 is "Products_Images/xyz.jpg", the URL becomes images/Products_Images/xyz.jpg
         debugger;
         console.log(item);
-        const fullImagePath = `images/${item.image_name1}`;
-        const displayName = currentLang === 'en' ? item.name_en : item.name_te;
 
-        return `
-            <div class="product-card" onclick="openProductModal('${item.id}')">
-                <img src="${fullImagePath}" alt="${displayName}" loading="lazy">
-                <div class="product-info">
-                    <h4 data-en="${item.name_en}" data-te="${item.name_te}">${displayName}</h4>
-                    <p class="price-tag">${item.price || 'Price on Request'}</p>
-                    <button class="view-btn" data-en="View Details" data-te="వివరాలు చూడండి">
-                        ${currentLang === 'en' ? 'View Details' : 'వివరాలు చూడండి'}
-                    </button>
+        if (item.image) {        
+            const fullImagePath = `images/${item.image}`;
+            const displayName = currentLang === 'en' ? item.title_en : item.title_te;
+    
+            return `
+                <div class="product-card" onclick="openProductModal('${item.id}')">
+                    <img src="${fullImagePath}" alt="${displayName}" loading="lazy">
+                    <div class="product-info">
+                        <h4 data-en="${item.title_en}" data-te="${item.title_te}">${displayName}</h4>
+                        <p class="price-tag">${item.price || 'Price on Request'}</p>
+                        <button class="view-btn" data-en="View Details" data-te="వివరాలు చూడండి">
+                            ${currentLang === 'en' ? 'View Details' : 'వివరాలు చూడండి'}
+                        </button>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        }
     }).join('');
 
     const countEl = document.getElementById('itemCount');
