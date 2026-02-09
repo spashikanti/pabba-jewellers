@@ -1,36 +1,39 @@
+// Global Modal State
+let currentSlideIndex = 0;
+let totalSlides = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('catalogGrid')) {
         loadCatalogPage();
     }
+    
+    // Modal Close Listeners
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    if (modalCloseBtn) modalCloseBtn.onclick = closeModal;
+    window.onclick = (e) => { if (e.target === document.getElementById('productModal')) closeModal(); };
 });
 
 async function loadCatalogPage() {
     const params = new URLSearchParams(window.location.search);
     const categoryID = params.get('category');
-    
     try {
-        const [collRes, prodRes] = await Promise.all([
-            fetch('collections.json'),
-            fetch('products.json')
-        ]);
+        const [collRes, prodRes] = await Promise.all([fetch('collections.json'), fetch('products.json')]);
         const allCollections = await collRes.json();
         allProducts = await prodRes.json();
 
         if (categoryID) {
             const currentCollection = allCollections.find(c => c.id === categoryID);
-            const titleEl = document.getElementById('categoryTitle');
-            if(titleEl && currentCollection) {
+            if (currentCollection) {
                 updateBreadcrumbs(currentCollection.name_en, currentCollection.name_te);
-                titleEl.textContent = currentLang === 'te' ? currentCollection.name_te : currentCollection.name_en;
+                document.getElementById('categoryTitle').textContent = currentLang === 'te' ? currentCollection.name_te : currentCollection.name_en;
             }
             filteredProducts = allProducts.filter(p => p.category_id === categoryID);
         } else {
             updateBreadcrumbs();
+            filteredProducts = allProducts;
         }
         renderCatalog(filteredProducts);
-    } catch (err) {
-        console.error("Catalog Loading Error:", err);
-    }
+    } catch (err) { console.error("Catalog Error:", err); }
 }
 
 function renderCatalog(items) {
@@ -223,5 +226,73 @@ function openProductModal(id) {
     }, 50);
 }
 
+function moveSlide(step) {
+    // IMPORTANT: Remove zoom before sliding so the image doesn't look cut off
+    const zoomedImg = document.querySelector('.carousel-track img.zoomed');
+    if (zoomedImg) zoomedImg.classList.remove('zoomed');
 
-// ... Keep your renderCatalog, updateBreadcrumbs, and openProductModal functions here ...
+    currentSlideIndex += step;
+    if (currentSlideIndex >= totalSlides) currentSlideIndex = 0;
+    if (currentSlideIndex < 0) currentSlideIndex = totalSlides - 1;
+    updateCarousel();
+}
+
+function goToSlide(index) {
+    currentSlideIndex = index;
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const track = document.getElementById('carouselTrack');
+    const dots = document.querySelectorAll('.dot');
+    
+    // Slide the track: 0%, -100%, -200%, etc.
+    track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+    
+    // Update dots
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlideIndex);
+    });
+}
+
+function closeModal() {
+    const modal = document.getElementById('productModal');
+    if (!modal || modal.style.display === 'none') return;
+
+    // Reset UI state
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = 'auto'; // Re-enable scroll
+    const btt = document.getElementById('backToTop');
+    if (btt) btt.style.display = 'flex';
+    
+    // Clean up zoom
+    const track = document.getElementById('carouselTrack');
+    if (track) {
+        track.querySelectorAll('.zoomed').forEach(el => el.classList.remove('zoomed'));
+    }
+
+    // Remove Arrow Listeners to prevent "ghost" clicks
+    const prevBtn = document.querySelector('.nav-arrow.prev');
+    const nextBtn = document.querySelector('.nav-arrow.next');
+    if (prevBtn) prevBtn.onclick = null;
+    if (nextBtn) nextBtn.onclick = null;
+
+    if (window.history.state && window.history.state.modalOpen) {
+        window.history.back();
+    }
+}
+
+// Safety check: Only add listener if the button exists (Catalog Page)
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeModal);
+}
+
+// Close modal when clicking outside content
+window.addEventListener('click', (event) => {
+    const modal = document.getElementById('productModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+});
