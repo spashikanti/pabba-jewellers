@@ -52,6 +52,9 @@ function renderCatalog(items) {
         const fullImagePath = `images/${item.image_name1}`;
         const displayName = currentLang === 'en' ? item.name_en : item.name_te;
 
+        alert(fullImagePath);
+        alert(displayName);
+
         return `
             <div class="product-card" onclick="openProductModal('${item.id}')">
                 <img src="${fullImagePath}" alt="${displayName}" loading="lazy">
