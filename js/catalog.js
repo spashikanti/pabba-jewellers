@@ -1,5 +1,4 @@
 /* --- GLOBAL STATE --- */
-let currentLang = localStorage.getItem('preferredLang') || 'en';
 let allProducts = []; // Stores the full JSON list
 let filteredProducts = []; // Stores items currently being displayed
 // Global Modal State
