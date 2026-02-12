@@ -20,7 +20,8 @@ jobs:
       - name: Optimize & Convert Images
         uses: stellasoftio/image-optimizer-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.BYPASS_TOKEN }}
+          fetch-depth: 0
           # Create WebP versions
           export-webp: true
           # Create AVIF versions
