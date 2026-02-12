@@ -56,7 +56,7 @@ function renderCatalog(items) {
     
             return `
                 <div class="product-card" onclick="openProductModal('${item.id}')">
-                    <img src="${fullImagePath}" alt="${displayName}" loading="lazy">
+                    <img src="${fullImagePath}" alt="${displayName}" loading="lazy" decoding="async">
                     <div class="product-info">
                         <h4 data-en="${item.title_en}" data-te="${item.title_te}">${displayName}</h4>
                         <p class="price-tag">${item.price || 'Price on Request'}</p>
@@ -139,6 +139,8 @@ function openProductModal(id) {
         const cleanPath = imgName.startsWith('images/') ? imgName : `images/${imgName}`;
         img.src = cleanPath;
         img.alt = product.title_en;
+        img.loading = 'lazy';
+        img.decoding = 'async';
         
         // Hide loader once image is ready
         img.onload = () => {
