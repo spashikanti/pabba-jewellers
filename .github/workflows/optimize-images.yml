@@ -1,0 +1,40 @@
+name: Optimize and Convert Images
+
+on:
+  push:
+    paths:
+      -  'images/raw/**' # Only runs when files are added to this folder
+  workflow_dispatch: # Allows you to run it manually for testing
+
+jobs:
+  build:
+    name: Convert to WebP and AVIF
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to push the optimized images back
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Optimize & Convert Images
+        uses: stellasoftio/image-optimizer-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Create WebP versions
+          export-webp: true
+          # Create AVIF versions
+          export-avif: true
+          # Where to look for images
+          image-root: 'images/raw'
+          # Where to put the results 
+          output-root: 'images/dist'
+          # Keep original raw images for backup
+          replace-original-after-export-webp: false
+          
+      - name: Commit optimized images
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Automated Image Optimization [Skip CI]"
+          file_pattern: 'images/dist/**'
+    
