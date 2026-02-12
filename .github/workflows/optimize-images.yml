@@ -29,11 +29,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BYPASS_TOKEN }}
         with:
           # Also passing it here for the action's own logic
-          token: ${{ secrets.BYPASS_TOKEN }}
+          github-token: ${{ secrets.BYPASS_TOKEN }}
           # Create WebP versions
           export-webp: true
           # Create AVIF versions
           export-avif: true
+          # We'll handle moving files ourselves in the next step
+          replace-original-after-export-webp: false
 
       - name: Move to Dist Folder
         run: |
@@ -44,10 +46,15 @@ jobs:
           find images/raw -name "*.avif" -exec cp {} images/dist/ \;
           find images/raw -name "*.jpg" -exec cp {} images/dist/ \;
 
+          echo "--- PERFORMANCE REPORT ---"
+          du -sh images/raw/*
+          du -sh images/dist/*
+          echo "--------------------------"
+          
           # Validation: List the files to prove they were moved
-          echo "Current files in images/dist:"
-          ls -R images/dist/
-
+          # echo "Current files in images/dist:"
+          # ls -R images/dist/
+          
       - name: Verify Output
         run: |
           COUNT=$(ls images/dist | wc -l)
@@ -56,6 +63,12 @@ jobs:
             exit 1
           fi
           echo "Success: $COUNT files are ready in images/dist."
+
+      - name: Cleanup Raw Folder
+      # Optional: Keeps your repo clean by removing the raw upload after processing
+        run: |
+          rm -rf images/raw/*
+          touch images/raw/.gitkeep
           
       - name: Commit optimized images
         uses: stefanzweifel/git-auto-commit-action@v5
