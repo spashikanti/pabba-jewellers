@@ -6,7 +6,11 @@
       "stones_en": "Kundan & Emeralds",
       "stones_te": "కుందన్ మరియు పచ్చలు"
     },
-    "images": [],
+    "images": [
+      "images/dist/1.image_name1.043115.jpg",
+      "images/dist/1.image_name2.043115.jpg",
+      "images/dist/1.image_name3.043115.jpg"
+    ],
     "id": 1,
     "category_id": 1,
     "category": "bridal",
@@ -14,7 +18,8 @@
     "title_te": "కుందన్ వధువు సెట్",
     "price": "Contact for Price",
     "desc_en": "Premium Kundan work with semi-precious stones.",
-    "desc_te": "విలువైన రాళ్లతో చేసిన ప్రీమియం కుందన్ పని."
+    "desc_te": "విలువైన రాళ్లతో చేసిన ప్రీమియం కుందన్ పని.",
+    "image": "images/dist/1.image_name1.043115.jpg"
   },
   {
     "specs": {
@@ -23,7 +28,9 @@
       "stones_en": "None",
       "stones_te": "ఏమీ లేవు"
     },
-    "images": [],
+    "images": [
+      "images/dist/2.image_name1.043502.jpg"
+    ],
     "id": 2,
     "category_id": 1,
     "category": "bridal",
@@ -31,7 +38,8 @@
     "title_te": "వధువు బంగారు హారం సెట్",
     "price": "Contact for Price",
     "desc_en": "Traditional bridal necklace set with intricate detailing.",
-    "desc_te": "వివాహ వేడుకల కోసం ప్రత్యేకంగా రూపొందించిన సంప్రదాయ హారం."
+    "desc_te": "వివాహ వేడుకల కోసం ప్రత్యేకంగా రూపొందించిన సంప్రదాయ హారం.",
+    "image": "images/dist/2.image_name1.043502.jpg"
   },
   {
     "specs": {
@@ -40,7 +48,9 @@
       "stones_en": "VVS1 Solitaire",
       "stones_te": "VVS1 సాలిటైర్"
     },
-    "images": [],
+    "images": [
+      "images/dist/3.image_name1.043528.jpg"
+    ],
     "id": 3,
     "category_id": 2,
     "category": "diamond",
@@ -48,7 +58,8 @@
     "title_te": "సాలిటైర్ డైమండ్ రింగ్",
     "price": "Contact for Price",
     "desc_en": "GIA certified diamond set in 18k white gold.",
-    "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో సెట్ చేయబడిన డైమండ్."
+    "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో సెట్ చేయబడిన డైమండ్.",
+    "image": "images/dist/3.image_name1.043528.jpg"
   },
   {
     "specs": {
@@ -57,7 +68,9 @@
       "stones_en": "12ct Total Diamonds",
       "stones_te": "12 క్యారెట్ల డైమండ్స్"
     },
-    "images": [],
+    "images": [
+      "images/dist/4.image_name1.043559.jpg"
+    ],
     "id": 4,
     "category_id": 2,
     "category": "diamond",
@@ -65,7 +78,8 @@
     "title_te": "డైమండ్ స్టేట్‌మెంట్ నెక్లెస్",
     "price": "Contact for Price",
     "desc_en": "Luxury diamond necklace for premium occasions.",
-    "desc_te": "ప్రత్యేక వేడుకల కోసం విలాసవంతమైన డైమండ్ హారం."
+    "desc_te": "ప్రత్యేక వేడుకల కోసం విలాసవంతమైన డైమండ్ హారం.",
+    "image": "images/dist/4.image_name1.043559.jpg"
   },
   {
     "specs": {
@@ -74,7 +88,9 @@
       "stones_en": "Antique Finish",
       "stones_te": "యాంటిక్ ఫినిష్"
     },
-    "images": [],
+    "images": [
+      "images/dist/5.image_name1.043622.jpg"
+    ],
     "id": 5,
     "category_id": 3,
     "category": "daily",
@@ -82,7 +98,8 @@
     "title_te": "గోల్డ్ టెంపుల్ గాజులు",
     "price": "Contact for Price",
     "desc_en": "Traditional temple design for daily elegance.",
-    "desc_te": "రోజువారీ ఉపయోగం కోసం సంప్రదాయ టెంపుల్ డిజైన్."
+    "desc_te": "రోజువారీ ఉపయోగం కోసం సంప్రదాయ టెంపుల్ డిజైన్.",
+    "image": "images/dist/5.image_name1.043622.jpg"
   },
   {
     "specs": {
@@ -92,6 +109,7 @@
       "stones_te": "ఏమీ లేవు"
     },
     "images": [
+      "images/dist/6.image_name1.043646.jpg",
       "images/dist/Diamond Statement Necklace.jpg"
     ],
     "id": 6,
@@ -102,7 +120,7 @@
     "price": "Contact for Price",
     "desc_en": "Minimal elegant gold ring for daily wear.",
     "desc_te": "ప్రతిరోజు ధరించడానికి సరైన అందమైన గోల్డ్ రింగ్.",
-    "image": "images/dist/Diamond Statement Necklace.jpg"
+    "image": "images/dist/6.image_name1.043646.jpg"
   },
   {
     "specs": {
@@ -112,7 +130,7 @@
       "stones_te": "కెంపులు మరియు ముత్యాలు"
     },
     "images": [
-      "images/dist/Classic_Gold_Ring.jpg"
+      "images/dist/7.image_name1.043703.jpg"
     ],
     "id": 7,
     "category_id": 1,
@@ -122,7 +140,7 @@
     "price": "Contact for Price",
     "desc_en": "Traditional temple work with ruby embellishments.",
     "desc_te": "రూబీ రాళ్లతో చేసిన సంప్రదాయ టెంపుల్ పనితనం.",
-    "image": "images/dist/Classic_Gold_Ring.jpg"
+    "image": "images/dist/7.image_name1.043703.jpg"
   },
   {
     "specs": {
@@ -132,7 +150,7 @@
       "stones_te": "VVS డైమండ్స్"
     },
     "images": [
-      "images/dist/Bridal_Gold_Necklace_Set.jpg",
+      "images/dist/8.image_name1.043727.jpg",
       "images/dist/Bridal Gold Necklace Set.jpg"
     ],
     "id": 8,
@@ -143,45 +161,7 @@
     "price": "Contact for Price",
     "desc_en": "GIA certified solitaire studs in 18k white gold.",
     "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో డైమండ్ స్టడ్స్.",
-    "image": "images/dist/Bridal_Gold_Necklace_Set.jpg"
-  },
-  {
-    "specs": {
-      "purity": "22K Gold",
-      "weight": "12.00g",
-      "stones_en": "None",
-      "stones_te": "ఏమీ లేవు"
-    },
-    "images": [],
-    "id": 9,
-    "category_id": 3,
-    "category": "daily",
-    "title_en": "Minimalist Bangle",
-    "title_te": "మినిమలిస్ట్ బంగారు గాజు",
-    "price": "Contact for Price",
-    "desc_en": "Sleek 22k gold bangle for daily elegance.",
-    "desc_te": "రోజువారీ ధరించడానికి అనువైన బంగారు గాజు."
-  },
-  {
-    "specs": {
-      "purity": "18K",
-      "weight": "4.2g",
-      "stones_en": "VVS Diamonds",
-      "stones_te": "VVS డైమండ్స్"
-    },
-    "images": [
-      "images/dist/diamond_studs.jpg",
-      "images/dist/Diamond Statement Necklace.jpg"
-    ],
-    "id": 10,
-    "category_id": 2,
-    "category": "diamond",
-    "title_en": "Diamond Studs",
-    "title_te": "డైమండ్ చెవి రింగులు",
-    "price": "Contact for Price",
-    "desc_en": "GIA certified solitaire studs in 18k white gold.",
-    "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో డైమండ్ స్టడ్స్.",
-    "image": "images/dist/diamond_studs.jpg"
+    "image": "images/dist/8.image_name1.043727.jpg"
   },
   {
     "specs": {
@@ -193,7 +173,7 @@
     "images": [
       "images/dist/gold_bangle.jpg"
     ],
-    "id": 11,
+    "id": 9,
     "category_id": 3,
     "category": "daily",
     "title_en": "Minimalist Bangle",
@@ -215,7 +195,7 @@
       "images/dist/20260208234535-c391652c.image_name2.054922.jpg",
       "images/dist/20260208234535-c391652c.image_name3.054922.jpg"
     ],
-    "id": "20260208234535-c391652c",
+    "id": 10,
     "category_id": "1",
     "title_en": "Heritage Nakshi Bridal Haram",
     "title_te": "హెరిటేజ్ నక్షి బ్రైడల్ హారం",
