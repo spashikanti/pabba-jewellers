@@ -1,62 +1,227 @@
 [
   {
-    "specs": {},
-    "images": [
-      "images/dist/Bridal Gold Necklace Set.jpg"
-    ],
+    "specs": {
+      "purity": "22K Gold",
+      "weight": "45.00g",
+      "stones_en": "Kundan & Emeralds",
+      "stones_te": "కుందన్ మరియు పచ్చలు"
+    },
+    "images": [],
     "id": 1,
-    "name_en": "Bridal Collection",
-    "name_te": "వధువు కలెక్షన్",
-    "image": "images/dist/Bridal Gold Necklace Set.jpg"
+    "category_id": 1,
+    "category": "bridal",
+    "title_en": "Kundan Bridal Set",
+    "title_te": "కుందన్ వధువు సెట్",
+    "price": "Contact for Price",
+    "desc_en": "Premium Kundan work with semi-precious stones.",
+    "desc_te": "విలువైన రాళ్లతో చేసిన ప్రీమియం కుందన్ పని."
   },
   {
-    "specs": {},
+    "specs": {
+      "purity": "22K Gold",
+      "weight": "82.50g",
+      "stones_en": "None",
+      "stones_te": "ఏమీ లేవు"
+    },
+    "images": [],
+    "id": 2,
+    "category_id": 1,
+    "category": "bridal",
+    "title_en": "Bridal Gold Necklace Set",
+    "title_te": "వధువు బంగారు హారం సెట్",
+    "price": "Contact for Price",
+    "desc_en": "Traditional bridal necklace set with intricate detailing.",
+    "desc_te": "వివాహ వేడుకల కోసం ప్రత్యేకంగా రూపొందించిన సంప్రదాయ హారం."
+  },
+  {
+    "specs": {
+      "purity": "18K White Gold",
+      "weight": "3.20g",
+      "stones_en": "VVS1 Solitaire",
+      "stones_te": "VVS1 సాలిటైర్"
+    },
+    "images": [],
+    "id": 3,
+    "category_id": 2,
+    "category": "diamond",
+    "title_en": "Solitaire Diamond Ring",
+    "title_te": "సాలిటైర్ డైమండ్ రింగ్",
+    "price": "Contact for Price",
+    "desc_en": "GIA certified diamond set in 18k white gold.",
+    "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో సెట్ చేయబడిన డైమండ్."
+  },
+  {
+    "specs": {
+      "purity": "18K Gold",
+      "weight": "38.10g",
+      "stones_en": "12ct Total Diamonds",
+      "stones_te": "12 క్యారెట్ల డైమండ్స్"
+    },
+    "images": [],
+    "id": 4,
+    "category_id": 2,
+    "category": "diamond",
+    "title_en": "Diamond Statement Necklace",
+    "title_te": "డైమండ్ స్టేట్‌మెంట్ నెక్లెస్",
+    "price": "Contact for Price",
+    "desc_en": "Luxury diamond necklace for premium occasions.",
+    "desc_te": "ప్రత్యేక వేడుకల కోసం విలాసవంతమైన డైమండ్ హారం."
+  },
+  {
+    "specs": {
+      "purity": "22K Gold",
+      "weight": "24.00g",
+      "stones_en": "Antique Finish",
+      "stones_te": "యాంటిక్ ఫినిష్"
+    },
+    "images": [],
+    "id": 5,
+    "category_id": 3,
+    "category": "daily",
+    "title_en": "Gold Temple Bangle",
+    "title_te": "గోల్డ్ టెంపుల్ గాజులు",
+    "price": "Contact for Price",
+    "desc_en": "Traditional temple design for daily elegance.",
+    "desc_te": "రోజువారీ ఉపయోగం కోసం సంప్రదాయ టెంపుల్ డిజైన్."
+  },
+  {
+    "specs": {
+      "purity": "22K Gold",
+      "weight": "6.50g",
+      "stones_en": "None",
+      "stones_te": "ఏమీ లేవు"
+    },
     "images": [
       "images/dist/Diamond Statement Necklace.jpg"
     ],
-    "id": 2,
-    "name_en": "Diamond Jewellery",
-    "name_te": "డైమండ్ నగలు",
+    "id": 6,
+    "category_id": 3,
+    "category": "daily",
+    "title_en": "Classic Gold Ring",
+    "title_te": "క్లాసిక్ గోల్డ్ రింగ్",
+    "price": "Contact for Price",
+    "desc_en": "Minimal elegant gold ring for daily wear.",
+    "desc_te": "ప్రతిరోజు ధరించడానికి సరైన అందమైన గోల్డ్ రింగ్.",
     "image": "images/dist/Diamond Statement Necklace.jpg"
   },
   {
-    "specs": {},
+    "specs": {
+      "purity": "22K Gold",
+      "weight": "45.00g",
+      "stones_en": "Rubies & Pearls",
+      "stones_te": "కెంపులు మరియు ముత్యాలు"
+    },
     "images": [
-      "images/dist/Daily Wear Necklace.jpg"
+      "images/dist/Classic_Gold_Ring.jpg"
     ],
-    "id": 3,
-    "name_en": "Daily Wear",
-    "name_te": "ప్రతిరోజు ధరించే నగలు",
-    "image": "images/dist/Daily Wear Necklace.jpg"
+    "id": 7,
+    "category_id": 1,
+    "category": "bridal",
+    "title_en": "Antique Gold Necklace",
+    "title_te": "పురాతన బంగారు హారం",
+    "price": "Contact for Price",
+    "desc_en": "Traditional temple work with ruby embellishments.",
+    "desc_te": "రూబీ రాళ్లతో చేసిన సంప్రదాయ టెంపుల్ పనితనం.",
+    "image": "images/dist/Classic_Gold_Ring.jpg"
   },
   {
-    "specs": {},
+    "specs": {
+      "purity": "18K White Gold",
+      "weight": "4.20g",
+      "stones_en": "VVS Diamonds",
+      "stones_te": "VVS డైమండ్స్"
+    },
     "images": [
-      "images/dist/4.image_name1.040751.jpg"
+      "images/dist/Bridal_Gold_Necklace_Set.jpg",
+      "images/dist/Bridal Gold Necklace Set.jpg"
     ],
-    "id": 4,
-    "name_en": "Temple Jewellery",
-    "name_te": "ఆలయ నగలు",
-    "image": "images/dist/4.image_name1.040751.jpg"
+    "id": 8,
+    "category_id": 2,
+    "category": "diamond",
+    "title_en": "Diamond Studs",
+    "title_te": "డైమండ్ చెవి రింగులు",
+    "price": "Contact for Price",
+    "desc_en": "GIA certified solitaire studs in 18k white gold.",
+    "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో డైమండ్ స్టడ్స్.",
+    "image": "images/dist/Bridal_Gold_Necklace_Set.jpg"
   },
   {
-    "specs": {},
-    "images": [
-      "images/dist/5.image_name1.044650.jpg"
-    ],
-    "id": 5,
-    "name_en": "Antique Collection",
-    "name_te": "ప్రాచీన నగల కలెక్షన్",
-    "image": "images/dist/5.image_name1.044650.jpg"
+    "specs": {
+      "purity": "22K Gold",
+      "weight": "12.00g",
+      "stones_en": "None",
+      "stones_te": "ఏమీ లేవు"
+    },
+    "images": [],
+    "id": 9,
+    "category_id": 3,
+    "category": "daily",
+    "title_en": "Minimalist Bangle",
+    "title_te": "మినిమలిస్ట్ బంగారు గాజు",
+    "price": "Contact for Price",
+    "desc_en": "Sleek 22k gold bangle for daily elegance.",
+    "desc_te": "రోజువారీ ధరించడానికి అనువైన బంగారు గాజు."
   },
   {
-    "specs": {},
+    "specs": {
+      "purity": "18K",
+      "weight": "4.2g",
+      "stones_en": "VVS Diamonds",
+      "stones_te": "VVS డైమండ్స్"
+    },
     "images": [
-      "images/dist/6.image_name1.045515.jpg"
+      "images/dist/diamond_studs.jpg",
+      "images/dist/Diamond Statement Necklace.jpg"
     ],
-    "id": 6,
-    "name_en": "Platinum Jewellery",
-    "name_te": "ప్లాటినం నగలు",
-    "image": "images/dist/6.image_name1.045515.jpg"
+    "id": 10,
+    "category_id": 2,
+    "category": "diamond",
+    "title_en": "Diamond Studs",
+    "title_te": "డైమండ్ చెవి రింగులు",
+    "price": "Contact for Price",
+    "desc_en": "GIA certified solitaire studs in 18k white gold.",
+    "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో డైమండ్ స్టడ్స్.",
+    "image": "images/dist/diamond_studs.jpg"
+  },
+  {
+    "specs": {
+      "purity": "22K",
+      "weight": "12g",
+      "stones_en": "None",
+      "stones_te": "ఏమీ లేవు"
+    },
+    "images": [
+      "images/dist/gold_bangle.jpg"
+    ],
+    "id": 11,
+    "category_id": 3,
+    "category": "daily",
+    "title_en": "Minimalist Bangle",
+    "title_te": "మినిమలిస్ట్ బంగారు గాజు",
+    "price": "Contact for Price",
+    "desc_en": "Sleek 22k gold bangle for daily elegance.",
+    "desc_te": "రోజువారీ ధరించడానికి అనువైన బంగారు గాజు.",
+    "image": "images/dist/gold_bangle.jpg"
+  },
+  {
+    "specs": {
+      "purity": "22K Gold (BIS Hallmarked)",
+      "weight": "115.30 Grams",
+      "stones_en": "Burmese Rubies & South Sea Pearls",
+      "stones_te": "బర్మీస్ కెంపులు మరియు దక్షిణ సముద్ర ముత్యాలు"
+    },
+    "images": [
+      "images/dist/20260208234535-c391652c.image_name1.054922.jpg",
+      "images/dist/20260208234535-c391652c.image_name2.054922.jpg",
+      "images/dist/20260208234535-c391652c.image_name3.054922.jpg"
+    ],
+    "id": "20260208234535-c391652c",
+    "category_id": "1",
+    "title_en": "Heritage Nakshi Bridal Haram",
+    "title_te": "హెరిటేజ్ నక్షి బ్రైడల్ హారం",
+    "desc_en": "An exquisite 22k gold Nakshi work Haram featuring Goddess Lakshmi motifs, adorned with premium Burmese rubies and South Sea pearls.",
+    "desc_te": "మహాలక్ష్మి అమ్మవారి నగిషీ పనితనంతో, బర్మీస్ కెంపులు మరియు దక్షిణ సముద్ర ముత్యాలతో రూపొందించబడిన అద్భుతమైన 22 క్యారెట్ల బంగారు హారం.",
+    "image": "images/dist/20260208234535-c391652c.image_name1.054922.jpg",
+    "created_at": "2026-02-09T05:45:35.000Z"
   }
 ]
