@@ -7,9 +7,9 @@
       "stones_te": "కుందన్ మరియు పచ్చలు"
     },
     "images": [
-      "images/dist/1.image_name1.043115.jpg",
-      "images/dist/1.image_name2.043115.jpg",
-      "images/dist/1.image_name3.043115.jpg"
+      "images/dist/1.image_name1.015842.jpg",
+      "images/dist/1.image_name2.015842.jpg",
+      "images/dist/1.image_name3.015842.jpg"
     ],
     "id": 1,
     "category_id": 1,
@@ -19,7 +19,7 @@
     "price": "Contact for Price",
     "desc_en": "Premium Kundan work with semi-precious stones.",
     "desc_te": "విలువైన రాళ్లతో చేసిన ప్రీమియం కుందన్ పని.",
-    "image": "images/dist/1.image_name1.043115.jpg"
+    "image": "images/dist/1.image_name1.015842.jpg"
   },
   {
     "specs": {
@@ -29,7 +29,7 @@
       "stones_te": "ఏమీ లేవు"
     },
     "images": [
-      "images/dist/2.image_name1.043502.jpg"
+      "images/dist/2.image_name1.015948.jpg"
     ],
     "id": 2,
     "category_id": 1,
@@ -39,7 +39,7 @@
     "price": "Contact for Price",
     "desc_en": "Traditional bridal necklace set with intricate detailing.",
     "desc_te": "వివాహ వేడుకల కోసం ప్రత్యేకంగా రూపొందించిన సంప్రదాయ హారం.",
-    "image": "images/dist/2.image_name1.043502.jpg"
+    "image": "images/dist/2.image_name1.015948.jpg"
   },
   {
     "specs": {
@@ -49,7 +49,7 @@
       "stones_te": "VVS1 సాలిటైర్"
     },
     "images": [
-      "images/dist/3.image_name1.043528.jpg"
+      "images/dist/3.image_name1.035332.jpg"
     ],
     "id": 3,
     "category_id": 2,
@@ -59,7 +59,7 @@
     "price": "Contact for Price",
     "desc_en": "GIA certified diamond set in 18k white gold.",
     "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో సెట్ చేయబడిన డైమండ్.",
-    "image": "images/dist/3.image_name1.043528.jpg"
+    "image": "images/dist/3.image_name1.035332.jpg"
   },
   {
     "specs": {
@@ -69,7 +69,7 @@
       "stones_te": "12 క్యారెట్ల డైమండ్స్"
     },
     "images": [
-      "images/dist/4.image_name1.043559.jpg"
+      "images/dist/4.image_name1.035350.jpg"
     ],
     "id": 4,
     "category_id": 2,
@@ -79,7 +79,7 @@
     "price": "Contact for Price",
     "desc_en": "Luxury diamond necklace for premium occasions.",
     "desc_te": "ప్రత్యేక వేడుకల కోసం విలాసవంతమైన డైమండ్ హారం.",
-    "image": "images/dist/4.image_name1.043559.jpg"
+    "image": "images/dist/4.image_name1.035350.jpg"
   },
   {
     "specs": {
@@ -89,7 +89,7 @@
       "stones_te": "యాంటిక్ ఫినిష్"
     },
     "images": [
-      "images/dist/5.image_name1.043622.jpg"
+      "images/dist/5.image_name1.035136.jpg"
     ],
     "id": 5,
     "category_id": 3,
@@ -99,7 +99,7 @@
     "price": "Contact for Price",
     "desc_en": "Traditional temple design for daily elegance.",
     "desc_te": "రోజువారీ ఉపయోగం కోసం సంప్రదాయ టెంపుల్ డిజైన్.",
-    "image": "images/dist/5.image_name1.043622.jpg"
+    "image": "images/dist/5.image_name1.035136.jpg"
   },
   {
     "specs": {
@@ -109,7 +109,7 @@
       "stones_te": "ఏమీ లేవు"
     },
     "images": [
-      "images/dist/6.image_name1.043646.jpg"
+      "images/dist/6.image_name1.035241.jpg"
     ],
     "id": 6,
     "category_id": 3,
@@ -119,7 +119,7 @@
     "price": "Contact for Price",
     "desc_en": "Minimal elegant gold ring for daily wear.",
     "desc_te": "ప్రతిరోజు ధరించడానికి సరైన అందమైన గోల్డ్ రింగ్.",
-    "image": "images/dist/6.image_name1.043646.jpg"
+    "image": "images/dist/6.image_name1.035241.jpg"
   },
   {
     "specs": {
@@ -129,7 +129,7 @@
       "stones_te": "కెంపులు మరియు ముత్యాలు"
     },
     "images": [
-      "images/dist/7.image_name1.043703.jpg"
+      "images/dist/7.image_name1.035605.jpg"
     ],
     "id": 7,
     "category_id": 1,
@@ -139,7 +139,7 @@
     "price": "Contact for Price",
     "desc_en": "Traditional temple work with ruby embellishments.",
     "desc_te": "రూబీ రాళ్లతో చేసిన సంప్రదాయ టెంపుల్ పనితనం.",
-    "image": "images/dist/7.image_name1.043703.jpg"
+    "image": "images/dist/7.image_name1.035605.jpg"
   },
   {
     "specs": {
@@ -149,7 +149,7 @@
       "stones_te": "VVS డైమండ్స్"
     },
     "images": [
-      "images/dist/8.image_name1.043727.jpg"
+      "images/dist/8.image_name1.035412.jpg"
     ],
     "id": 8,
     "category_id": 2,
@@ -159,7 +159,7 @@
     "price": "Contact for Price",
     "desc_en": "GIA certified solitaire studs in 18k white gold.",
     "desc_te": "18 క్యారెట్ల వైట్ గోల్డ్‌లో డైమండ్ స్టడ్స్.",
-    "image": "images/dist/8.image_name1.043727.jpg"
+    "image": "images/dist/8.image_name1.035412.jpg"
   },
   {
     "specs": {
@@ -169,7 +169,7 @@
       "stones_te": "ఏమీ లేవు"
     },
     "images": [
-      "images/dist/9.image_name1.044239.jpg"
+      "images/dist/9.image_name1.035311.jpg"
     ],
     "id": 9,
     "category_id": 3,
@@ -179,7 +179,7 @@
     "price": "Contact for Price",
     "desc_en": "Sleek 22k gold bangle for daily elegance.",
     "desc_te": "రోజువారీ ధరించడానికి అనువైన బంగారు గాజు.",
-    "image": "images/dist/9.image_name1.044239.jpg"
+    "image": "images/dist/9.image_name1.035311.jpg"
   },
   {
     "specs": {
@@ -189,9 +189,9 @@
       "stones_te": "బర్మీస్ కెంపులు మరియు దక్షిణ సముద్ర ముత్యాలు"
     },
     "images": [
-      "images/dist/20260208234535-c391652c.image_name1.054922.jpg",
-      "images/dist/20260208234535-c391652c.image_name2.054922.jpg",
-      "images/dist/20260208234535-c391652c.image_name3.054922.jpg"
+      "images/dist/10.image_name1.035510.jpg",
+      "images/dist/10.image_name2.035510.jpg",
+      "images/dist/10.image_name3.035510.jpg"
     ],
     "id": 10,
     "category_id": "1",
@@ -201,7 +201,7 @@
     "price": "Contact for Price",
     "desc_en": "An exquisite 22k gold Nakshi work Haram featuring Goddess Lakshmi motifs, adorned with premium Burmese rubies and South Sea pearls.",
     "desc_te": "మహాలక్ష్మి అమ్మవారి నగిషీ పనితనంతో, బర్మీస్ కెంపులు మరియు దక్షిణ సముద్ర ముత్యాలతో రూపొందించబడిన అద్భుతమైన 22 క్యారెట్ల బంగారు హారం.",
-    "image": "images/dist/20260208234535-c391652c.image_name1.054922.jpg",
+    "image": "images/dist/10.image_name1.035510.jpg",
     "created_at": "2026-02-09T05:45:35.000Z"
   }
 ]
