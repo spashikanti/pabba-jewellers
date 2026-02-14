@@ -89,7 +89,9 @@
       "stones_te": "యాంటిక్ ఫినిష్"
     },
     "images": [
-      "images/dist/5.image_name1.035136.jpg"
+      "images/dist/5.image_name1.035136.jpg",
+      "images/dist/5.image_name2.050830.jpg",
+      "images/dist/5.image_name3.050830.jpg"
     ],
     "id": 5,
     "category_id": 3,
@@ -129,7 +131,8 @@
       "stones_te": "కెంపులు మరియు ముత్యాలు"
     },
     "images": [
-      "images/dist/7.image_name1.035605.jpg"
+      "images/dist/7.image_name1.035605.jpg",
+      "images/dist/7.image_name2.050741.jpg"
     ],
     "id": 7,
     "category_id": 1,
