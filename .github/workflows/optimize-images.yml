@@ -37,8 +37,9 @@ jobs:
           # We'll handle moving files ourselves in the next step
           replace-original-after-export-webp: false
           # ADD THIS LINE TO SKIP THE .GITKEEP FILE
-          ignore-paths: '**/.*, **/README.md, **/.gitkeep'
-          full-history: false
+          # Ignore EVERYTHING except the raw folder and standard images
+          # This prevents other files scan and skips the .gitkeep
+          ignore-paths: '^(?!(images/raw/)).*, **/.gitkeep, **/.*'
 
       - name: Move to Dist Folder & Remove Raw Images
         run: |
