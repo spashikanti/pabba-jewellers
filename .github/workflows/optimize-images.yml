@@ -21,6 +21,20 @@ jobs:
           token: ${{ secrets.BYPASS_TOKEN }}
           fetch-depth: 0
 
+      - name: Debug - List File Formats
+        run: |
+          echo "--- STARTING FILE SCAN ---"
+          # This command lists all files and their types
+          find images/raw -type f -exec file --mime-type {} +
+          echo "--- SCAN COMPLETE ---"
+
+      - name: Purge Non-Images
+        run: |
+          # Delete everything in raw that isn't a jpg, jpeg, or png
+          # This protects the optimizer from 'unsupported formats'
+          find images/raw -type f ! -iname "*.jpg" ! -iname "*.jpeg" ! -iname "*.png" -delete
+          # Re-add 
+
       - name: Optimize & Convert Images
         uses: stellasoftio/image-optimizer-action@v1
         env:
@@ -30,16 +44,16 @@ jobs:
         with:
           # Also passing it here for the action's own logic
           github-token: ${{ secrets.BYPASS_TOKEN }}
+          # ADD THIS LINE TO SKIP THE .GITKEEP FILE
+          # Ignore EVERYTHING except the raw folder and standard images
+          # This prevents other files scan and skips the .gitkeep
+          ignore-paths: '^(?!(images/raw/)).*, **/.gitkeep, **/.*'
           # Create WebP versions
           export-webp: true
           # Create AVIF versions
           export-avif: true
           # We'll handle moving files ourselves in the next step
           replace-original-after-export-webp: false
-          # ADD THIS LINE TO SKIP THE .GITKEEP FILE
-          # Ignore EVERYTHING except the raw folder and standard images
-          # This prevents other files scan and skips the .gitkeep
-          ignore-paths: '^(?!(images/raw/)).*, **/.gitkeep, **/.*'
 
       - name: Move to Dist Folder & Remove Raw Images
         run: |
