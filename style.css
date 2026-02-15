@@ -11,6 +11,9 @@
     --letter-spacing-gold: 3px;
    /* --letter-spacing-ui: 1px; */
     --transition-smooth: all 0.3s ease;
+    --gold: #d4af37;
+    --dark: #1a1a1a;
+    --light-gray: #f4f4f4;
 }
 
 /* --- LUXURY DARK SCROLLBAR --- */
@@ -1576,33 +1579,72 @@ body.modal-open #backToTop,
     object-fit: contain;
 }
 
-.search-container {
-    margin: 20px auto;
-    max-width: 600px;
-    padding: 0 15px;
+/* search */
+.search-section {
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 0 20px;
 }
-
-.search-box {
+.search-wrapper {
     position: relative;
     display: flex;
     align-items: center;
     background: #fff;
-    border: 1px solid var(--primary-gold); /* Using your theme variable */
-    border-radius: 25px;
-    padding: 10px 20px;
-    box-shadow: var(--card-shadow);
+    border: 1.5px solid var(--gold);
+    border-radius: 30px;
+    padding: 5px 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
+.search-wrapper:focus-within {
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Fixes the "Cursor not visible" & Alignment */
 #catalogSearch {
+    width: 100%;
+    padding: 10px 10px 10px 35px; /* Leave space for search icon */
     border: none;
     outline: none;
-    width: 100%;
     font-size: 16px;
-    color: var(--dark-accent);
+    color: var(--dark);
+    background: transparent;
+    caret-color: var(--gold); /* Gold cursor! */
 }
 
+/* Custom Search Icon Styling */
 .search-icon {
-    color: var(--primary-gold);
-    margin-left: 10px;
+    position: absolute;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+    color: var(--gold);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+/* Clear (X) Button styling */
+.clear-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #999;
+    cursor: pointer;
+    padding: 0 5px;
+    display: none; /* Hidden until user types */
+    transition: color 0.2s;
+}
+
+.clear-btn:hover {
+    color: var(--dark);
+}
+
+/* Removes default browser "X" to use our custom one */
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
 }
 
