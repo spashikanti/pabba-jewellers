@@ -345,11 +345,15 @@ let searchTimeout = null;
 
 function initSearch() {
     const searchInput = document.getElementById('catalogSearch');
-    if (!searchInput) return;
+    const clearBtn = document.getElementById('clearSearch');
+    if (!searchInput || !clearBtn) return;
 
     searchInput.addEventListener('input', (e) => {
-        clearTimeout(searchTimeout);
         const query = e.target.value.toLowerCase().trim();
+        // Toggle Clear Button visibility
+        clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+        // Debounce search logic
+        clearTimeout(searchTimeout);
 
         // 1. Debounce the search for better performance
         searchTimeout = setTimeout(() => {
@@ -359,6 +363,14 @@ function initSearch() {
                 logSearchQuery(query);
             }
         }, 300);
+    });
+    
+    // Handle Clear Button click
+    clearBtn.addEventListener('click', () => {
+        searchInput.value = "";
+        clearBtn.style.display = 'none';
+        searchInput.focus();
+        performSearch(""); // Reset catalog
     });
 }
 
