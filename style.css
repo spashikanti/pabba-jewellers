@@ -807,7 +807,7 @@ footer {
 .carousel-container {
     position: relative;
     width: 100%;
-    /* max-width: 450px; */ /* Slightly larger for premium feel */
+    max-width: 450px; /* Slightly larger for premium feel */
     margin: 0; /* auto 20px; */
     overflow: hidden; /* This is the "window" the user looks through */
     border-radius: 12px;
