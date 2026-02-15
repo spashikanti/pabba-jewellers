@@ -148,7 +148,7 @@ function openProductModal(id) {
         wrapper.innerHTML = picHtmlString.trim();
         const picHtml = wrapper.firstElementChild;
 
-        console.log(picHtml);
+        //console.log(picHtml);
 
         // Grab the actual <img> tag from inside the <picture> for logic
         const img = picHtml.querySelector('img');
@@ -161,8 +161,8 @@ function openProductModal(id) {
         
         img.onclick = (e) => e.currentTarget.classList.toggle('zoomed');
        
-        track.appendChild(picHtml);
-        //container.appendChild(picHtml);
+        //track.appendChild(picHtml);
+        container.appendChild(picHtml);
         track.appendChild(container);        
 
         const dot = document.createElement('div');
