@@ -53,10 +53,11 @@ function renderCatalog(items) {
         if (item.image) {        
             const fullImagePath = `images/${item.image}`;
             const displayName = currentLang === 'en' ? item.title_en : item.title_te;
+            const picHtml = getPictureHtml(item.image, displayName);
     
             return `
                 <div class="product-card" onclick="openProductModal('${item.id}')">
-                    <img src="${fullImagePath}" alt="${displayName}" loading="lazy" decoding="async">
+                    ${picHtml}
                     <div class="product-info">
                         <h4 data-en="${item.title_en}" data-te="${item.title_te}">${displayName}</h4>
                         <p class="price-tag">${item.price || 'Price on Request'}</p>
@@ -135,12 +136,18 @@ function openProductModal(id) {
         container.className = 'slide-container'; // Ensures relative positioning for loader
         container.innerHTML = '<div class="loader"></div>';
         
-        const img = document.createElement('img');
+        // Instead of document.createElement('img'), we use innerHTML for <picture>
+        const displayName = currentLang === 'en' ? product.title_en : product.title_te;
+        container.innerHTML += getPictureHtml(imgName, displayName, "carousel-img");
+        
+        const img = container.querySelector('img'); //document.createElement('img');
+
+        /*
         const cleanPath = imgName.startsWith('images/') ? imgName : `images/${imgName}`;
         img.src = cleanPath;
         img.alt = product.title_en;
         img.loading = 'lazy';
-        img.decoding = 'async';
+        img.decoding = 'async'; */
         
         // Hide loader once image is ready
         img.onload = () => {
@@ -149,7 +156,7 @@ function openProductModal(id) {
         };
         
         img.onclick = (e) => e.currentTarget.classList.toggle('zoomed');
-        track.appendChild(img);
+        // track.appendChild(img);
         track.appendChild(container);
 
         const dot = document.createElement('div');
