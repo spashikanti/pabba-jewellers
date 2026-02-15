@@ -1576,3 +1576,33 @@ body.modal-open #backToTop,
     object-fit: contain;
 }
 
+.search-container {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 0 15px;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--primary-gold); /* Using your theme variable */
+    border-radius: 25px;
+    padding: 10px 20px;
+    box-shadow: var(--card-shadow);
+}
+
+#catalogSearch {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: var(--dark-accent);
+}
+
+.search-icon {
+    color: var(--primary-gold);
+    margin-left: 10px;
+}
+
