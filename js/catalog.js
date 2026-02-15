@@ -363,22 +363,25 @@ function initSearch() {
 }
 
 function performSearch(query) {
-    console.log('performSearch');
-    console.log(query);
-    // We filter from 'allProducts' which is your master list
-    const filtered = allProducts.filter(item => {
+    // 1. Determine the 'Pool' of products to search from
+    // Use the already filtered category list if it exists, otherwise use all products
+    const searchPool = (typeof filteredProducts !== 'undefined' && filteredProducts.length > 0) 
+                       ? filteredProducts 
+                       : allProducts;
+
+    if (query === "") {
+        renderCatalog(searchPool); 
+        return;
+    }
+
+    const filtered = searchPool.filter(item => {
         const titleEn = (item.title_en || "").toLowerCase();
         const titleTe = (item.title_te || "").toLowerCase();
-        const descEn = (item.desc_en || "").toLowerCase();
         const id = String(item.id || "");
-
-        return titleEn.includes(query) || 
-               titleTe.includes(query) || 
-               descEn.includes(query) || 
-               id.includes(query);
+        
+        return titleEn.includes(query) || titleTe.includes(query) || id.includes(query);
     });
 
-    // Reuse your existing render function
     renderCatalog(filtered);
 }
 
