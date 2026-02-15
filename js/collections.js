@@ -1,11 +1,3 @@
-<script src="collections.js"></script>
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('fullCollectionsGrid')) {
-        loadFullCollections();
-    }
-});
-
 function loadFullCollections() {
     const grid = document.getElementById("fullCollectionsGrid");
     if (!grid) return;
