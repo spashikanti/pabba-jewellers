@@ -2,6 +2,7 @@
 let currentSlideIndex = 0;
 let totalSlides = 0;
 
+/*
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('catalogGrid')) {
         loadCatalogPage();
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalCloseBtn) modalCloseBtn.onclick = closeModal;
     window.onclick = (e) => { if (e.target === document.getElementById('productModal')) closeModal(); };
 });
+*/
 
 async function loadCatalogPage() {
     const params = new URLSearchParams(window.location.search);
