@@ -340,3 +340,53 @@ function handleSwipe() {
     }
 }
 
+// Search Block
+let searchTimeout = null;
+
+function initSearch() {
+    const searchInput = document.getElementById('catalogSearch');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        const query = e.target.value.toLowerCase().trim();
+
+        // 1. Debounce the search for better performance
+        searchTimeout = setTimeout(() => {
+            performSearch(query);
+            // 2. Log the search for the future Admin Dashboard
+            if (query.length > 2) {
+                logSearchQuery(query);
+            }
+        }, 300);
+    });
+}
+
+function performSearch(query) {
+    // We filter from 'allProducts' which is your master list
+    const filtered = allProducts.filter(item => {
+        const titleEn = (item.title_en || "").toLowerCase();
+        const titleTe = (item.title_te || "").toLowerCase();
+        const descEn = (item.desc_en || "").toLowerCase();
+        const id = String(item.id || "");
+
+        return titleEn.includes(query) || 
+               titleTe.includes(query) || 
+               descEn.includes(query) || 
+               id.includes(query);
+    });
+
+    // Reuse your existing render function
+    renderCatalog(filtered);
+}
+
+function logSearchQuery(query) {
+    console.log(`Admin Logging: User searched for "${query}"`);
+    
+    // Future Development:
+    // fetch('YOUR_APPS_SCRIPT_WEBHOOK_URL', {
+    //   method: 'POST',
+    //   body: JSON.stringify({ searchQuery: query, timestamp: new Date() })
+    // });
+}
+
