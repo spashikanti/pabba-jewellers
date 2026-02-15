@@ -144,9 +144,13 @@
     <script src="js/catalog.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // 1. Check if we are on the Catalog page
             if (document.getElementById('catalogGrid')) {
                 loadCatalogPage();
             }
+
+            // 2. Initialize the Search functionality
+            initSearch();
             
             // Modal Close Listeners
             const modalCloseBtn = document.getElementById('modalCloseBtn');
