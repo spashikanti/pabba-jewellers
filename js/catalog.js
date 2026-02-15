@@ -110,6 +110,7 @@ function updateBreadcrumbs(categoryEn, categoryTe) {
 }
 
 function openProductModal(id) {
+    id = Number(id);
     alert(typeof(id));
     // 1. Setup UI Elements & Data
     const product = allProducts.find(p => p.id === id);
