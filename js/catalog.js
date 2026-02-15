@@ -2,19 +2,6 @@
 let currentSlideIndex = 0;
 let totalSlides = 0;
 
-/*
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('catalogGrid')) {
-        loadCatalogPage();
-    }
-    
-    // Modal Close Listeners
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-    if (modalCloseBtn) modalCloseBtn.onclick = closeModal;
-    window.onclick = (e) => { if (e.target === document.getElementById('productModal')) closeModal(); };
-});
-*/
-
 async function loadCatalogPage() {
     const params = new URLSearchParams(window.location.search);
     const categoryID = params.get('category');
@@ -134,70 +121,25 @@ function openProductModal(id) {
     const imageList = (product.images && product.images.length > 0) ? [...product.images] : [product.image];
     totalSlides = imageList.length;
 
-    imageList.forEach((imgName, index) => {
-        /*
+    imageList.forEach((imgName, index) => {        
         const container = document.createElement('div');
         container.className = 'slide-container'; // Ensures relative positioning for loader
         container.innerHTML = '<div class="loader"></div>';
         
-        // Instead of document.createElement('img'), we use innerHTML for <picture>
-        const displayName = currentLang === 'en' ? product.title_en : product.title_te;
-        container.innerHTML += getPictureHtml(imgName, displayName, "carousel-img");
-        
-        const img = container.querySelector('img'); //document.createElement('img');
-        
+        const img = document.createElement('img');
         const cleanPath = imgName.startsWith('images/') ? imgName : `images/${imgName}`;
         img.src = cleanPath;
         img.alt = product.title_en;
-        img.loading = 'lazy';
-        img.decoding = 'async'; 
         
         // Hide loader once image is ready
         img.onload = () => {
             const loader = container.querySelector('.loader');
             if (loader) loader.remove();
-        };        
+        };
         
         img.onclick = (e) => e.currentTarget.classList.toggle('zoomed');
-        // track.appendChild(img);
-        track.appendChild(container);
-        */
-
-        // Create the main slide wrapper
-        const slide = document.createElement('div');
-        slide.className = 'slide-container'; 
-        
-        // Add the loader
-        const loader = document.createElement('div');
-        loader.className = 'loader';
-        slide.appendChild(loader);
-
-        // Generate the Picture HTML
-        const displayName = currentLang === 'en' ? product.title_en : product.title_te;
-        const picHtml = getPictureHtml(imgName, displayName, "carousel-img");
-        
-        // Inject picture into the slide
-        slide.insertAdjacentHTML('beforeend', picHtml);
-        
-        // Grab the actual <img> tag from inside the <picture> for logic
-        const img = slide.querySelector('img');
-
-        // Hide loader once image is ready
-        if (img.complete) {
-            loader.remove();
-        } else {
-            img.onload = () => loader.remove();
-            img.onerror = () => loader.remove(); // Safety if image fails
-        }
-        
-        // Zoom functionality
-        img.onclick = (e) => {
-            e.stopPropagation(); // Prevent modal closing
-            img.classList.toggle('zoomed');
-        };
-
-        // Append the entire slide to the track
-        track.appendChild(slide);
+        track.appendChild(img);
+        track.appendChild(container);        
 
         const dot = document.createElement('div');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
