@@ -39,7 +39,19 @@
                 <p id="itemCount" style="opacity: 0.7; font-size: 0.9rem; letter-spacing: 1px;">
                     Scanning inventory...
                 </p>
-            </header>  
+            </header>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="catalogSearch" 
+                           placeholder="Search by name, ID, or description..." 
+                           data-en="Search by name, ID, or description..." 
+                           data-te="పేరు, ID లేదా వివరణ ద్వారా వెతకండి...">
+                    <button id="clearSearch" class="hidden">&times;</button>
+                    <i class="search-icon">🔍</i>
+                </div>
+                <div id="searchStats" class="search-stats"></div>
+            </div>
     
             <div class="catalog-grid" id="catalogGrid">
                 </div>
