@@ -142,6 +142,7 @@ function openProductModal(id) {
         const displayName = currentLang === 'en' ? product.title_en : product.title_te;
         const picHtmlString = getPictureHtml(imgName, displayName, "");
 
+        
         // Convert string to real DOM element
         const wrapper = document.createElement('div');
         wrapper.innerHTML = picHtmlString.trim();
@@ -157,7 +158,8 @@ function openProductModal(id) {
         };
         
         img.onclick = (e) => e.currentTarget.classList.toggle('zoomed');
-        track.appendChild(img);
+       
+        track.appendChild(wrapper);
         //container.appendChild(picHtml);
         track.appendChild(container);        
 
