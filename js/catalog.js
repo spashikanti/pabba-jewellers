@@ -363,6 +363,8 @@ function initSearch() {
 }
 
 function performSearch(query) {
+    console.log('performSearch');
+    console.log(query);
     // We filter from 'allProducts' which is your master list
     const filtered = allProducts.filter(item => {
         const titleEn = (item.title_en || "").toLowerCase();
