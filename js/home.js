@@ -15,7 +15,7 @@ async function loadCollectionsHome() {
 
     try {
         // 1. Use the Smart Cache (returns already-parsed JSON)
-        const cols = await fetchWithSmartCache("collections.json");
+        const cols = await fetchWithSmartCache("data/collections.json");
 
         if (!cols || cols.length === 0) {
             console.warn("No collections found to display on home.");
@@ -133,8 +133,8 @@ async function loadTestimonials() {
     if (!container) return;
 
     try {
-        const response = await fetch('./testimonials.json');
-        const data = await response.json();
+        const data = await fetchWithSmartCache("data/testimonials.json');
+        //const data = await response.json();
         
         container.innerHTML = data.map((item, index) => `
             <div class="testimonial" style="display: ${index === 0 ? 'block' : 'none'}; opacity: ${index === 0 ? '1' : '0'}">
