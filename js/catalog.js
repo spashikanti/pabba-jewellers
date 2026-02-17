@@ -6,18 +6,23 @@ async function loadCatalogPage() {
     const params = new URLSearchParams(window.location.search);
     const categoryID = params.get('category');
     try {
-        const [collRes, prodRes] = await Promise.all([fetchWithSmartCache('collections.json'), fetchWithSmartCache('products.json')]);
-        const allCollections = await collRes.json();
-        const allProductsData = await prodRes.json();
+        const [allCollections, allProductsData] = await Promise.all([fetchWithSmartCache('collections.json'), fetchWithSmartCache('products.json')]);
+        //const allCollections = await collRes.json();
+        //const allProductsData = await prodRes.json();
         allProducts = allProductsData;
 
         if (categoryID) {
-            const currentCollection = allCollections.find(c => String(c.id) === String(categoryID));
+            //const currentCollection = allCollections.find(c => String(c.id) === String(categoryID));
+            // 2. Match using gallery_id (String) instead of id (Number)
+            const currentCollection = allCollections.find(c => c.gallery_id === categoryID);
+            
             if (currentCollection) {
                 updateBreadcrumbs(currentCollection.name_en, currentCollection.name_te);
                 document.getElementById('categoryTitle').textContent = currentLang === 'te' ? currentCollection.name_te : currentCollection.name_en;
             }
-            filteredProducts = allProducts.filter(p => String(p.category_id) === String(categoryID));
+            // filteredProducts = allProducts.filter(p => String(p.category_id) === String(categoryID));
+            // 3. Filter products using the string-based category_id
+            filteredProducts = allProducts.filter(p => p.category_id === categoryID);
         } else {
             updateBreadcrumbs();
             filteredProducts = allProducts;
