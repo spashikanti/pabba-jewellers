@@ -11,8 +11,7 @@ async function loadCatalogPage() {
         //const allProductsData = await prodRes.json();
         allProducts = allProductsData;
 
-        if (categoryID) {
-            //const currentCollection = allCollections.find(c => String(c.id) === String(categoryID));
+        if (categoryID) {            
             // 2. Match using gallery_id (String) instead of id (Number)
             const currentCollection = allCollections.find(c => c.gallery_id === categoryID);
             
@@ -50,7 +49,7 @@ function renderCatalog(items) {
             const picHtml = getPictureHtml(item.image, displayName);
     
             return `
-                <div class="product-card" onclick="openProductModal('${item.id}')">
+                <div class="product-card" onclick="openProductModal('${item.product_id}')">
                     ${picHtml}
                     <div class="product-info">
                         <h4 data-en="${item.title_en}" data-te="${item.title_te}">${displayName}</h4>
@@ -103,7 +102,7 @@ function updateBreadcrumbs(categoryEn, categoryTe) {
 
 function openProductModal(id) {
     // 1. Setup UI Elements & Data
-    const product = allProducts.find(p => String(p.id) === String(id));
+    const product = allProducts.find(p => String(p.product_id) === String(id));
     if (!product) {
         console.error("Product not found for ID:", id);
         return;
@@ -233,7 +232,7 @@ function openProductModal(id) {
     }
 
     // 6. WhatsApp Link
-    const msg = `Enquiry for ${product.title_en} (ID: ${product.id})`;
+    const msg = `Enquiry for ${product.title_en} (ID: ${product.product_id})`;
     document.getElementById('whatsappBtn').href = `https://wa.me/918978569063?text=${encodeURIComponent(msg)}`;
 
     // 7. Show Modal & Browser History Management (DO ONCE)
@@ -393,7 +392,7 @@ function performSearch(query) {
     const filtered = searchPool.filter(item => {
         const titleEn = (item.title_en || "").toLowerCase();
         const titleTe = (item.title_te || "").toLowerCase();
-        const id = String(item.id || "").toLowerCase();
+        const id = String(item.product_id || "").toLowerCase();
         //Also search by tags!
         const tags = (item.search_tags || "").toLowerCase();
         return titleEn.includes(query) || titleTe.includes(query) || id.includes(query) || tags.includes(query);
