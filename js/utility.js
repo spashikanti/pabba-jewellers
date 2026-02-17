@@ -57,6 +57,12 @@ async function fetchWithSmartCache(url) {
     const cachedData = localStorage.getItem(cacheKey);
     const cachedEtag = localStorage.getItem(etagKey);
 
+    // 1. Check if user is offline and we have no cache
+    if (!navigator.onLine && !cachedData) {
+        showNoConnectionMessage();
+        return []; // Return empty array to prevent code crashes
+    }
+
     const headers = {};
     if (cachedEtag) {
         // Tell the server: "Only give me data if it doesn't match this fingerprint"
@@ -64,7 +70,10 @@ async function fetchWithSmartCache(url) {
     }
 
     try {
-        const response = await fetch(url, { headers });
+        const response = await fetch(url, { 
+            headers,
+            cache: 'no-cache' // Ensures we always check GitHub for the latest version
+        });
 
         // Status 304 means the file hasn't changed!
         if (response.status === 304 && cachedData) {
@@ -86,7 +95,9 @@ async function fetchWithSmartCache(url) {
         }
     } catch (err) {
         console.error("Smart Cache Error:", err);
+        console.warn(`Network fetch failed for ${url}, attempting cache fallback.`, err);
+        // 2. Final Fallback: If network is jittery/down, return cache even if expired
         // Fallback to cache if network fails entirely
-        return cachedData ? JSON.parse(cachedData) : null;
+        return cachedData ? JSON.parse(cachedData) : [];
     }
 }
