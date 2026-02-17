@@ -4,7 +4,7 @@ function loadFullCollections() {
     if (!grid) return;
 
     // We'll use our new Cached Fetcher here (defined below)
-    fetchWithCache("collections.json", 3600) // Cache for 1 hour
+    fetchWithSmartCache("collections.json")
         .then(cols => {
             grid.innerHTML = cols.map(c => {
                 const picHtml = getPictureHtml(c.image, c.name_en);
