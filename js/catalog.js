@@ -231,7 +231,7 @@ function openProductModal(id) {
 
     // 6. WhatsApp Link
     const msg = `Enquiry for ${product.title_en} (ID: ${product.product_id})`;
-    document.getElementById('whatsappBtn').href = `https://wa.me/918978569063?text=${encodeURIComponent(msg)}`;
+    document.getElementById('whatsappBtn').href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
     // 7. Show Modal & Browser History Management (DO ONCE)
     document.getElementById('productModal').style.display = 'flex';
