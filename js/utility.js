@@ -101,3 +101,15 @@ async function fetchWithSmartCache(url) {
         return cachedData ? JSON.parse(cachedData) : [];
     }
 }
+
+// Simple UI fallback for errors
+function showNoConnectionMessage() {
+    const grid = document.getElementById('catalogGrid') || document.getElementById('fullCollectionsGrid');
+    if (grid) {
+        grid.innerHTML = `
+            <div style="text-align: center; padding: 40px;">
+                <p>⚠️ It looks like you're offline or the connection is slow.</p>
+                <button onclick="location.reload()" class="gold-btn">Try Again</button>
+            </div>`;
+    }
+}
