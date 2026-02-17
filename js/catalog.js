@@ -97,9 +97,8 @@ function updateBreadcrumbs(categoryEn, categoryTe) {
 }
 
 function openProductModal(id) {
-    id = Number(id);
     // 1. Setup UI Elements & Data
-    const product = allProducts.find(p => p.id === id);
+    const product = allProducts.find(p => String(p.id) === String(id));
     if (!product) {
         console.error("Product not found for ID:", id);
         return;
@@ -389,12 +388,19 @@ function performSearch(query) {
     const filtered = searchPool.filter(item => {
         const titleEn = (item.title_en || "").toLowerCase();
         const titleTe = (item.title_te || "").toLowerCase();
-        const id = String(item.id || "");
-        
-        return titleEn.includes(query) || titleTe.includes(query) || id.includes(query);
+        const id = String(item.id || "").toLowerCase();
+        //Also search by tags!
+        const tags = (item.search_tags || "").toLowerCase();
+        return titleEn.includes(query) || titleTe.includes(query) || id.includes(query) || tags.includes(query);
     });
 
     renderCatalog(filtered);
+
+    // UI Update: Show "Searching in [Category]"
+    const countEl = document.getElementById('itemCount');
+    if (query !== "" && countEl) {
+        countEl.innerHTML += ` (filtered for "${query}")`;
+    }
 }
 
 function logSearchQuery(query) {
