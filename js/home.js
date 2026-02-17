@@ -147,7 +147,7 @@ async function loadTestimonials() {
 
         if (data.length > 1) startCarousel();
     } catch (error) {
-        container.innerHTML = "<p>Trusted by families since 2026.</p>";
+        container.innerHTML = "<p>Trusted by families since ${CONFIG.ESTABLISHED_YEAR}.</p>";
     }
 }
 
