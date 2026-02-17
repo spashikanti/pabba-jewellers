@@ -9,25 +9,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function loadCollectionsHome() {
-    return fetch("collections.json")
-        .then(r => r.json())
-        .then(cols => {
-            const grid = document.getElementById("collectionsGrid");
-            if (!grid) return;
-            grid.innerHTML = cols.map(c => {
-                const displayName = currentLang === 'en' ? c.name_en : c.name_te;
-                const picHtml = getPictureHtml(c.image, displayName);
-                return `
-                    <a href="catalog.html?category=${c.id}" class="card">
-                        ${picHtml}
+async function loadCollectionsHome() {
+    const grid = document.getElementById("collectionsGrid");
+    if (!grid) return;
+
+    try {
+        // 1. Use the Smart Cache (returns already-parsed JSON)
+        const cols = await fetchWithSmartCache("collections.json");
+
+        if (!cols || cols.length === 0) {
+            console.warn("No collections found to display on home.");
+            return;
+        }
+
+        // 2. Map and Render
+        grid.innerHTML = cols.map(c => {
+            const displayName = currentLang === 'en' ? c.name_en : c.name_te;
+            
+            // Generate optimized picture HTML
+            const picHtml = getPictureHtml(c.image, displayName);
+            
+            // IMPORTANT: Changed ${c.id} to ${c.gallery_id} for the new String-based URLs
+            return `
+                <a href="catalog.html?category=${c.gallery_id}" class="card">
+                    ${picHtml}
+                    <div class="card-content">
                         <h3 class="gold" data-en="${c.name_en}" data-te="${c.name_te}">
-                            ${currentLang === 'en' ? c.name_en : c.name_te}
+                            ${displayName}
                         </h3>
-                    </a>
-                `;
-            }).join('');
-        });
+                    </div>
+                </a>
+            `;
+        }).join('');
+
+    } catch (err) {
+        console.error("Home Collections Loading Error:", err);
+        showNoConnectionMessage(); // Using the fallback we created
+    }
 }
 
 function initCollectionSlider() {
