@@ -113,3 +113,45 @@ function showNoConnectionMessage() {
             </div>`;
     }
 }
+
+function loadConfigToUI() {
+    const phoneLink = document.getElementById('footerPhoneLink');
+    if (phoneLink) {
+        // Sets the visible text
+        phoneLink.innerText = CONFIG.WHATSAPP_NUMBER;
+        // Sets the clickable link
+        phoneLink.href = `tel:+${CONFIG.WHATSAPP_NUMBER}`;
+    }
+}
+
+function syncGlobalUI() {
+    // 1. Update Browser Tab Title
+    // e.g., "Pabba Jewellers - Bridal Collection"
+    const pageCategory = new URLSearchParams(window.location.search).get('category') || "";
+    document.title = `${CONFIG.STORE_NAME_EN} ${pageCategory ? '- ' + pageCategory : ''}`;
+
+    // 2. Update Navbar Brand/Logo Text
+    const navLogo = document.querySelector('.nav-logo'); // or by ID
+    if (navLogo) {
+        navLogo.innerText = currentLang === 'te' ? CONFIG.STORE_NAME_TE : CONFIG.STORE_NAME_EN;
+    }
+
+    // 3. Update Footer Copyright & Year
+    const footerCredit = document.getElementById('footerCredit');
+    if (footerCredit) {
+        const currentYear = new Date().getFullYear();
+        footerCredit.innerHTML = `&copy; ${CONFIG.ESTABLISHED_YEAR}-${currentYear} ${CONFIG.STORE_NAME_EN}. All Rights Reserved.`;
+    }
+    
+    // 4. Update dynamic labels (like "Call Us")
+    document.querySelectorAll('.config-phone').forEach(el => {
+        el.innerText = CONFIG.WHATSAPP_NUMBER;
+    });
+}
+
+// Run this automatically when the DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    syncGlobalUI();
+    loadConfigToUI();
+});
+
