@@ -6,9 +6,7 @@ async function loadCatalogPage() {
     const params = new URLSearchParams(window.location.search);
     const categoryID = params.get('category');
     try {
-        const [allCollections, allProductsData] = await Promise.all([fetchWithSmartCache('collections.json'), fetchWithSmartCache('products.json')]);
-        //const allCollections = await collRes.json();
-        //const allProductsData = await prodRes.json();
+        const [allCollections, allProductsData] = await Promise.all([fetchWithSmartCache('data/collections.json'), fetchWithSmartCache('data/products.json')]);
         allProducts = allProductsData;
 
         if (categoryID) {            
