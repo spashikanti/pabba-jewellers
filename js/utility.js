@@ -21,7 +21,7 @@ function getPictureHtml(imagePath, altText, className = "") {
     `;
 }
 
-async function fetchWithCache(url, expirationInSeconds = 3600) {
+async function fetchWithCache(url, expirationInSeconds = CONFIG.CACHE_EXPIRATION) {
     const cacheKey = `cache_${url}`;
     const cachedData = localStorage.getItem(cacheKey);
 
