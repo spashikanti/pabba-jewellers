@@ -1,5 +1,5 @@
 /* --- GLOBAL STATE --- */
-let currentLang = localStorage.getItem('preferredLang') || 'en';
+let currentLang = localStorage.getItem('preferredLang') || CONFIG.DEFAULT_LANG;
 let allProducts = []; 
 let filteredProducts = []; 
 
