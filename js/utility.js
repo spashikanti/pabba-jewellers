@@ -147,6 +147,17 @@ function syncGlobalUI() {
     document.querySelectorAll('.config-phone').forEach(el => {
         el.innerText = CONFIG.WHATSAPP_NUMBER;
     });
+
+    const fbLink = document.getElementById('facebookLink');
+    const igLink = document.getElementById('instagramLink');
+
+    if (fbLink) {
+        fbLink.href = CONFIG.FACEBOOK_URL;
+    }
+    
+    if (igLink) {
+        igLink.href = CONFIG.INSTAGRAM_URL;
+    }
 }
 
 // Run this automatically when the DOM is ready
