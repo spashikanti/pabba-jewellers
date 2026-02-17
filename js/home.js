@@ -135,13 +135,13 @@ async function loadTestimonials() {
     try {
         const data = await fetchWithSmartCache("data/testimonials.json");
         //const data = await response.json();
-        //<div class="stars">${item.rating}</div>
+        //<div class="stars">${'★'.repeat(item.rating)}${'☆'.repeat(5 - item.rating)}</div>
         
         container.innerHTML = data.map((item, index) => `
             <div class="testimonial" style="display: ${index === 0 ? 'block' : 'none'}; opacity: ${index === 0 ? '1' : '0'}">
                 <p class="testimonial-text">"${item.text}"</p>
-                <h4 class="testimonial-author">- ${item.name}</h4>
-                <div class="stars">${'★'.repeat(item.rating)}${'☆'.repeat(5 - item.rating)}</div>
+                <h4 class="testimonial-author">- ${item.name}</h4>                
+                <div class="stars">${item.rating}</div>
             </div>
         `).join('');
 
