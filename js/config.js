@@ -4,6 +4,8 @@ const CONFIG = {
     STORE_NAME_EN: "Pabba Jewellers",
     STORE_NAME_TE: "పబ్బా జ్యువెలర్స్",
     ESTABLISHED_YEAR: 2026,
+    RESERVATION_EN: "All rights reserved.",
+    RESERVATION_TE: "సర్వ హక్కులు ప్రత్యేకించబడ్డాయి.",
     
     // 2. DATA SOURCE (The Apps Script URL)
     // Replace with your deployed Web App URL
