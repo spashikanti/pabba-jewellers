@@ -88,10 +88,12 @@ async function fetchWithSmartCache(url) {
  * Fills all titles, links, and brand names from CONFIG.js
  */
 function syncGlobalUI() {
+    const isTe = (currentLang === 'te');
+    const storeName = isTe ? CONFIG.STORE_NAME_TE : CONFIG.STORE_NAME_EN;
     // A. Browser Tab Title
     const params = new URLSearchParams(window.location.search);
     const category = params.get('category') || "";
-    document.title = `${CONFIG.STORE_NAME_EN} ${category ? '- ' + category : ''}`;
+    document.title = `${storeName} ${category ? '- ' + category : ''}`;
 
     // B. Brand Names (Navbar & Footer)
     const brandText = currentLang === 'te' ? CONFIG.STORE_NAME_TE : CONFIG.STORE_NAME_EN;
@@ -100,7 +102,9 @@ function syncGlobalUI() {
     // C. Phone Links (Footer & Nav)
     document.querySelectorAll('.config-phone-link').forEach(el => {
         el.innerText = CONFIG.WHATSAPP_NUMBER;
-        el.href = `tel:+${CONFIG.WHATSAPP_NUMBER}`;
+        // Clean the number of any + or spaces before adding one +
+        const cleanPhone = CONFIG.WHATSAPP_NUMBER.replace(/\D/g, '');
+        el.href = `tel:+${cleanPhone}`;
     });
 
     // D. Social Media
@@ -183,8 +187,8 @@ function syncFooter() {
     // 3. Phone Link
     const footerPhone = document.getElementById('footerPhoneLink');
     if (footerPhone) {
-        footerPhone.innerText = CONFIG.STORE_PHONE;
-        footerPhone.href = `tel:${CONFIG.STORE_PHONE}`;
+        footerPhone.innerText = CONFIG.CONTACT_NUMBER;
+        footerPhone.href = `tel:${CONFIG.CONTACT_NUMBER}`;
     }
 
     // 4. Social Links
@@ -211,7 +215,6 @@ function updateCopyright() {
  */
 document.addEventListener('DOMContentLoaded', () => {
     syncGlobalUI();
-    setupContactSection();
     syncFooter();
     updateCopyright();
 });
