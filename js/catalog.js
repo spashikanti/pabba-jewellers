@@ -51,7 +51,7 @@ function renderCatalog(items) {
     if (currentItems.length === 0) {
         grid.innerHTML = "<p>No items found.</p>";
     } else {
-        grid.innerHTML = items.map(item => {
+        grid.innerHTML = currentItems.map(item => {
             // IT Standard: Ensure we handle the folder path correctly
             // If image_name1 is "Products_Images/xyz.jpg", the URL becomes images/Products_Images/xyz.jpg
 
