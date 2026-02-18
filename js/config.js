@@ -16,20 +16,19 @@ const CONFIG = {
 
     // 4. CONTACT & SOCIAL
     WHATSAPP_NUMBER: "918978569063",
-    CONTACT_EMAIL: "info@pabbajewellers.com",
+    CONTACT_EMAIL: "pabbajewellers916@gmail.com",
     INSTAGRAM_URL: "https://instagram.com/pabbajewellers",
+    CONTACT_NUMBER: "918978569063",
     
     // 5. CACHE SETTINGS
     CACHE_EXPIRATION: 3600, // In seconds (1 hour)
-
-    CONTACT_EMAIL: "info@pabbajewellers.com",
-    STORE_ADDRESS_EN: "123 Jewellery Street, Hyderabad, TS",
-    STORE_ADDRESS_TE: "123 జ్యువెలరీ వీధి, హైదరాబాద్, తెలంగాణ",
-    GOOGLE_MAPS_URL: "https://goo.gl/maps/example-link",
+    
+    STORE_ADDRESS_EN: "H.No, 3, 12-12/B, Ganesh Nagar, Ramanthapur, Hyderabad, Telangana 500013, India",
+    STORE_ADDRESS_TE: "హెచ్. నెం. 3, 12-12/B, గణేష్ నగర్, రామంతాపూర్, హైదరాబాద్, తెలంగాణ 500013, భారత్",
 
     // Google Maps
     GOOGLE_MAPS_EMBED_URL: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3445.4409025845193!2d78.52809857462714!3d17.39564920256807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9905184fe753%3A0x5df8cf5942aa41ad!2sPabba%20Jewellers%20%26%20Co.!5e1!3m2!1sen!2sus!4v1771431248249!5m2!1sen!2sus",
-    GOOGLE_MAPS_URL: "https://goo.gl/maps/example" // For the clickable button
+    GOOGLE_MAPS_URL: "https://maps.app.goo.gl/LFFWMCc9XKCnGGK77" // For the clickable button
 };
 
 // Freeze the object so logic files don't accidentally overwrite settings
