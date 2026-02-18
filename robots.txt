@@ -1,0 +1,10 @@
+# Pabba Jewellers Robots.txt
+User-agent: *
+Allow: /
+
+# Exclude private/legal pages from cluttering search snippets if desired
+Disallow: /privacy.html
+Disallow: /terms.html
+
+# Link to your sitemap (if you generate one later)
+Sitemap: https://spashikanti.github.io/pabba-jewellers/sitemap.xml
