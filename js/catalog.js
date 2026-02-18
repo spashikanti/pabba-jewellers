@@ -1,6 +1,8 @@
 // Global Modal State
 let currentSlideIndex = 0;
 let totalSlides = 0;
+let currentPage = 1;
+let paginatedProducts = []; // The filtered list we are currently viewing
 
 async function loadCatalogPage() {
     const params = new URLSearchParams(window.location.search);
@@ -31,35 +33,51 @@ async function loadCatalogPage() {
 function renderCatalog(items) {
     const grid = document.getElementById('catalogGrid');
     if (!grid) return;
-
+    
     if (items.length === 0) {
         grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px;"><h3 class="gold">No Items Found in this Collection</h3></div>`;
         return;
     }
-
-    grid.innerHTML = items.map(item => {
-        // IT Standard: Ensure we handle the folder path correctly
-        // If image_name1 is "Products_Images/xyz.jpg", the URL becomes images/Products_Images/xyz.jpg
-
-        if (item.image) {        
-            const fullImagePath = `images/${item.image}`;
-            const displayName = currentLang === 'en' ? item.title_en : item.title_te;
-            const picHtml = getPictureHtml(item.image, displayName);
     
-            return `
-                <div class="product-card" onclick="openProductModal('${item.product_id}')">
-                    ${picHtml}
-                    <div class="product-info">
-                        <h4 data-en="${item.title_en}" data-te="${item.title_te}">${displayName}</h4>
-                        <p class="price-tag">${item.price || 'Price on Request'}</p>
-                        <button class="view-btn" data-en="View Details" data-te="వివరాలు చూడండి">
-                            ${currentLang === 'en' ? 'View Details' : 'వివరాలు చూడండి'}
-                        </button>
+    paginatedItems = items;
+    const totalPages = Math.ceil(items.length / CONFIG.ITEMS_PER_PAGE);
+
+    // 1. Slice products for current page
+    const start = (currentPage - 1) * CONFIG.ITEMS_PER_PAGE;
+    const end = start + CONFIG.ITEMS_PER_PAGE;
+    const currentItems = items.slice(start, end);
+
+    // 2. Render Cards
+    if (currentItems.length === 0) {
+        grid.innerHTML = "<p>No items found.</p>";
+    } else {
+        grid.innerHTML = items.map(item => {
+            // IT Standard: Ensure we handle the folder path correctly
+            // If image_name1 is "Products_Images/xyz.jpg", the URL becomes images/Products_Images/xyz.jpg
+
+            if (item.image) {        
+                const fullImagePath = `images/${item.image}`;
+                const displayName = currentLang === 'en' ? item.title_en : item.title_te;
+                const picHtml = getPictureHtml(item.image, displayName);
+        
+                return `
+                    <div class="product-card" onclick="openProductModal('${item.product_id}')">
+                        ${picHtml}
+                        <div class="product-info">
+                            <h4 data-en="${item.title_en}" data-te="${item.title_te}">${displayName}</h4>
+                            <p class="price-tag">${CONFIG.CURRENCY_SYMBOL}${item.price || 'Price on Request'}</p>
+                            <button class="view-btn" data-en="View Details" data-te="వివరాలు చూడండి">
+                                ${currentLang === 'en' ? 'View Details' : 'వివరాలు చూడండి'}
+                            </button>
+                        </div>
                     </div>
-                </div>
-            `;
-        }
-    }).join('');
+                `;
+            }
+        }).join('');
+    }
+
+    // 3. Update Pagination Controls
+    updatePaginationUI(totalPages);
 
     const countEl = document.getElementById('itemCount');
     if (countEl) {
@@ -68,6 +86,53 @@ function renderCatalog(items) {
         countEl.innerText = currentLang === 'en' ? countTextEn : countTextTe;
     }
 }
+
+function updatePaginationUI(totalPages) {
+    const container = document.getElementById('pagination-container');
+    const numbersCont = document.getElementById('page-numbers');
+    
+    // Hide if only one page
+    if (totalPages <= 1) {
+        container.style.display = 'none';
+        return;
+    }
+    
+    container.style.display = 'flex';
+    numbersCont.innerHTML = "";
+
+    // Prev/Next Buttons
+    document.getElementById('prev-page').disabled = (currentPage === 1);
+    document.getElementById('next-page').disabled = (currentPage === totalPages);
+
+    // Page Numbering
+    for (let i = 1; i <= totalPages; i++) {
+        const span = document.createElement('span');
+        span.className = `page-num ${i === currentPage ? 'active' : ''}`;
+        span.innerText = i;
+        span.onclick = () => {
+            currentPage = i;
+            renderCatalog(paginatedProducts);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        numbersCont.appendChild(span);
+    }
+}
+
+// Event Listeners for Prev/Next
+document.getElementById('prev-page').onclick = () => {
+    if (currentPage > 1) {
+        currentPage--;
+        renderCatalog(paginatedProducts);
+    }
+};
+
+document.getElementById('next-page').onclick = () => {
+    const totalPages = Math.ceil(paginatedProducts.length / CONFIG.ITEMS_PER_PAGE);
+    if (currentPage < totalPages) {
+        currentPage++;
+        renderCatalog(paginatedProducts);
+    }
+};
 
 function updateBreadcrumbs(categoryEn, categoryTe) {
     const trail = document.getElementById('breadcrumb-trail');

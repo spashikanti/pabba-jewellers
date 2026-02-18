@@ -1758,3 +1758,43 @@ input[type="search"]::-webkit-search-cancel-button {
 #copyrightYear:empty {
     min-width: 80px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 40px 0;
+}
+
+.page-btn {
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.page-btn:disabled {
+    border-color: #333;
+    color: #555;
+    cursor: not-allowed;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 10px;
+}
+
+.page-num {
+    cursor: pointer;
+    color: #888;
+    padding: 5px 10px;
+}
+
+.page-num.active {
+    color: #d4af37;
+    border-bottom: 2px solid #d4af37;
+    font-weight: bold;
+}
