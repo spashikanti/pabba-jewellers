@@ -13,8 +13,8 @@ const CONFIG = {
 
     // 3. UI SETTINGS
     DEFAULT_LANG: "en", // 'en' or 'te'
-    CURRENCY_SYMBOL: "₹",
-    ITEMS_PER_PAGE: 4,
+    CURRENCY_SYMBOL: "₹ ",
+    ITEMS_PER_PAGE: 20,
 
     // 4. CONTACT & SOCIAL
     WHATSAPP_NUMBER: "918978569063",
