@@ -169,11 +169,50 @@ function showNoConnectionMessage() {
     }
 }
 
+function syncFooter() {
+    // 1. Address
+    const footerAddr = document.getElementById('footerAddress');
+    if (footerAddr) {
+        footerAddr.innerText = (currentLang === 'te') ? CONFIG.STORE_ADDRESS_TE : CONFIG.STORE_ADDRESS_EN;
+    }
+
+    // 2. Map Link
+    const footerMap = document.getElementById('footerMapLink');
+    if (footerMap) footerMap.href = CONFIG.GOOGLE_MAPS_URL;
+
+    // 3. Phone Link
+    const footerPhone = document.getElementById('footerPhoneLink');
+    if (footerPhone) {
+        footerPhone.innerText = CONFIG.STORE_PHONE;
+        footerPhone.href = `tel:${CONFIG.STORE_PHONE}`;
+    }
+
+    // 4. Social Links
+    if (document.getElementById('footerFacebook')) document.getElementById('footerFacebook').href = CONFIG.FACEBOOK_URL;
+    if (document.getElementById('footerInstagram')) document.getElementById('footerInstagram').href = CONFIG.INSTAGRAM_URL;
+}
+
+function updateCopyright() {
+    const yearEl = document.getElementById('copyrightYear');
+    if (yearEl) {
+        const currentYear = new Date().getFullYear();
+        const estYear = CONFIG.ESTABLISHED_YEAR;
+        
+        // If it's the same year, just show the year. 
+        // If it's later, show the range (e.g., 1995 - 2026)
+        yearEl.innerText = (currentYear > estYear) 
+            ? `${estYear} - ${currentYear}` 
+            : currentYear;
+    }
+}
+
 /**
  * INIT
  */
 document.addEventListener('DOMContentLoaded', () => {
     syncGlobalUI();
     setupContactSection();
+    syncFooter();
+    updateCopyright();
 });
 
