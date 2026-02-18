@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | Pabba Jewellers</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-container {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .error-code { font-size: 8rem; color: #d4af37; font-family: 'Cinzel', serif; }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <h2 data-en="Oops! This piece of jewelry is missing." data-te="అయ్యో! ఈ ఆభరణం కనిపించడం లేదు.">Oops! This piece of jewelry is missing.</h2>
+        <p data-en="The page you are looking for doesn't exist or has been moved." data-te="మీరు వెతుకుతున్న పేజీ లేదు లేదా తరలించబడింది."></p>
+        <br>
+        <a href="index.html" class="gold-btn" data-en="Return Home" data-te="తిరిగి హోమ్ పేజీకి">Return Home</a>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/utility.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => syncGlobalUI());
+    </script>
+</body>
+</html>
