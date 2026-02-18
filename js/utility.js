@@ -124,25 +124,38 @@ function syncGlobalUI() {
  * Specific to contact.html or footer contact area
 **/
 function setupContactSection() {
+    // 1. Phone & Email
     const emailEl = document.getElementById('contactEmail');
     if (emailEl) {
         emailEl.innerText = CONFIG.CONTACT_EMAIL;
         emailEl.href = `mailto:${CONFIG.CONTACT_EMAIL}?subject=Enquiry`;
     }
+    const phoneEl = document.getElementById('footerPhoneLink');
+    if (phoneEl) {
+        phoneEl.innerText = CONFIG.CONTACT_NUMBER;
+        phoneEl.href = `tel:+${CONFIG.CONTACT_NUMBER}`;
+    }    
 
-    const addressEl = document.getElementById('contactAddress');
-    if (addressEl) {
-        addressEl.innerText = (currentLang === 'te') ? CONFIG.STORE_ADDRESS_TE : CONFIG.STORE_ADDRESS_EN;
-    }
+    // 2. Address (Main & Footer)
+    const addr = (currentLang === 'te') ? CONFIG.STORE_ADDRESS_TE : CONFIG.STORE_ADDRESS_EN;
+    const addressElements = ['contactAddress', 'footerAddress'];
+    addressElements.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = addr;
+    });
 
-    const mapLink = document.getElementById('mapLink');
-    if (mapLink) mapLink.href = CONFIG.GOOGLE_MAPS_URL;
-
-    // Inject Map Embed URL
+    // 3. Map Links & Iframe
     const mapIframe = document.getElementById('googleMapIframe');
-    if (mapIframe) {
-        mapIframe.src = CONFIG.GOOGLE_MAPS_EMBED_URL;
-    }
+    if (mapIframe) mapIframe.src = CONFIG.GOOGLE_MAPS_EMBED_URL;
+
+    const mapLinks = ['mapLink', 'footerMapLink'];
+    mapLinks.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.href = CONFIG.GOOGLE_MAPS_URL;
+    });
+    
+    // Run language attribute sync
+    applyLanguage();
 }
 
 /**
@@ -165,6 +178,23 @@ function toggleLanguage() {
     currentLang = (currentLang === 'en') ? 'te' : 'en';
     localStorage.setItem('pabba_lang', currentLang);
     location.reload(); // Simplest way to re-render everything with new lang
+}
+
+/**
+ * 6. APPLY LANGUAGE
+**/
+function applyLanguage() {
+    const isTelugu = (currentLang === 'te');
+    
+    // Find every element with a data-en attribute
+    document.querySelectorAll('[data-en]').forEach(el => {
+        const text = isTelugu ? el.getAttribute('data-te') : el.getAttribute('data-en');
+        if (text) el.innerText = text;
+    });
+
+    // Update the toggle button text
+    const btn = document.getElementById('lang-toggle');
+    if (btn) btn.innerText = isTelugu ? 'English' : 'తెలుగు';
 }
 
 /**
