@@ -20,7 +20,12 @@ const CONFIG = {
     INSTAGRAM_URL: "https://instagram.com/pabbajewellers",
     
     // 5. CACHE SETTINGS
-    CACHE_EXPIRATION: 3600 // In seconds (1 hour)
+    CACHE_EXPIRATION: 3600, // In seconds (1 hour)
+
+    CONTACT_EMAIL: "info@pabbajewellers.com",
+    STORE_ADDRESS_EN: "123 Jewellery Street, Hyderabad, TS",
+    STORE_ADDRESS_TE: "123 జ్యువెలరీ వీధి, హైదరాబాద్, తెలంగాణ",
+    GOOGLE_MAPS_URL: "https://goo.gl/maps/example-link"
 };
 
 // Freeze the object so logic files don't accidentally overwrite settings
