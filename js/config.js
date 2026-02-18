@@ -25,7 +25,11 @@ const CONFIG = {
     CONTACT_EMAIL: "info@pabbajewellers.com",
     STORE_ADDRESS_EN: "123 Jewellery Street, Hyderabad, TS",
     STORE_ADDRESS_TE: "123 జ్యువెలరీ వీధి, హైదరాబాద్, తెలంగాణ",
-    GOOGLE_MAPS_URL: "https://goo.gl/maps/example-link"
+    GOOGLE_MAPS_URL: "https://goo.gl/maps/example-link",
+
+    // Google Maps
+    GOOGLE_MAPS_EMBED_URL: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.313... (your full link)",
+    GOOGLE_MAPS_URL: "https://goo.gl/maps/example" // For the clickable button
 };
 
 // Freeze the object so logic files don't accidentally overwrite settings
