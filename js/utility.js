@@ -1,7 +1,14 @@
 /**
+ * Utility Module
+ * Handles Data Fetching, Caching, and Global UI Sync
+*/
+
+let currentLang = localStorage.getItem('pabba_lang') || CONFIG.DEFAULT_LANG;
+
+/**
  * Generates HTML for a <picture> element with AVIF/WebP support.
  * Assumes the optimizer moves files to images/dist/ and adds extensions.
- */
+**/
 function getPictureHtml(imagePath, altText, className = "") {
     if (!imagePath) return "";
 
@@ -21,34 +28,10 @@ function getPictureHtml(imagePath, altText, className = "") {
     `;
 }
 
-async function fetchWithCache(url, expirationInSeconds = CONFIG.CACHE_EXPIRATION) {
-    const cacheKey = `cache_${url}`;
-    const cachedData = localStorage.getItem(cacheKey);
-
-    if (cachedData) {
-        const { data, timestamp } = JSON.parse(cachedData);
-        const isExpired = (Date.now() - timestamp) > (expirationInSeconds * 1000);
-
-        if (!isExpired) {
-            console.log(`%c [Cache Hit] Loading ${url} from storage`, "color: green");
-            return data;
-        }
-    }
-
-    // If no cache or expired, fetch fresh data
-    console.log(`%c [Cache Miss] Fetching ${url} from network`, "color: orange");
-    const response = await fetch(url);
-    const freshData = await response.json();
-
-    // Store in localStorage with current timestamp
-    localStorage.setItem(cacheKey, JSON.stringify({
-        data: freshData,
-        timestamp: Date.now()
-    }));
-
-    return freshData;
-}
-
+/**
+ * 2. SMART DATA FETCHING
+ * Uses ETag (fingerprinting) and LocalStorage for near-instant loads.
+**/
 async function fetchWithSmartCache(url) {
     const cacheKey = `data_${url}`;
     const etagKey = `etag_${url}`;
@@ -102,101 +85,87 @@ async function fetchWithSmartCache(url) {
     }
 }
 
-// Simple UI fallback for errors
-function showNoConnectionMessage() {
-    const grid = document.getElementById('catalogGrid') || document.getElementById('fullCollectionsGrid');
-    if (grid) {
-        grid.innerHTML = `
-            <div style="text-align: center; padding: 40px;">
-                <p>⚠️ It looks like you're offline or the connection is slow.</p>
-                <button onclick="location.reload()" class="gold-btn">Try Again</button>
-            </div>`;
-    }
-}
-
-function loadConfigToUI() {
-    const phoneLink = document.getElementById('footerPhoneLink');
-    if (phoneLink) {
-        // Sets the visible text
-        phoneLink.innerText = CONFIG.WHATSAPP_NUMBER;
-        // Sets the clickable link
-        phoneLink.href = `tel:+${CONFIG.WHATSAPP_NUMBER}`;
-    }
-}
-
+/**
+ * 3. GLOBAL UI SYNC
+ * Fills all titles, links, and brand names from CONFIG.js
+ */
 function syncGlobalUI() {
-    // 1. Update Browser Tab Title
-    // e.g., "Pabba Jewellers - Bridal Collection"
-    const pageCategory = new URLSearchParams(window.location.search).get('category') || "";
-    document.title = `${CONFIG.STORE_NAME_EN} ${pageCategory ? '- ' + pageCategory : ''}`;
+    // A. Browser Tab Title
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category') || "";
+    document.title = `${CONFIG.STORE_NAME_EN} ${category ? '- ' + category : ''}`;
 
-    // 2. Update Navbar Brand/Logo Text
-    const navLogo = document.querySelector('.nav-logo'); // or by ID
-    if (navLogo) {
-        navLogo.innerText = currentLang === 'te' ? CONFIG.STORE_NAME_TE : CONFIG.STORE_NAME_EN;
-    }
+    // B. Brand Names (Navbar & Footer)
+    const brandText = currentLang === 'te' ? CONFIG.STORE_NAME_TE : CONFIG.STORE_NAME_EN;
+    document.querySelectorAll('.brand-name').forEach(el => el.innerText = brandText);
 
-    // 3. Update Footer Copyright & Year
-    const footerCredit = document.getElementById('footerCredit');
-    if (footerCredit) {
-        const currentYear = new Date().getFullYear();
-        footerCredit.innerHTML = `&copy; ${CONFIG.ESTABLISHED_YEAR}-${currentYear} ${CONFIG.STORE_NAME_EN}. All Rights Reserved.`;
-    }
-    
-    // 4. Update dynamic labels (like "Call Us")
-    document.querySelectorAll('.config-phone').forEach(el => {
+    // C. Phone Links (Footer & Nav)
+    document.querySelectorAll('.config-phone-link').forEach(el => {
         el.innerText = CONFIG.WHATSAPP_NUMBER;
+        el.href = `tel:+${CONFIG.WHATSAPP_NUMBER}`;
     });
 
+    // D. Social Media
     const fbLink = document.getElementById('facebookLink');
     const igLink = document.getElementById('instagramLink');
+    if (fbLink) fbLink.href = CONFIG.FACEBOOK_URL;
+    if (igLink) igLink.href = CONFIG.INSTAGRAM_URL;
 
-    if (fbLink) {
-        fbLink.href = CONFIG.FACEBOOK_URL;
-    }
-    
-    if (igLink) {
-        igLink.href = CONFIG.INSTAGRAM_URL;
+    // E. Footer Copyright
+    const footerCredit = document.getElementById('footerCredit');
+    if (footerCredit) {
+        const year = new Date().getFullYear();
+        footerCredit.innerHTML = `&copy; ${CONFIG.ESTABLISHED_YEAR}-${year} ${CONFIG.STORE_NAME_EN}`;
     }
 }
 
+/**
+ * 4. CONTACT SECTION SYNC
+ * Specific to contact.html or footer contact area
+**/
 function setupContactSection() {
-    // 1. Phone Setup
-    const phoneEl = document.getElementById('contactPhone');
-    if (phoneEl) {
-        phoneEl.innerText = CONFIG.WHATSAPP_NUMBER;
-        phoneEl.href = `tel:+${CONFIG.WHATSAPP_NUMBER}`;
-    }
-
-    // 2. Email Setup (mailto: opens their default email app)
     const emailEl = document.getElementById('contactEmail');
     if (emailEl) {
         emailEl.innerText = CONFIG.CONTACT_EMAIL;
-        emailEl.href = `mailto:${CONFIG.CONTACT_EMAIL}?subject=Enquiry from Website`;
+        emailEl.href = `mailto:${CONFIG.CONTACT_EMAIL}?subject=Enquiry`;
     }
 
-    // 3. Address & Maps Setup
     const addressEl = document.getElementById('contactAddress');
     if (addressEl) {
         addressEl.innerText = (currentLang === 'te') ? CONFIG.STORE_ADDRESS_TE : CONFIG.STORE_ADDRESS_EN;
     }
 
     const mapLink = document.getElementById('mapLink');
-    if (mapLink) {
-        mapLink.href = CONFIG.GOOGLE_MAPS_URL;
+    if (mapLink) mapLink.href = CONFIG.GOOGLE_MAPS_URL;
+}
+
+/**
+ * 5. ERROR HANDLING
+**/
+function showNoConnectionMessage() {
+    const grid = document.getElementById('catalogGrid') || document.getElementById('fullCollectionsGrid');
+    if (grid) {
+        grid.innerHTML = `<div style="text-align:center; padding:50px;">
+            <p>⚠️ Offline Mode. Please check your connection.</p>
+            <button onclick="location.reload()" class="gold-btn">Retry</button>
+        </div>`;
     }
 }
 
-// Ensure this is called in your DOMContentLoaded listener
-document.addEventListener('DOMContentLoaded', () => {
-    initializeTemplateUI(); // Syncs brand names
-    setupContactSection(); // Syncs contact details
-});
+/**
+ * 6. LANGUAGE TOGGLE
+**/
+function toggleLanguage() {
+    currentLang = (currentLang === 'en') ? 'te' : 'en';
+    localStorage.setItem('pabba_lang', currentLang);
+    location.reload(); // Simplest way to re-render everything with new lang
+}
 
-// Run this automatically when the DOM is ready
+/**
+ * INIT
+ */
 document.addEventListener('DOMContentLoaded', () => {
     syncGlobalUI();
-    loadConfigToUI();
     setupContactSection();
 });
 
