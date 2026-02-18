@@ -117,7 +117,10 @@ function syncGlobalUI() {
     const footerCredit = document.getElementById('footerCredit');
     if (footerCredit) {
         const year = new Date().getFullYear();
-        footerCredit.innerHTML = `&copy; ${CONFIG.ESTABLISHED_YEAR}-${year} ${CONFIG.STORE_NAME_EN}`;
+        // B. Brand Names (Navbar & Footer)
+        const footerStoreText = currentLang === 'te' ? CONFIG.STORE_NAME_TE : CONFIG.STORE_NAME_EN;
+        const footerReservationText = currentLang === 'te' ? CONFIG.RESERVATION_TE : CONFIG.RESERVATION_EN;
+        footerCredit.innerHTML = `&copy; ${CONFIG.ESTABLISHED_YEAR} - ${year} ${footerStoreText} ${footerReservationText}`;
     }
 }
 
