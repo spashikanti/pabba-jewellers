@@ -66,12 +66,16 @@ function initScrollEffects() {
     }
 }
 
+/**
+ * LANGUAGE TOGGLE
+**/
 function initLanguageToggle() {
     const langBtn = document.getElementById('lang-toggle');
     if (langBtn) {
         langBtn.onclick = () => {
             currentLang = currentLang === 'en' ? 'te' : 'en';
             localStorage.setItem('preferredLang', currentLang);
+            location.reload(); // Simplest way to re-render everything with new lang
             applyLanguage();
             // Trigger refresh on dynamic parts if they exist
             if (typeof renderCatalog === 'function') renderCatalog(filteredProducts);
@@ -79,6 +83,9 @@ function initLanguageToggle() {
     }
 }
 
+/**
+ * APPLY LANGUAGE
+**/
 function applyLanguage() {
     const langBtn = document.getElementById('lang-toggle');
     document.querySelectorAll('[data-en]').forEach(el => {
