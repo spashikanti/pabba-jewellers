@@ -160,9 +160,43 @@ function syncGlobalUI() {
     }
 }
 
+function setupContactSection() {
+    // 1. Phone Setup
+    const phoneEl = document.getElementById('contactPhone');
+    if (phoneEl) {
+        phoneEl.innerText = CONFIG.WHATSAPP_NUMBER;
+        phoneEl.href = `tel:+${CONFIG.WHATSAPP_NUMBER}`;
+    }
+
+    // 2. Email Setup (mailto: opens their default email app)
+    const emailEl = document.getElementById('contactEmail');
+    if (emailEl) {
+        emailEl.innerText = CONFIG.CONTACT_EMAIL;
+        emailEl.href = `mailto:${CONFIG.CONTACT_EMAIL}?subject=Enquiry from Website`;
+    }
+
+    // 3. Address & Maps Setup
+    const addressEl = document.getElementById('contactAddress');
+    if (addressEl) {
+        addressEl.innerText = (currentLang === 'te') ? CONFIG.STORE_ADDRESS_TE : CONFIG.STORE_ADDRESS_EN;
+    }
+
+    const mapLink = document.getElementById('mapLink');
+    if (mapLink) {
+        mapLink.href = CONFIG.GOOGLE_MAPS_URL;
+    }
+}
+
+// Ensure this is called in your DOMContentLoaded listener
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTemplateUI(); // Syncs brand names
+    setupContactSection(); // Syncs contact details
+});
+
 // Run this automatically when the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     syncGlobalUI();
     loadConfigToUI();
+    setupContactSection();
 });
 

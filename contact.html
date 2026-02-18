@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Pabba Jewellers</title>
+    
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/theme-gold.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo brand-name">Pabba Jewellers</a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-en="Home" data-te="హోమ్">Home</a></li>
+                <li><a href="products.html" data-en="Collections" data-te="సేకరణలు">Collections</a></li>
+                <li><a href="contact.html" class="active" data-en="Contact" data-te="సంప్రదించండి">Contact</a></li>
+            </ul>
+            <button id="langToggleBtn" onclick="toggleLanguage()" class="lang-btn">తెలుగు</button>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 data-en="Contact Us" data-te="మమ్మల్ని సంప్రదించండి">Contact Us</h1>
+        <p data-en="Have a question? We'd love to hear from you." data-te="ప్రశ్న ఉందా? మేము మీ నుండి వినడానికి ఇష్టపడతాము.">Have a question? We'd love to hear from you.</p>
+    </header>
+
+    <main class="container">
+        <div class="contact-grid">
+            
+            <div class="contact-info">
+                <div class="info-card">
+                    <i class="fas fa-phone-alt gold"></i>
+                    <h3 data-en="Call / WhatsApp" data-te="కాల్ / వాట్సాప్">Call / WhatsApp</h3>
+                    <a id="contactPhone" href="#" class="contact-link"></a>
+                </div>
+
+                <div class="info-card">
+                    <i class="fas fa-envelope gold"></i>
+                    <h3 data-en="Email Us" data-te="ఈమెయిల్">Email Us</h3>
+                    <a id="contactEmail" href="#" class="contact-link"></a>
+                </div>
+
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt gold"></i>
+                    <h3 data-en="Our Store" data-te="మా దుకాణం">Our Store</h3>
+                    <p id="contactAddress"></p>
+                    <a id="mapLink" href="#" target="_blank" class="gold-link" data-en="View on Google Maps" data-te="గూగుల్ మ్యాప్స్‌లో చూడండి">View on Google Maps</a>
+                </div>
+            </div>
+
+            <div class="social-section">
+                <h3 class="gold" data-en="Follow Us" data-te="మమ్మల్ని అనుసరించండి">Follow Us</h3>
+                <div class="social-icons">
+                    <a id="facebookLink" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a id="instagramLink" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2 class="brand-name">Pabba Jewellers</h2>
+                    <p data-en="Crafting excellence since 2026." data-te="2026 నుండి అద్భుతమైన ఆభరణాల తయారీ.">Crafting excellence since 2026.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="privacy.html" data-en="Privacy Policy" data-te="గోప్యతా విధానం">Privacy Policy</a>
+                    <a href="terms.html" data-en="Terms" data-te="నిబంధనలు">Terms</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p id="footerCredit"></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/utility.js"></script>
+    <script>
+        // Initialize page-specific UI
+        document.addEventListener('DOMContentLoaded', () => {
+            applyLanguage();       // Syncs bilingual text
+            syncGlobalUI();        // Syncs titles and brand
+            setupContactSection(); // Syncs phone, email, map
+            loadSocialLinks();     // Syncs FB/IG links
+        });
+    </script>
+</body>
+</html>
