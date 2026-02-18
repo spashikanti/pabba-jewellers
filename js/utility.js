@@ -137,6 +137,12 @@ function setupContactSection() {
 
     const mapLink = document.getElementById('mapLink');
     if (mapLink) mapLink.href = CONFIG.GOOGLE_MAPS_URL;
+
+    // Inject Map Embed URL
+    const mapIframe = document.getElementById('googleMapIframe');
+    if (mapIframe) {
+        mapIframe.src = CONFIG.GOOGLE_MAPS_EMBED_URL;
+    }
 }
 
 /**
