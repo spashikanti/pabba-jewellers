@@ -3,37 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | Pabba Jewellers</title>
+    <title>Privacy Policy | Pabba Jewellers & Co.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
 </head>
-<body class="legal-page">
+<body class="catalog-page">
     <nav class="navbar">
-        <div class="logo"><h1 class="brand-name gold"></h1></div>
-        <ul class="nav-links"><li><a href="index.html">Home</a></li></ul>
+        <div class="logo">
+            <h1 class="gold" data-en="PABBA JEWELLERS & Co." data-te="పబ్బా జ్యువెలర్స్ & Co.">PABBA JEWELLERS & Co.</h1>
+            <span class="telugu-name" data-te="PABBA JEWELLERS & Co." data-en="పబ్బా జ్యువెలర్స్ & Co.">పబ్బా జ్యువెలర్స్ & Co.</span>
+        </div>        
+        <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+        <ul class="nav-links" id="nav-links">
+            <div class="close-menu" id="close-menu">&times;</div>
+            <li><a href="index.html" data-en="Home" data-te="హోమ్">Home</a></li>
+            <li><button id="lang-toggle" class="lang-btn">తెలుగు</button></li>
+        </ul>
     </nav>
 
-    <main class="container legal-content">
-        <h1 data-en="Privacy Policy" data-te="గోప్యతా విధానం">Privacy Policy</h1>
-        <p class="last-updated">Last Updated: February 2026</p>
-
-        <section>
-            <h2 data-en="1. Information We Collect" data-te="1. మేము సేకరించే సమాచారం">1. Information We Collect</h2>
-            <p data-en="We only collect information that you voluntarily provide via our contact forms or WhatsApp, such as your name and phone number." 
-               data-te="మా కాంటాక్ట్ ఫారమ్‌లు లేదా వాట్సాప్ ద్వారా మీరు స్వచ్ఛందంగా అందించే పేరు మరియు ఫోన్ నంబర్ వంటి సమాచారాన్ని మాత్రమే మేము సేకరిస్తాము."></p>
-        </section>
-
-        <section>
-            <h2 data-en="2. How We Use It" data-te="2. మేము దానిని ఎలా ఉపయోగిస్తాము">2. How We Use It</h2>
-            <p data-en="Your data is used solely to respond to your inquiries and provide jewelry services." 
-               data-te="మీ డేటా మీ విచారణలకు ప్రతిస్పందించడానికి మరియు జ్యువెలరీ సేవలను అందించడానికి మాత్రమే ఉపయోగించబడుతుంది."></p>
-        </section>
-
-        <section>
-            <h2 data-en="3. Contact Us" data-te="3. మమ్మల్ని సంప్రదించండి">3. Contact Us</h2>
-            <p data-en="If you have questions, contact us at:" data-te="మీకు ఏవైనా ప్రశ్నలు ఉంటే, మమ్మల్ని ఇక్కడ సంప్రదించండి:"></p>
-            <a id="contactEmail" href="#" class="gold-link"></a>
-        </address>
-    </main>
+    <section class="catalog-section">
+        <div class="breadcrumb-container">
+            <div class="container">
+                <div id="breadcrumb-trail">
+                    <a href="index.html" data-en="Home" data-te="హోమ్">Home</a> 
+                    <span class="separator">/</span> 
+                    <span data-en="Privacy Policy" data-te="గోప్యతా విధాను">Privacy Policy</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="container">
+            <header class="catalog-header">
+                <h2 class="gold" data-en="Privacy Policy" data-te="గోప్యతా విధాను">Privacy Policy</h2>
+                <p class="last-updated">Last Updated: February 2026</p>
+            </header>
+            <main class="container legal-content">
+                <section>
+                    <h2 data-en="1. Information We Collect" data-te="1. మేము సేకరించే సమాచారం">1. Information We Collect</h2>
+                    <p data-en="We only collect information that you voluntarily provide via our contact forms or WhatsApp, such as your name and phone number." 
+                       data-te="మా కాంటాక్ట్ ఫారమ్‌లు లేదా వాట్సాప్ ద్వారా మీరు స్వచ్ఛందంగా అందించే పేరు మరియు ఫోన్ నంబర్ వంటి సమాచారాన్ని మాత్రమే మేము సేకరిస్తాము."></p>
+                </section>
+        
+                <section>
+                    <h2 data-en="2. How We Use It" data-te="2. మేము దానిని ఎలా ఉపయోగిస్తాము">2. How We Use It</h2>
+                    <p data-en="Your data is used solely to respond to your inquiries and provide jewelry services." 
+                       data-te="మీ డేటా మీ విచారణలకు ప్రతిస్పందించడానికి మరియు జ్యువెలరీ సేవలను అందించడానికి మాత్రమే ఉపయోగించబడుతుంది."></p>
+                </section>
+        
+                <section>
+                    <h2 data-en="3. Contact Us" data-te="3. మమ్మల్ని సంప్రదించండి">3. Contact Us</h2>
+                    <p data-en="If you have questions, contact us at:" data-te="మీకు ఏవైనా ప్రశ్నలు ఉంటే, మమ్మల్ని ఇక్కడ సంప్రదించండి:"></p>
+                    <a id="contactEmail" href="#" class="gold-link"></a>
+                </address>
+            </main>
+            
+        </div>
+    </section>
+        
+       
+    <footer class="premium-footer">
+        <div class="footer-container">
+            
+            <div class="footer-col">
+                <h3 class="brand-name gold"></h3>
+                <p data-en="Crafting traditions since generations." 
+                   data-te="తరతరాల నుండి సంప్రదాయాలను తీర్చిదిద్దుతున్నాము."></p>
+                <div class="social-links">
+                    <a id="footerFacebook" href="#" target="_blank" class="gold-link">Facebook</a> | 
+                    <a id="footerInstagram" href="#" target="_blank" class="gold-link">Instagram</a>
+                </div>
+            </div>
+    
+            <div class="footer-col">
+                <h4 class="gold" data-en="Quick Links" data-te="త్వరిత లింకులు">Quick Links</h4>
+                <ul>
+                    <li><a href="index.html" data-en="Home" data-te="హోమ్">Home</a></li>
+                    <li><a href="collections.html" data-en="Collections" data-te="సేకరణలు">Collections</a></li>
+                    <li><a href="contact.html" data-en="Contact Us" data-te="సంప్రదించండి">Contact Us</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-col">
+                <h4 class="gold" data-en="Legal" data-te="చట్టపరమైన">Legal</h4>
+                <ul>
+                    <li><a href="privacy.html" data-en="Privacy Policy" data-te="గోప్యతా విధానం">Privacy Policy</a></li>
+                    <li><a href="terms.html" data-en="Terms & Conditions" data-te="నిబంధనలు & షరతులు">Terms & Conditions</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-col">
+                <h4 class="gold" data-en="Visit Our Store" data-te="మా దుకాణం">Visit Our Store</h4>
+                <address id="footerAddress" class="footer-addr">
+                    </address>
+                <a id="footerMapLink" href="#" target="_blank" class="directions-link" data-en="Get Directions ➔" data-te="దారి చూపు ➔">Get Directions ➔</a>
+                <div class="phone-box mt-2">
+                    <a id="footerPhoneLink" href="#" class="gold-link config-phone-link"></a>
+                </div>
+            </div>
+    
+        </div>
+    
+        <div class="footer-bottom">
+            <p id="footerCredit"></p>        
+            <p class="copyright">
+              © <span id="copyrightYear"></span> <span class="brand-name"></span>. 
+              <span data-en="All rights reserved." data-te="సర్వ హక్కులు ప్రత్యేకించబడ్డాయి.">All rights reserved.</span>
+          </p>
+        </div>
+    </footer>
+      
+      <button id="backToTop" aria-label="Back to Top">
+          <i class="fas fa-chevron-up">↑</i>
+      </button>
     <script src="js/core.js"></script>
     <script src="js/config.js"></script>
     <script src="js/utility.js"></script>
