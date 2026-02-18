@@ -28,7 +28,7 @@ const CONFIG = {
     GOOGLE_MAPS_URL: "https://goo.gl/maps/example-link",
 
     // Google Maps
-    GOOGLE_MAPS_EMBED_URL: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.313... (your full link)",
+    GOOGLE_MAPS_EMBED_URL: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3445.4409025845193!2d78.52809857462714!3d17.39564920256807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9905184fe753%3A0x5df8cf5942aa41ad!2sPabba%20Jewellers%20%26%20Co.!5e1!3m2!1sen!2sus!4v1771431248249!5m2!1sen!2sus",
     GOOGLE_MAPS_URL: "https://goo.gl/maps/example" // For the clickable button
 };
 
