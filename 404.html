@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Not Found | Pabba Jewellers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
     <style>
         .error-container {
             height: 80vh;
@@ -17,15 +19,47 @@
         .error-code { font-size: 8rem; color: #d4af37; font-family: 'Cinzel', serif; }
     </style>
 </head>
-<body>
-    <div class="error-container">
-        <h1 class="error-code">404</h1>
-        <h2 data-en="Oops! This piece of jewelry is missing." data-te="అయ్యో! ఈ ఆభరణం కనిపించడం లేదు.">Oops! This piece of jewelry is missing.</h2>
-        <p data-en="The page you are looking for doesn't exist or has been moved." data-te="మీరు వెతుకుతున్న పేజీ లేదు లేదా తరలించబడింది."></p>
-        <br>
-        <a href="index.html" class="gold-btn" data-en="Return Home" data-te="తిరిగి హోమ్ పేజీకి">Return Home</a>
-    </div>
+<body class="catalog-page">
+    <nav class="navbar">
+        <div class="logo">
+            <h1 class="gold" data-en="PABBA JEWELLERS & Co." data-te="పబ్బా జ్యువెలర్స్ & Co.">PABBA JEWELLERS & Co.</h1>
+            <span class="telugu-name" data-te="PABBA JEWELLERS & Co." data-en="పబ్బా జ్యువెలర్స్ & Co.">పబ్బా జ్యువెలర్స్ & Co.</span>
+        </div>        
+        <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+        <ul class="nav-links" id="nav-links">
+            <div class="close-menu" id="close-menu">&times;</div>
+            <li><a href="index.html" data-en="Home" data-te="హోమ్">Home</a></li>
+            <li><button id="lang-toggle" class="lang-btn">తెలుగు</button></li>
+        </ul>
+    </nav>
 
+    <section class="catalog-section">
+        <div class="breadcrumb-container">
+            <div class="container">
+                <div id="breadcrumb-trail">
+                    <a href="index.html" data-en="Home" data-te="హోమ్">Home</a> 
+                    <span class="separator">/</span> 
+                    <span data-en="Page Not Found" data-te="నిబంధనలు & నిబంధనలు">Page Not Found</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="container">
+            <header class="catalog-header">
+                <h2 class="gold" data-en="Page Not Found" data-te="నిబంధనలు & నిబంధనల">Page Not Found</h2>
+            </header>
+            <main class="container legal-content">
+                <div class="error-container">
+                    <h1 class="error-code">404</h1>
+                    <h2 data-en="Oops! This piece of jewelry is missing." data-te="అయ్యో! ఈ ఆభరణం కనిపించడం లేదు.">Oops! This piece of jewelry is missing.</h2>
+                    <p data-en="The page you are looking for doesn't exist or has been moved." data-te="మీరు వెతుకుతున్న పేజీ లేదు లేదా తరలించబడింది."></p>
+                    <br>
+                    <a href="index.html" class="gold-btn" data-en="Return Home" data-te="తిరిగి హోమ్ పేజీకి">Return Home</a>
+                </div>
+            </main>
+        </div>
+    </section>
+    <script src="js/core.js"></script>
     <script src="js/config.js"></script>
     <script src="js/utility.js"></script>
     <script>
