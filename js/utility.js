@@ -3,8 +3,6 @@
  * Handles Data Fetching, Caching, and Global UI Sync
 */
 
-let currentLang = localStorage.getItem('pabba_lang') || CONFIG.DEFAULT_LANG;
-
 /**
  * Generates HTML for a <picture> element with AVIF/WebP support.
  * Assumes the optimizer moves files to images/dist/ and adds extensions.
@@ -169,32 +167,6 @@ function showNoConnectionMessage() {
             <button onclick="location.reload()" class="gold-btn">Retry</button>
         </div>`;
     }
-}
-
-/**
- * 6. LANGUAGE TOGGLE
-**/
-function toggleLanguage() {
-    currentLang = (currentLang === 'en') ? 'te' : 'en';
-    localStorage.setItem('pabba_lang', currentLang);
-    location.reload(); // Simplest way to re-render everything with new lang
-}
-
-/**
- * 6. APPLY LANGUAGE
-**/
-function applyLanguage() {
-    const isTelugu = (currentLang === 'te');
-    
-    // Find every element with a data-en attribute
-    document.querySelectorAll('[data-en]').forEach(el => {
-        const text = isTelugu ? el.getAttribute('data-te') : el.getAttribute('data-en');
-        if (text) el.innerText = text;
-    });
-
-    // Update the toggle button text
-    const btn = document.getElementById('lang-toggle');
-    if (btn) btn.innerText = isTelugu ? 'English' : 'తెలుగు';
 }
 
 /**
