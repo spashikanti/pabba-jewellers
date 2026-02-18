@@ -20,7 +20,14 @@
             <li><button id="lang-toggle" onclick="toggleLanguage()" class="lang-btn">తెలుగు</button></li>
         </ul>
     </nav>
-
+    <div class="breadcrumb-container">
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li><a href="index.html" data-en="Home" data-te="హోమ్">Home</a></li>
+                <li class="active" data-en="Contact Us" data-te="మమ్మల్ని సంప్రదించండి">Contact Us</li>
+            </ul>
+        </div>
+    </div>
     <header class="page-header">
         <h1 data-en="Contact Us" data-te="మమ్మల్ని సంప్రదించండి">Contact Us</h1>
         <p data-en="Have a question? We'd love to hear from you." data-te="ప్రశ్న ఉందా? మేము మీ నుండి వినడానికి ఇష్టపడతాము."></p>
@@ -45,7 +52,22 @@
             </div>
         </div>
     </main>
-
+    <section class="map-section">
+        <div class="container">
+            <div class="map-wrapper">
+                <iframe 
+                    id="googleMapIframe"
+                    src="" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
     <footer class="premium-footer">
         <div class="footer-container">
             <div class="footer-col">
