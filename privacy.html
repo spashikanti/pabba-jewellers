@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Pabba Jewellers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="legal-page">
+    <nav class="navbar">
+        <div class="logo"><h1 class="brand-name gold"></h1></div>
+        <ul class="nav-links"><li><a href="index.html">Home</a></li></ul>
+    </nav>
+
+    <main class="container legal-content">
+        <h1 data-en="Privacy Policy" data-te="గోప్యతా విధానం">Privacy Policy</h1>
+        <p class="last-updated">Last Updated: February 2026</p>
+
+        <section>
+            <h2 data-en="1. Information We Collect" data-te="1. మేము సేకరించే సమాచారం">1. Information We Collect</h2>
+            <p data-en="We only collect information that you voluntarily provide via our contact forms or WhatsApp, such as your name and phone number." 
+               data-te="మా కాంటాక్ట్ ఫారమ్‌లు లేదా వాట్సాప్ ద్వారా మీరు స్వచ్ఛందంగా అందించే పేరు మరియు ఫోన్ నంబర్ వంటి సమాచారాన్ని మాత్రమే మేము సేకరిస్తాము."></p>
+        </section>
+
+        <section>
+            <h2 data-en="2. How We Use It" data-te="2. మేము దానిని ఎలా ఉపయోగిస్తాము">2. How We Use It</h2>
+            <p data-en="Your data is used solely to respond to your inquiries and provide jewelry services." 
+               data-te="మీ డేటా మీ విచారణలకు ప్రతిస్పందించడానికి మరియు జ్యువెలరీ సేవలను అందించడానికి మాత్రమే ఉపయోగించబడుతుంది."></p>
+        </section>
+
+        <section>
+            <h2 data-en="3. Contact Us" data-te="3. మమ్మల్ని సంప్రదించండి">3. Contact Us</h2>
+            <p data-en="If you have questions, contact us at:" data-te="మీకు ఏవైనా ప్రశ్నలు ఉంటే, మమ్మల్ని ఇక్కడ సంప్రదించండి:"></p>
+            <a id="contactEmail" href="#" class="gold-link"></a>
+        </address>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/utility.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            syncGlobalUI(); // Injects Brand Name
+            const emailEl = document.getElementById('contactEmail');
+            if(emailEl) {
+                emailEl.innerText = CONFIG.CONTACT_EMAIL;
+                emailEl.href = `mailto:${CONFIG.CONTACT_EMAIL}`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -88,10 +88,12 @@ async function fetchWithSmartCache(url) {
  * Fills all titles, links, and brand names from CONFIG.js
  */
 function syncGlobalUI() {
+    const isTe = (currentLang === 'te');
+    const storeName = isTe ? CONFIG.STORE_NAME_TE : CONFIG.STORE_NAME_EN;
     // A. Browser Tab Title
     const params = new URLSearchParams(window.location.search);
     const category = params.get('category') || "";
-    document.title = `${CONFIG.STORE_NAME_EN} ${category ? '- ' + category : ''}`;
+    document.title = `${storeName} ${category ? '- ' + category : ''}`;
 
     // B. Brand Names (Navbar & Footer)
     const brandText = currentLang === 'te' ? CONFIG.STORE_NAME_TE : CONFIG.STORE_NAME_EN;
@@ -100,7 +102,9 @@ function syncGlobalUI() {
     // C. Phone Links (Footer & Nav)
     document.querySelectorAll('.config-phone-link').forEach(el => {
         el.innerText = CONFIG.WHATSAPP_NUMBER;
-        el.href = `tel:+${CONFIG.WHATSAPP_NUMBER}`;
+        // Clean the number of any + or spaces before adding one +
+        const cleanPhone = CONFIG.WHATSAPP_NUMBER.replace(/\D/g, '');
+        el.href = `tel:+${cleanPhone}`;
     });
 
     // D. Social Media
@@ -169,11 +173,49 @@ function showNoConnectionMessage() {
     }
 }
 
+function syncFooter() {
+    // 1. Address
+    const footerAddr = document.getElementById('footerAddress');
+    if (footerAddr) {
+        footerAddr.innerText = (currentLang === 'te') ? CONFIG.STORE_ADDRESS_TE : CONFIG.STORE_ADDRESS_EN;
+    }
+
+    // 2. Map Link
+    const footerMap = document.getElementById('footerMapLink');
+    if (footerMap) footerMap.href = CONFIG.GOOGLE_MAPS_URL;
+
+    // 3. Phone Link
+    const footerPhone = document.getElementById('footerPhoneLink');
+    if (footerPhone) {
+        footerPhone.innerText = CONFIG.CONTACT_NUMBER;
+        footerPhone.href = `tel:${CONFIG.CONTACT_NUMBER}`;
+    }
+
+    // 4. Social Links
+    if (document.getElementById('footerFacebook')) document.getElementById('footerFacebook').href = CONFIG.FACEBOOK_URL;
+    if (document.getElementById('footerInstagram')) document.getElementById('footerInstagram').href = CONFIG.INSTAGRAM_URL;
+}
+
+function updateCopyright() {
+    const yearEl = document.getElementById('copyrightYear');
+    if (yearEl) {
+        const currentYear = new Date().getFullYear();
+        const estYear = CONFIG.ESTABLISHED_YEAR;
+        
+        // If it's the same year, just show the year. 
+        // If it's later, show the range (e.g., 1995 - 2026)
+        yearEl.innerText = (currentYear > estYear) 
+            ? `${estYear} - ${currentYear}` 
+            : currentYear;
+    }
+}
+
 /**
  * INIT
  */
 document.addEventListener('DOMContentLoaded', () => {
     syncGlobalUI();
-    setupContactSection();
+    syncFooter();
+    updateCopyright();
 });
 
