@@ -4,41 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms & Conditions | Pabba Jewellers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
 </head>
-<body class="legal-page">
+<body class="catalog-page">
+
     <nav class="navbar">
-        <div class="logo"><h1 class="brand-name gold"></h1></div>
-        <ul class="nav-links"><li><a href="index.html">Home</a></li></ul>
+        <div class="logo">
+            <h1 class="gold" data-en="PABBA JEWELLERS & Co." data-te="పబ్బా జ్యువెలర్స్ & Co.">PABBA JEWELLERS & Co.</h1>
+            <span class="telugu-name" data-te="PABBA JEWELLERS & Co." data-en="పబ్బా జ్యువెలర్స్ & Co.">పబ్బా జ్యువెలర్స్ & Co.</span>
+        </div>        
+        <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+        <ul class="nav-links" id="nav-links">
+            <div class="close-menu" id="close-menu">&times;</div>
+            <li><a href="index.html" data-en="Home" data-te="హోమ్">Home</a></li>
+            <li><button id="lang-toggle" class="lang-btn">తెలుగు</button></li>
+        </ul>
     </nav>
 
-    <main class="container legal-content">
-        <h1 data-en="Terms & Conditions" data-te="నిబంధనలు & నిబంధనలు">Terms & Conditions</h1>
-        <p class="last-updated">Effective Date: February 2026</p>
+    <section class="catalog-section">
+        <div class="breadcrumb-container">
+            <div class="container">
+                <div id="breadcrumb-trail">
+                    <a href="index.html" data-en="Home" data-te="హోమ్">Home</a> 
+                    <span class="separator">/</span> 
+                    <span data-en="Terms & Conditions" data-te="నిబంధనలు & నిబంధనలు">Terms & Conditions</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="container">
+            <header class="catalog-header">
+                <h2 class="gold" data-en="Terms & Conditions" data-te="నిబంధనలు & నిబంధనల">Terms & Conditions</h2>
+                <p class="last-updated">Effective Date: February 2026</p>
+            </header>
+            <main class="container legal-content">
+                <h1 data-en="Terms & Conditions" data-te="నిబంధనలు & నిబంధనలు">Terms & Conditions</h1>
+                <p class="last-updated">Effective Date: February 2026</p>
+        
+                <section>
+                    <h2 data-en="1. Accuracy of Content" data-te="1. సమాచార ఖచ్చితత్వం">1. Accuracy of Content</h2>
+                    <p data-en="While we strive for accuracy, gold prices and stone weights are subject to market fluctuations. Final quotes will be provided at the time of purchase." 
+                       data-te="మేము ఖచ్చితత్వం కోసం ప్రయత్నిస్తున్నప్పటికీ, బంగారు ధరలు మరియు రాళ్ల బరువులు మార్కెట్ హెచ్చుతగ్గులకు లోబడి ఉంటాయి. తుది ధర కొనుగోలు సమయంలో అందించబడుతుంది."></p>
+                </section>
+        
+                <section>
+                    <h2 data-en="2. Intellectual Property" data-te="2. మేధో సంపత్తి">2. Intellectual Property</h2>
+                    <p data-en="All jewelry designs, images, and brand assets are the property of Pabba Jewellers & Co. Unauthorized use is prohibited." 
+                       data-te="అన్ని జ్యువెలరీ డిజైన్లు, చిత్రాలు మరియు బ్రాండ్ ఆస్తులు పబ్బా జ్యువెలర్స్ & కో యాజమాన్యంలో ఉన్నాయి. అనధికారిక ఉపయోగం నిషేధించబడింది."></p>
+                </section>
+        
+                <section>
+                    <h2 data-en="3. Order Enquiries" data-te="3. ఆర్డర్ విచారణలు">3. Order Enquiries</h2>
+                    <p data-en="Submitting an enquiry via WhatsApp or the website does not constitute a final sale. Orders are only confirmed after direct communication and payment." 
+                       data-te="వాట్సాప్ లేదా వెబ్‌సైట్ ద్వారా విచారణను సమర్పించడం తుది అమ్మకం కాదు. ప్రత్యక్ష కమ్యూనికేషన్ మరియు చెల్లింపు తర్వాత మాత్రమే ఆర్డర్‌లు నిర్ధారించబడతాయి."></p>
+                </section>
+            </main>
+        </div>
+    </section>
+    
+    <footer class="premium-footer">
+    <div class="footer-container">
+        
+        <div class="footer-col">
+            <h3 class="brand-name gold"></h3>
+            <p data-en="Crafting traditions since generations." 
+               data-te="తరతరాల నుండి సంప్రదాయాలను తీర్చిదిద్దుతున్నాము."></p>
+            <div class="social-links">
+                <a id="footerFacebook" href="#" target="_blank" class="gold-link">Facebook</a> | 
+                <a id="footerInstagram" href="#" target="_blank" class="gold-link">Instagram</a>
+            </div>
+        </div>
 
-        <section>
-            <h2 data-en="1. Accuracy of Content" data-te="1. సమాచార ఖచ్చితత్వం">1. Accuracy of Content</h2>
-            <p data-en="While we strive for accuracy, gold prices and stone weights are subject to market fluctuations. Final quotes will be provided at the time of purchase." 
-               data-te="మేము ఖచ్చితత్వం కోసం ప్రయత్నిస్తున్నప్పటికీ, బంగారు ధరలు మరియు రాళ్ల బరువులు మార్కెట్ హెచ్చుతగ్గులకు లోబడి ఉంటాయి. తుది ధర కొనుగోలు సమయంలో అందించబడుతుంది."></p>
-        </section>
+        <div class="footer-col">
+            <h4 class="gold" data-en="Quick Links" data-te="త్వరిత లింకులు">Quick Links</h4>
+            <ul>
+                <li><a href="index.html" data-en="Home" data-te="హోమ్">Home</a></li>
+                <li><a href="collections.html" data-en="Collections" data-te="సేకరణలు">Collections</a></li>
+                <li><a href="contact.html" data-en="Contact Us" data-te="సంప్రదించండి">Contact Us</a></li>
+            </ul>
+        </div>
 
-        <section>
-            <h2 data-en="2. Intellectual Property" data-te="2. మేధో సంపత్తి">2. Intellectual Property</h2>
-            <p data-en="All jewelry designs, images, and brand assets are the property of Pabba Jewellers & Co. Unauthorized use is prohibited." 
-               data-te="అన్ని జ్యువెలరీ డిజైన్లు, చిత్రాలు మరియు బ్రాండ్ ఆస్తులు పబ్బా జ్యువెలర్స్ & కో యాజమాన్యంలో ఉన్నాయి. అనధికారిక ఉపయోగం నిషేధించబడింది."></p>
-        </section>
+        <div class="footer-col">
+            <h4 class="gold" data-en="Legal" data-te="చట్టపరమైన">Legal</h4>
+            <ul>
+                <li><a href="privacy.html" data-en="Privacy Policy" data-te="గోప్యతా విధానం">Privacy Policy</a></li>
+                <li><a href="terms.html" data-en="Terms & Conditions" data-te="నిబంధనలు & షరతులు">Terms & Conditions</a></li>
+            </ul>
+        </div>
 
-        <section>
-            <h2 data-en="3. Order Enquiries" data-te="3. ఆర్డర్ విచారణలు">3. Order Enquiries</h2>
-            <p data-en="Submitting an enquiry via WhatsApp or the website does not constitute a final sale. Orders are only confirmed after direct communication and payment." 
-               data-te="వాట్సాప్ లేదా వెబ్‌సైట్ ద్వారా విచారణను సమర్పించడం తుది అమ్మకం కాదు. ప్రత్యక్ష కమ్యూనికేషన్ మరియు చెల్లింపు తర్వాత మాత్రమే ఆర్డర్‌లు నిర్ధారించబడతాయి."></p>
-        </section>
-    </main>
+        <div class="footer-col">
+            <h4 class="gold" data-en="Visit Our Store" data-te="మా దుకాణం">Visit Our Store</h4>
+            <address id="footerAddress" class="footer-addr">
+                </address>
+            <a id="footerMapLink" href="#" target="_blank" class="directions-link" data-en="Get Directions ➔" data-te="దారి చూపు ➔">Get Directions ➔</a>
+            <div class="phone-box mt-2">
+                <a id="footerPhoneLink" href="#" class="gold-link config-phone-link"></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p id="footerCredit"></p>        
+        <p class="copyright">
+          © <span id="copyrightYear"></span> <span class="brand-name"></span>. 
+          <span data-en="All rights reserved." data-te="సర్వ హక్కులు ప్రత్యేకించబడ్డాయి.">All rights reserved.</span>
+      </p>
+    </div>
+</footer>
+  
+  <button id="backToTop" aria-label="Back to Top">
+      <i class="fas fa-chevron-up">↑</i>
+  </button>
+    
     <script src="js/core.js"></script>
     <script src="js/config.js"></script>
     <script src="js/utility.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => syncGlobalUI());
     </script>
+    
 </body>
 </html>
+
