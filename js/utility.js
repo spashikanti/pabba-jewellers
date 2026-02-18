@@ -120,7 +120,7 @@ function syncGlobalUI() {
         // B. Brand Names (Navbar & Footer)
         const footerStoreText = currentLang === 'te' ? CONFIG.STORE_NAME_TE : CONFIG.STORE_NAME_EN;
         const footerReservationText = currentLang === 'te' ? CONFIG.RESERVATION_TE : CONFIG.RESERVATION_EN;
-        footerCredit.innerHTML = `&copy; ${CONFIG.ESTABLISHED_YEAR} - ${year} ${footerStoreText} ${footerReservationText}`;
+        footerCredit.innerHTML = `&copy; ${CONFIG.ESTABLISHED_YEAR} - ${year} ${footerStoreText}. ${footerReservationText}`;
     }
 }
 
